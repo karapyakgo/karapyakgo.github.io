@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="100%" height="100%">
+  <defs>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F2D3C"/>
+      <stop offset="45%" stop-color="#1B4D68"/>
+      <stop offset="75%" stop-color="#387796"/>
+      <stop offset="100%" stop-color="#E99368"/>
+    </linearGradient>
+    <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0E5E7A"/>
+      <stop offset="50%" stop-color="#0B4257"/>
+      <stop offset="100%" stop-color="#06222D"/>
+    </linearGradient>
+    <linearGradient id="cliffGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E2D9CC"/>
+      <stop offset="35%" stop-color="#9C8E7D"/>
+      <stop offset="85%" stop-color="#4A4237"/>
+      <stop offset="100%" stop-color="#241E18"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="75%" cy="35%" r="40%">
+      <stop offset="0%" stop-color="#FFE7A3" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#FFAC5E" stop-opacity="0.5"/>
+      <stop offset="80%" stop-color="#FF7B54" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1200" height="480" fill="url(#skyGrad)"/>
+  
+  <!-- Sun & Horizon Atmosphere -->
+  <circle cx="880" cy="280" r="140" fill="url(#sunGlow)"/>
+  <circle cx="880" cy="280" r="42" fill="#FFF4D0" opacity="0.9"/>
+  
+  <!-- Distant Clouds & Mountains -->
+  <path d="M 0 350 Q 220 320, 480 345 T 900 330 T 1200 345 L 1200 480 L 0 480 Z" fill="#205068" opacity="0.6"/>
+  <path d="M 0 375 Q 350 355, 700 370 T 1200 365 L 1200 480 L 0 480 Z" fill="#153E52" opacity="0.8"/>
+
+  <!-- Ocean Waves -->
+  <rect y="410" width="1200" height="270" fill="url(#seaGrad)"/>
+  <path d="M 0 415 Q 150 408, 300 415 T 600 412 T 900 416 T 1200 413 L 1200 440 L 0 440 Z" fill="#2285A3" opacity="0.4"/>
+  <path d="M 0 435 Q 200 425, 450 435 T 850 432 T 1200 436 L 1200 470 L 0 470 Z" fill="#3AA0BE" opacity="0.3"/>
+
+  <!-- Iconic Karapyak White Cliffs & Rock Formations -->
+  <!-- Left Main Promontory -->
+  <path d="M 0 260 Q 80 270, 140 320 T 260 410 T 380 500 T 420 680 L 0 680 Z" fill="url(#cliffGrad)"/>
+  <path d="M 20 280 Q 90 320, 130 380 T 220 460 T 310 600 L 0 600 Z" fill="#C4B7A5" opacity="0.35"/>
+  
+  <!-- Right Offshore Reef Rocks -->
+  <path d="M 820 540 Q 880 480, 960 490 T 1080 560 T 1140 680 L 760 680 Z" fill="#383028"/>
+  <path d="M 850 530 Q 910 495, 960 505 T 1040 550 L 1020 680 L 820 680 Z" fill="#7E7262" opacity="0.6"/>
+  <path d="M 620 580 Q 660 550, 710 560 T 770 610 L 750 680 L 600 680 Z" fill="#2C241E"/>
+
+  <!-- Coral Reef Tide Pools / Shallows Reflections -->
+  <ellipse cx="500" cy="570" rx="140" ry="24" fill="#3BB3C3" opacity="0.35"/>
+  <ellipse cx="680" cy="620" rx="190" ry="30" fill="#2AA1B3" opacity="0.4"/>
+  <ellipse cx="880" cy="610" rx="110" ry="18" fill="#58CBD8" opacity="0.3"/>
+
+  <!-- Foam / White Water on Rocks -->
+  <path d="M 280 480 Q 340 470, 390 495 Q 430 520, 410 540 Q 360 515, 290 510 Z" fill="#FFFFFF" opacity="0.75"/>
+  <path d="M 750 590 Q 800 580, 850 600 Q 880 620, 840 630 Q 790 610, 740 615 Z" fill="#FFFFFF" opacity="0.7"/>
+
+  <!-- Vegetation on Cliff Crest -->
+  <path d="M 0 255 Q 30 240, 70 250 Q 110 265, 140 260 Q 170 290, 200 310 L 170 330 L 0 310 Z" fill="#1C3D28" opacity="0.9"/>
+  <path d="M 10 245 Q 40 230, 80 242 Q 120 250, 150 280 L 110 295 Z" fill="#355E3B" opacity="0.8"/>
+
+  <!-- Coastal Birds Silhouette -->
+  <path d="M 440 210 Q 455 198, 470 210 Q 485 198, 500 210 Q 485 204, 470 214 Q 455 204, 440 210 Z" fill="#FFFFFF" opacity="0.85"/>
+  <path d="M 490 235 Q 502 225, 514 235 Q 526 225, 538 235 Q 526 230, 514 238 Q 502 230, 490 235 Z" fill="#FFFFFF" opacity="0.7"/>
+</svg>

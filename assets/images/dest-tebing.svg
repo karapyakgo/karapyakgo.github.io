@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="60%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#F0F9FF"/>
+    </linearGradient>
+    <linearGradient id="tSea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="60%" stop-color="#0369A1"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="240" fill="url(#tSky)"/>
+  <circle cx="480" cy="90" r="35" fill="#FEF08A"/>
+  <!-- Clouds -->
+  <path d="M 60 110 Q 90 90, 130 100 Q 160 85, 200 105 Q 230 115, 220 130 L 50 130 Z" fill="#FFFFFF" opacity="0.8"/>
+  <rect y="220" width="600" height="180" fill="url(#tSea)"/>
+  <!-- White Reef Cliffs -->
+  <path d="M 0 160 Q 80 170, 120 220 T 220 300 T 320 400 L 0 400 Z" fill="#E2E8F0"/>
+  <path d="M 0 180 Q 70 200, 100 240 T 180 320 L 0 400 Z" fill="#CBD5E1"/>
+  <path d="M 120 215 Q 150 170, 200 180 Q 250 240, 230 330 Z" fill="#F1F5F9"/>
+  <!-- Shallows Reef Formations -->
+  <ellipse cx="380" cy="310" rx="90" ry="25" fill="#38BDF8" opacity="0.4"/>
+  <ellipse cx="490" cy="340" rx="70" ry="20" fill="#0EA5E9" opacity="0.5"/>
+  <path d="M 420 300 Q 450 270, 480 290 T 520 340 L 400 340 Z" fill="#94A3B8"/>
+  <!-- Surf Foam -->
+  <path d="M 170 310 Q 210 295, 250 315 Q 280 330, 250 345 Z" fill="#FFFFFF" opacity="0.8"/>
+</svg>

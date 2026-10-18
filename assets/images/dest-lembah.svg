@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="lhSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2196C4"/>
+      <stop offset="50%" stop-color="#55BBDB"/>
+      <stop offset="85%" stop-color="#A8DCEE"/>
+      <stop offset="100%" stop-color="#D4EEFA"/>
+    </linearGradient>
+    <linearGradient id="lhSea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0FA8C8"/>
+      <stop offset="40%" stop-color="#0B8AA8"/>
+      <stop offset="100%" stop-color="#095E72"/>
+    </linearGradient>
+    <linearGradient id="lhSand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F5DBA0"/>
+      <stop offset="30%" stop-color="#F0CE8A"/>
+      <stop offset="70%" stop-color="#E8C070"/>
+      <stop offset="100%" stop-color="#F5DBA0"/>
+    </linearGradient>
+    <linearGradient id="lhHill1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3A8040"/>
+      <stop offset="100%" stop-color="#285C30"/>
+    </linearGradient>
+    <linearGradient id="lhHill2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4E9E55"/>
+      <stop offset="100%" stop-color="#326038"/>
+    </linearGradient>
+    <radialGradient id="lhSun" cx="75%" cy="28%" r="18%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="20%" stop-color="#FFF9E0" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#87CEDE" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <filter id="water-blur">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="600" fill="url(#lhSky)"/>
+  <!-- Sunlight glow -->
+  <rect width="800" height="600" fill="url(#lhSun)"/>
+
+  <!-- Soft clouds -->
+  <path d="M 40 80 Q 80 55, 130 68 Q 165 48, 210 65 Q 245 75, 230 95 L 30 95 Z" fill="white" opacity="0.85"/>
+  <path d="M 500 55 Q 545 38, 600 52 Q 640 40, 680 55 Q 715 65, 695 82 L 485 82 Z" fill="white" opacity="0.8"/>
+  <path d="M 300 95 Q 330 82, 365 90 Q 385 80, 415 92 Q 435 100, 420 112 L 285 112 Z" fill="white" opacity="0.7"/>
+
+  <!-- Distant background hill (headland) -->
+  <path d="M 520 200 Q 600 140, 700 160 Q 760 168, 800 180 L 800 340 L 520 340 Z" fill="url(#lhHill1)"/>
+  <path d="M 580 190 Q 620 155, 670 168 Q 710 175, 760 185 L 800 220 L 800 340 L 560 340 Z" fill="#2E6A35" opacity="0.5"/>
+  <!-- Limestone cliff face on headland -->
+  <path d="M 600 220 Q 620 200, 650 210 Q 670 215, 680 230 T 700 275 L 600 260 Z" fill="#E8E0D0" opacity="0.6"/>
+
+  <!-- Ocean / Sea -->
+  <rect y="290" width="800" height="310" fill="url(#lhSea)"/>
+
+  <!-- Wave patterns (multiple) -->
+  <path d="M 0 310 Q 100 302, 200 310 T 400 305 T 600 310 T 800 306 L 800 335 L 0 335 Z" fill="#25C0DA" opacity="0.45"/>
+  <path d="M 0 340 Q 120 330, 260 340 T 520 335 T 800 340 L 800 365 L 0 365 Z" fill="#1AAEC6" opacity="0.4"/>
+  <path d="M 0 370 Q 140 360, 300 370 T 600 367 T 800 370 L 800 400 L 0 400 Z" fill="#129CB4" opacity="0.35"/>
+  <path d="M 0 395 Q 180 387, 380 395 T 800 393 L 800 425 L 0 425 Z" fill="#0E8EA4" opacity="0.3"/>
+
+  <!-- Surf foam line -->
+  <path d="M 0 435 Q 200 428, 400 436 T 800 433" stroke="#FFFFFF" stroke-width="3.5" fill="none" opacity="0.75"/>
+  <path d="M 0 445 Q 160 440, 340 447 T 800 443" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <!-- Wet sand (dark) at waterline -->
+  <path d="M 0 440 Q 250 432, 500 442 T 800 438 L 800 500 L 0 500 Z" fill="#C8A855" opacity="0.7"/>
+  <!-- Dry sand beach -->
+  <path d="M 0 475 Q 200 465, 450 478 T 800 472 L 800 600 L 0 600 Z" fill="url(#lhSand)"/>
+
+  <!-- Sand texture dots -->
+  <circle cx="120" cy="510" r="2" fill="#D4AB60" opacity="0.5"/>
+  <circle cx="280" cy="530" r="1.5" fill="#C89A50" opacity="0.4"/>
+  <circle cx="450" cy="520" r="2" fill="#D4AB60" opacity="0.5"/>
+  <circle cx="600" cy="505" r="1.5" fill="#C89A50" opacity="0.4"/>
+  <circle cx="700" cy="525" r="2" fill="#D4AB60" opacity="0.45"/>
+
+  <!-- Left Cliff / Small Headland -->
+  <path d="M 0 230 Q 30 200, 80 220 Q 120 235, 150 290 T 180 400 L 0 400 Z" fill="#D8CDB8"/>
+  <path d="M 0 250 Q 20 225, 60 240 Q 90 255, 110 300 L 0 310 Z" fill="#E8E0CC" opacity="0.6"/>
+  <!-- Vegetation on left cliff -->
+  <ellipse cx="30" cy="210" rx="45" ry="30" fill="#3A8040"/>
+  <ellipse cx="75" cy="205" rx="40" ry="28" fill="#4E9E55"/>
+  <ellipse cx="0" cy="218" rx="25" ry="20" fill="#326038" opacity="0.9"/>
+
+  <!-- Coconut palm silhouette on left -->
+  <line x1="155" y1="460" x2="140" y2="320" stroke="#5A3A0A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 140 320 Q 120 290, 95 300 Q 105 320, 140 320 Z" fill="#3A7030"/>
+  <path d="M 140 320 Q 130 285, 100 275 Q 108 298, 140 320 Z" fill="#4A9040" opacity="0.8"/>
+  <path d="M 140 320 Q 155 285, 180 290 Q 168 310, 140 320 Z" fill="#3A7030"/>
+  <path d="M 140 320 Q 168 280, 195 285 Q 178 308, 140 320 Z" fill="#4A9040" opacity="0.8"/>
+  <path d="M 140 320 Q 148 285, 168 272 Q 162 296, 140 320 Z" fill="#5AAA50" opacity="0.9"/>
+  <!-- Coconut -->
+  <circle cx="140" cy="325" r="5" fill="#5C3008"/>
+
+  <!-- Right Cliff / Rocky Formation -->
+  <path d="M 800 260 Q 760 240, 720 265 Q 690 280, 665 330 T 640 420 L 800 420 Z" fill="#D0C4B0"/>
+  <path d="M 800 280 Q 775 260, 745 278 Q 720 295, 700 340 L 800 350 Z" fill="#E0D4BC" opacity="0.6"/>
+  <!-- Vegetation on right cliff -->
+  <ellipse cx="775" cy="245" rx="45" ry="28" fill="#4E9E55"/>
+  <ellipse cx="730" cy="252" rx="38" ry="25" fill="#3A8040"/>
+
+  <!-- Right coconut palm -->
+  <line x1="640" y1="470" x2="660" y2="330" stroke="#5A3A0A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 660 330 Q 640 300, 615 308 Q 628 328, 660 330 Z" fill="#3A7030"/>
+  <path d="M 660 330 Q 650 295, 622 282 Q 632 305, 660 330 Z" fill="#4A9040" opacity="0.8"/>
+  <path d="M 660 330 Q 678 295, 702 300 Q 688 318, 660 330 Z" fill="#3A7030"/>
+  <path d="M 660 330 Q 678 292, 708 290 Q 690 314, 660 330 Z" fill="#5AAA50" opacity="0.9"/>
+  <circle cx="660" cy="336" r="5" fill="#5C3008"/>
+
+  <!-- Beach umbrella (left zone) -->
+  <line x1="230" y1="490" x2="225" y2="530" stroke="#8B4513" stroke-width="3"/>
+  <path d="M 175 490 Q 228 460, 285 490 Q 260 500, 230 495 Q 203 500, 175 490 Z" fill="#E74C3C" opacity="0.9"/>
+  <!-- Towel/mat on sand -->
+  <ellipse cx="228" cy="518" rx="22" ry="8" fill="#3498DB" opacity="0.8"/>
+
+  <!-- Second umbrella (right) -->
+  <line x1="580" y1="485" x2="575" y2="525" stroke="#8B4513" stroke-width="3"/>
+  <path d="M 530 484 Q 580 455, 630 484 Q 608 494, 580 490 Q 555 494, 530 484 Z" fill="#2ECC71" opacity="0.9"/>
+  <ellipse cx="579" cy="515" rx="22" ry="7" fill="#E67E22" opacity="0.8"/>
+
+  <!-- Ocean shimmer reflections -->
+  <line x1="100" y1="360" x2="130" y2="360" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="380" y1="345" x2="420" y2="345" stroke="#FFFFFF" stroke-width="1.5" opacity="0.5"/>
+  <line x1="600" y1="355" x2="645" y2="355" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="200" y1="380" x2="240" y2="380" stroke="#FFFFFF" stroke-width="1" opacity="0.4"/>
+  <line x1="520" y1="370" x2="560" y2="370" stroke="#FFFFFF" stroke-width="1" opacity="0.4"/>
+</svg>

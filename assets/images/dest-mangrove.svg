@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="mSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="40%" stop-color="#B0D8E8"/>
+      <stop offset="100%" stop-color="#E8F4F0"/>
+    </linearGradient>
+    <linearGradient id="mWater" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2D6E5E"/>
+      <stop offset="60%" stop-color="#1A4A3E"/>
+      <stop offset="100%" stop-color="#0E2E26"/>
+    </linearGradient>
+    <linearGradient id="boardwalk" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5D3A1A"/>
+      <stop offset="50%" stop-color="#7B4F2E"/>
+      <stop offset="100%" stop-color="#5D3A1A"/>
+    </linearGradient>
+    <!-- Dappled Light Pattern -->
+    <radialGradient id="sunspot1" cx="30%" cy="20%" r="15%">
+      <stop offset="0%" stop-color="#F9E4A0" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="sunspot2" cx="65%" cy="15%" r="12%">
+      <stop offset="0%" stop-color="#F9E4A0" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <filter id="blur-soft">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <!-- Sky/Canopy Background (muted green as sky is blocked) -->
+  <rect width="800" height="600" fill="#1C4A32"/>
+
+  <!-- Background Distant Mangrove Canopy -->
+  <ellipse cx="100" cy="200" rx="150" ry="130" fill="#0D3522" opacity="0.9"/>
+  <ellipse cx="250" cy="170" rx="180" ry="140" fill="#145C34" opacity="0.85"/>
+  <ellipse cx="450" cy="155" rx="200" ry="150" fill="#0E4228" opacity="0.9"/>
+  <ellipse cx="650" cy="175" rx="190" ry="135" fill="#0D3522" opacity="0.85"/>
+  <ellipse cx="780" cy="195" rx="130" ry="120" fill="#145C34" opacity="0.8"/>
+
+  <!-- Midground Canopy Layer (brighter) -->
+  <ellipse cx="50" cy="230" rx="110" ry="90" fill="#1E7040" opacity="0.9"/>
+  <ellipse cx="170" cy="210" rx="140" ry="110" fill="#2A8C50" opacity="0.85"/>
+  <ellipse cx="320" cy="200" rx="160" ry="120" fill="#1E7040" opacity="0.9"/>
+  <ellipse cx="490" cy="195" rx="155" ry="115" fill="#217845" opacity="0.9"/>
+  <ellipse cx="640" cy="205" rx="150" ry="110" fill="#1E7040" opacity="0.85"/>
+  <ellipse cx="780" cy="220" rx="110" ry="95" fill="#2A8C50" opacity="0.8"/>
+
+  <!-- Foreground Canopy (bright sunlit tops) -->
+  <ellipse cx="80" cy="260" rx="90" ry="75" fill="#33A862" opacity="0.9"/>
+  <ellipse cx="230" cy="240" rx="120" ry="90" fill="#3DBE72" opacity="0.85"/>
+  <ellipse cx="400" cy="230" rx="130" ry="95" fill="#33A862" opacity="0.9"/>
+  <ellipse cx="570" cy="235" rx="120" ry="88" fill="#2D9A58" opacity="0.9"/>
+  <ellipse cx="720" cy="250" rx="100" ry="80" fill="#3DBE72" opacity="0.85"/>
+
+  <!-- Sunlight dappling through leaves -->
+  <rect width="800" height="600" fill="url(#sunspot1)" filter="url(#blur-soft)"/>
+  <rect width="800" height="600" fill="url(#sunspot2)" filter="url(#blur-soft)"/>
+  <ellipse cx="500" cy="280" rx="60" ry="40" fill="#F9E4A0" opacity="0.15" filter="url(#blur-soft)"/>
+
+  <!-- Still Water / Ground -->
+  <rect y="380" width="800" height="220" fill="url(#mWater)"/>
+  <!-- Water surface shimmer -->
+  <path d="M 0 390 Q 100 385, 200 392 T 400 388 T 600 393 T 800 389 L 800 420 L 0 420 Z" fill="#3A8C6A" opacity="0.5"/>
+  <path d="M 0 410 Q 150 405, 300 412 T 600 408 T 800 412 L 800 440 L 0 440 Z" fill="#2D6E5E" opacity="0.4"/>
+
+  <!-- Mangrove Stilt Roots (left cluster) -->
+  <line x1="60" y1="290" x2="30" y2="380" stroke="#3D2200" stroke-width="5" stroke-linecap="round"/>
+  <line x1="60" y1="290" x2="55" y2="390" stroke="#5A3610" stroke-width="4.5"/>
+  <line x1="60" y1="290" x2="85" y2="385" stroke="#3D2200" stroke-width="4"/>
+  <line x1="60" y1="290" x2="100" y2="378" stroke="#5A3610" stroke-width="3.5"/>
+  <!-- root tips -->
+  <line x1="30" y1="380" x2="20" y2="400" stroke="#3D2200" stroke-width="3"/>
+  <line x1="30" y1="380" x2="42" y2="402" stroke="#3D2200" stroke-width="3"/>
+  <line x1="55" y1="390" x2="45" y2="408" stroke="#3D2200" stroke-width="3"/>
+  <line x1="85" y1="385" x2="78" y2="405" stroke="#3D2200" stroke-width="2.5"/>
+  <line x1="85" y1="385" x2="95" y2="408" stroke="#3D2200" stroke-width="2.5"/>
+
+  <!-- Mangrove Stilt Roots (right cluster) -->
+  <line x1="720" y1="280" x2="695" y2="380" stroke="#3D2200" stroke-width="5" stroke-linecap="round"/>
+  <line x1="720" y1="280" x2="718" y2="392" stroke="#5A3610" stroke-width="4.5"/>
+  <line x1="720" y1="280" x2="745" y2="378" stroke="#3D2200" stroke-width="4"/>
+  <line x1="720" y1="280" x2="762" y2="370" stroke="#5A3610" stroke-width="3.5"/>
+  <line x1="695" y1="380" x2="680" y2="402" stroke="#3D2200" stroke-width="3"/>
+  <line x1="718" y1="392" x2="710" y2="410" stroke="#3D2200" stroke-width="3"/>
+  <line x1="745" y1="378" x2="756" y2="402" stroke="#3D2200" stroke-width="2.5"/>
+
+  <!-- Center mangrove trunk -->
+  <line x1="380" y1="260" x2="355" y2="380" stroke="#5A3610" stroke-width="6"/>
+  <line x1="380" y1="260" x2="405" y2="385" stroke="#3D2200" stroke-width="5.5"/>
+  <line x1="380" y1="260" x2="340" y2="370" stroke="#5A3610" stroke-width="4"/>
+  <line x1="380" y1="260" x2="420" y2="375" stroke="#3D2200" stroke-width="4"/>
+  <line x1="355" y1="380" x2="342" y2="405" stroke="#3D2200" stroke-width="3.5"/>
+  <line x1="405" y1="385" x2="420" y2="408" stroke="#3D2200" stroke-width="3.5"/>
+  <line x1="340" y1="370" x2="325" y2="400" stroke="#3D2200" stroke-width="3"/>
+
+  <!-- Wooden Boardwalk / Eco Bridge (main path) -->
+  <!-- Bridge deck -->
+  <polygon points="250,340 550,340 580,600 220,600" fill="url(#boardwalk)"/>
+  <!-- Plank lines -->
+  <line x1="252" y1="355" x2="548" y2="355" stroke="#4A2D0C" stroke-width="2.5" opacity="0.7"/>
+  <line x1="255" y1="375" x2="545" y2="375" stroke="#4A2D0C" stroke-width="2.5" opacity="0.7"/>
+  <line x1="258" y1="398" x2="542" y2="398" stroke="#4A2D0C" stroke-width="2" opacity="0.6"/>
+  <line x1="262" y1="422" x2="538" y2="422" stroke="#4A2D0C" stroke-width="2" opacity="0.6"/>
+  <line x1="266" y1="450" x2="534" y2="450" stroke="#4A2D0C" stroke-width="2.5" opacity="0.65"/>
+  <line x1="272" y1="482" x2="528" y2="482" stroke="#4A2D0C" stroke-width="2.5" opacity="0.65"/>
+  <line x1="280" y1="520" x2="520" y2="520" stroke="#4A2D0C" stroke-width="3" opacity="0.6"/>
+  <line x1="290" y1="562" x2="510" y2="562" stroke="#4A2D0C" stroke-width="3" opacity="0.55"/>
+
+  <!-- Bridge side highlights (worn wood) -->
+  <polygon points="250,340 262,340 292,600 220,600" fill="#8B6340" opacity="0.4"/>
+  <polygon points="550,340 538,340 508,600 580,600" fill="#8B6340" opacity="0.4"/>
+
+  <!-- Railing posts (left) -->
+  <rect x="250" y="295" width="8" height="50" rx="2" fill="#7B4F2E"/>
+  <rect x="300" y="298" width="8" height="50" rx="2" fill="#7B4F2E"/>
+  <rect x="350" y="300" width="8" height="50" rx="2" fill="#7B4F2E"/>
+  <!-- Railing posts (right) -->
+  <rect x="542" y="295" width="8" height="50" rx="2" fill="#7B4F2E"/>
+  <rect x="492" y="298" width="8" height="50" rx="2" fill="#7B4F2E"/>
+  <rect x="442" y="300" width="8" height="50" rx="2" fill="#7B4F2E"/>
+  <!-- Railing bars -->
+  <path d="M 254 300 Q 330 295, 400 300 T 546 300" stroke="#9B6B3E" stroke-width="4" fill="none"/>
+  <path d="M 254 315 Q 330 310, 400 315 T 546 315" stroke="#7B4F2E" stroke-width="3" fill="none"/>
+
+  <!-- Water reflection of boardwalk -->
+  <polygon points="250,345 550,345 553,390 247,390" fill="#1A5244" opacity="0.5"/>
+
+  <!-- Root reflections in water -->
+  <line x1="30" y1="400" x2="32" y2="440" stroke="#1A3A2C" stroke-width="3" opacity="0.5"/>
+  <line x1="55" y1="395" x2="57" y2="435" stroke="#1A3A2C" stroke-width="3" opacity="0.5"/>
+  <line x1="355" y1="385" x2="355" y2="425" stroke="#1A3A2C" stroke-width="4" opacity="0.5"/>
+  <line x1="405" y1="388" x2="406" y2="428" stroke="#1A3A2C" stroke-width="4" opacity="0.5"/>
+
+  <!-- Atmospheric haze / depth -->
+  <rect width="800" height="600" fill="rgba(20,70,40,0.18)"/>
+
+  <!-- Small birds/wildlife in canopy -->
+  <path d="M 180 175 Q 190 168, 200 175 Q 210 168, 220 175" stroke="#FFFFFF" stroke-width="1.8" fill="none" opacity="0.8"/>
+  <path d="M 550 158 Q 558 152, 566 158 Q 574 152, 582 158" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.7"/>
+</svg>

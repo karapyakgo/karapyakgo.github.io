@@ -1,0 +1,804 @@
+/**
+ * Application Controller for Karapyak Travel
+ * Manages UI interactions, real-time reactive calculator bindings,
+ * modal dialogs, package pre-filling, and e-voucher generation (PDF Slide 4 & 5).
+ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const data = window.KARAPYAK_DATA;
+  if (!data) {
+    console.error("KARAPYAK_DATA not loaded");
+    return;
+  }
+
+  // Initialize Calculator with default values (matching Slide 6 Family simulation)
+  const calc = new window.KarapyakCalculator(data);
+
+  // Set default visit date to tomorrow
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const formattedDate = tomorrow.toISOString().split("T")[0];
+  calc.setState({ visitDate: formattedDate });
+
+  // DOM Elements - Calculator Controls
+  const visitDateInput = document.getElementById("visitDateInput");
+  const adultsVal = document.getElementById("adultsVal");
+  const adultsInc = document.getElementById("adultsInc");
+  const adultsDec = document.getElementById("adultsDec");
+
+  const childrenVal = document.getElementById("childrenVal");
+  const childrenInc = document.getElementById("childrenInc");
+  const childrenDec = document.getElementById("childrenDec");
+
+  const parkingSelect = document.getElementById("parkingSelect");
+  const guideSelect = document.getElementById("guideSelect");
+  const transportContainer = document.getElementById("transportContainer");
+  const activitiesContainer = document.getElementById("activitiesContainer");
+
+  // DOM Elements - Receipt & Output
+  const receiptItemsBody = document.getElementById("receiptItemsBody");
+  const receiptTotalDisplay = document.getElementById("receiptTotalDisplay");
+  const receiptItemCount = document.getElementById("receiptItemCount");
+  const appliedPackageBadge = document.getElementById("appliedPackageBadge");
+  const btnOpenBooking = document.getElementById("btnOpenBooking");
+
+  // DOM Elements - Containers
+  const packagesContainer = document.getElementById("packagesContainer");
+  const guidesContainer = document.getElementById("guidesContainer");
+  const destinationsContainer = document.getElementById("destinationsContainer");
+  const msmeContainer = document.getElementById("msmeContainer");
+
+  // DOM Elements - Modals
+  const bookingModal = document.getElementById("bookingModal");
+  const closeBookingModal = document.getElementById("closeBookingModal");
+  const bookingForm = document.getElementById("bookingForm");
+  const modalSummaryList = document.getElementById("modalSummaryList");
+  const modalTotalDisplay = document.getElementById("modalTotalDisplay");
+
+  const ticketModal = document.getElementById("ticketModal");
+  const closeTicketModal = document.getElementById("closeTicketModal");
+  const voucherContent = document.getElementById("voucherContent");
+  const btnPrintTicket = document.getElementById("btnPrintTicket");
+  const btnWhatsAppConfirm = document.getElementById("btnWhatsAppConfirm");
+
+  // DOM Elements - Mobile Navigation & Floating Bar
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const mobileDrawerOverlay = document.getElementById("mobileDrawerOverlay");
+  const closeMobileDrawer = document.getElementById("closeMobileDrawer");
+  const mobileStickyPrice = document.getElementById("mobileStickyPrice");
+  const btnMobileStickyBooking = document.getElementById("btnMobileStickyBooking");
+
+  // Mobile Drawer Open / Close Functions
+  function openMobileDrawer() {
+    if (mobileDrawerOverlay) {
+      mobileDrawerOverlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeMobileDrawerFn() {
+    if (mobileDrawerOverlay) {
+      mobileDrawerOverlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  }
+
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener("click", openMobileDrawer);
+  }
+  if (closeMobileDrawer) {
+    closeMobileDrawer.addEventListener("click", closeMobileDrawerFn);
+  }
+  if (mobileDrawerOverlay) {
+    mobileDrawerOverlay.addEventListener("click", (e) => {
+      if (e.target === mobileDrawerOverlay) {
+        closeMobileDrawerFn();
+      }
+    });
+  }
+
+  document.querySelectorAll(".mobile-nav-link, #btnDrawerCta").forEach(link => {
+    link.addEventListener("click", closeMobileDrawerFn);
+  });
+
+  if (btnMobileStickyBooking && btnOpenBooking) {
+    btnMobileStickyBooking.addEventListener("click", () => {
+      btnOpenBooking.click();
+    });
+  }
+
+  // Set initial Date
+  if (visitDateInput) {
+    visitDateInput.min = new Date().toISOString().split("T")[0];
+    visitDateInput.value = formattedDate;
+    visitDateInput.addEventListener("change", (e) => {
+      calc.setState({ visitDate: e.target.value });
+    });
+  }
+
+  // 1. Populate Guides Dropdown in Calculator
+  if (guideSelect) {
+    guideSelect.innerHTML = `
+      <option value="none">-- Tanpa Pemandu Wisata (Mandiri) --</option>
+      ${data.tourGuides.map(g => `
+        <option value="${g.id}">
+          ${g.name} (${g.role}) - ${calc.formatRupiah(g.price)} / ${g.duration}
+        </option>
+      `).join("")}
+    `;
+    guideSelect.value = calc.state.selectedGuideId;
+    guideSelect.addEventListener("change", (e) => {
+      calc.setState({ selectedGuideId: e.target.value, appliedPackageId: null });
+      highlightSelectedGuideCard(e.target.value);
+    });
+  }
+
+  // 2. Render Transport Radio Options
+  if (transportContainer) {
+    transportContainer.innerHTML = data.transportOptions.map(t => `
+      <label class="choice-chip ${calc.state.selectedTransId === t.id ? 'selected' : ''}" data-trans-id="${t.id}">
+        <div class="choice-chip-left">
+          <input type="radio" name="transChoice" class="choice-radio" value="${t.id}" ${calc.state.selectedTransId === t.id ? 'checked' : ''}>
+          <div class="choice-info">
+            <strong>${t.name}</strong>
+            <small>${t.description}</small>
+          </div>
+        </div>
+        <div class="choice-price">
+          ${t.price === 0 ? 'Gratis' : calc.formatRupiah(t.price)}
+        </div>
+      </label>
+    `).join("");
+
+    transportContainer.querySelectorAll(".choice-chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const transId = chip.getAttribute("data-trans-id");
+        calc.setState({ selectedTransId: transId, appliedPackageId: null });
+        updateTransportChipsUI(transId);
+      });
+    });
+  }
+
+  function updateTransportChipsUI(transId) {
+    if (!transportContainer) return;
+    transportContainer.querySelectorAll(".choice-chip").forEach(chip => {
+      const isMatch = chip.getAttribute("data-trans-id") === transId;
+      chip.classList.toggle("selected", isMatch);
+      const radio = chip.querySelector("input[type='radio']");
+      if (radio) radio.checked = isMatch;
+    });
+  }
+
+  // 3. Render Custom Activities Checkboxes
+  if (activitiesContainer) {
+    activitiesContainer.innerHTML = data.customActivities.map(act => {
+      const isChecked = calc.state.selectedActivities.includes(act.id);
+      return `
+        <label class="checkbox-card ${isChecked ? 'selected' : ''}" data-act-id="${act.id}">
+          <input type="checkbox" value="${act.id}" ${isChecked ? 'checked' : ''}>
+          <div class="checkbox-card-body">
+            <div class="checkbox-title-row">
+              <strong>${act.name}</strong>
+              <span class="choice-price">${calc.formatRupiah(act.price)}</span>
+            </div>
+            <p>${act.description}</p>
+          </div>
+        </label>
+      `;
+    }).join("");
+
+    activitiesContainer.querySelectorAll(".checkbox-card").forEach(card => {
+      const checkbox = card.querySelector("input[type='checkbox']");
+      checkbox.addEventListener("change", (e) => {
+        const actId = e.target.value;
+        calc.toggleActivity(actId);
+        card.classList.toggle("selected", e.target.checked);
+      });
+    });
+  }
+
+  function updateActivitiesUI(selectedActIds) {
+    if (!activitiesContainer) return;
+    activitiesContainer.querySelectorAll(".checkbox-card").forEach(card => {
+      const actId = card.getAttribute("data-act-id");
+      const isSelected = selectedActIds.includes(actId);
+      card.classList.toggle("selected", isSelected);
+      const checkbox = card.querySelector("input[type='checkbox']");
+      if (checkbox) checkbox.checked = isSelected;
+    });
+  }
+
+  // 4. Adults & Children Steppers
+  if (adultsInc) {
+    adultsInc.addEventListener("click", () => {
+      const current = parseInt(calc.state.adults, 10) || 0;
+      calc.setState({ adults: current + 1, appliedPackageId: null });
+    });
+  }
+  if (adultsDec) {
+    adultsDec.addEventListener("click", () => {
+      const current = parseInt(calc.state.adults, 10) || 0;
+      if (current > 1) {
+        calc.setState({ adults: current - 1, appliedPackageId: null });
+      }
+    });
+  }
+  if (childrenInc) {
+    childrenInc.addEventListener("click", () => {
+      const current = parseInt(calc.state.children, 10) || 0;
+      calc.setState({ children: current + 1, appliedPackageId: null });
+    });
+  }
+  if (childrenDec) {
+    childrenDec.addEventListener("click", () => {
+      const current = parseInt(calc.state.children, 10) || 0;
+      if (current > 0) {
+        calc.setState({ children: current - 1, appliedPackageId: null });
+      }
+    });
+  }
+
+  // Parking Select
+  if (parkingSelect) {
+    parkingSelect.addEventListener("change", (e) => {
+      calc.setState({ parkingType: e.target.value });
+    });
+  }
+
+  // 5. Render Tour Packages (PDF Slide 5)
+  if (packagesContainer) {
+    packagesContainer.innerHTML = data.tourPackages.map((pkg, idx) => `
+      <div class="package-card ${pkg.featured ? 'featured-package' : ''} reveal reveal-delay-${(idx % 4) + 1}" data-pkg-id="${pkg.id}">
+        <div class="package-card-header">
+          <span class="badge ${pkg.featured ? 'badge-warm' : 'badge-primary'}">${pkg.badge}</span>
+          <h3>${pkg.title}</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">${pkg.category}</p>
+        </div>
+        <p style="font-size: 0.825rem; margin-bottom: 0.75rem;">${pkg.description}</p>
+        <div class="package-price-wrap">
+          <span style="font-size: 0.725rem; color: var(--text-muted); display: block;">Total Estimasi Paket</span>
+          <div class="package-price">${calc.formatRupiah(pkg.price)}</div>
+        </div>
+        <ul class="package-includes-list">
+          ${pkg.includes.map(inc => `
+            <li>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>${inc}</span>
+            </li>
+          `).join("")}
+        </ul>
+        <button class="btn ${pkg.featured ? 'btn-primary' : 'btn-secondary'} btn-block btn-apply-package" data-id="${pkg.id}">
+          Pilih & Terapkan ke Estimasi
+        </button>
+      </div>
+    `).join("");
+
+    packagesContainer.querySelectorAll(".btn-apply-package").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const pkgId = btn.getAttribute("data-id");
+        calc.applyPackage(pkgId);
+        showToast(`Paket "${data.tourPackages.find(p => p.id === pkgId).title}" berhasil diterapkan ke kalkulator!`);
+        scrollToElement("#kalkulator");
+      });
+    });
+  }
+
+  // 6. Render Tour Guides (PDF Slide 4 Step 3 & Slide 5)
+  if (guidesContainer) {
+    guidesContainer.innerHTML = data.tourGuides.map((g, idx) => `
+      <div class="guide-card reveal reveal-delay-${(idx % 4) + 1}" id="card-${g.id}" data-guide-id="${g.id}">
+        <div class="guide-avatar-wrap">
+          <img src="${g.avatar}" alt="${g.name}">
+          <span class="badge badge-success guide-badge-pill">${g.badge}</span>
+        </div>
+        <div class="guide-card-content">
+          <h4 class="guide-name">${g.name}</h4>
+          <span class="guide-role">${g.role}</span>
+          <div class="guide-rating-row">
+            <span class="star-icon">★</span>
+            <span>${g.rating}</span>
+            <span style="color: var(--text-muted); font-weight: 400;">(${g.reviewCount} ulasan)</span>
+          </div>
+          <p class="guide-specialty">${g.specialty}</p>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+            Bahasa: <strong>${g.languages.join(", ")}</strong>
+          </div>
+          <div class="guide-footer-row">
+            <span class="guide-rate">${calc.formatRupiah(g.price)} <small style="font-weight: 400; color: var(--text-muted);">/ ${g.duration}</small></span>
+            <button class="btn btn-sm btn-secondary btn-select-guide" data-id="${g.id}">
+              Pilih Guide
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+
+    guidesContainer.querySelectorAll(".btn-select-guide").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const gId = btn.getAttribute("data-id");
+        calc.setState({ selectedGuideId: gId, appliedPackageId: null });
+        highlightSelectedGuideCard(gId);
+        showToast(`Pemandu "${data.tourGuides.find(g => g.id === gId).name}" dipilih!`);
+        scrollToElement("#kalkulator");
+      });
+    });
+  }
+
+  function highlightSelectedGuideCard(guideId) {
+    if (!guidesContainer) return;
+    guidesContainer.querySelectorAll(".guide-card").forEach(c => {
+      const isMatch = c.getAttribute("data-guide-id") === guideId;
+      c.classList.toggle("selected-guide", isMatch);
+      const btn = c.querySelector(".btn-select-guide");
+      if (btn) {
+        btn.textContent = isMatch ? "Dipilih ✓" : "Pilih Guide";
+        btn.className = isMatch ? "btn btn-sm btn-primary btn-select-guide" : "btn btn-sm btn-secondary btn-select-guide";
+      }
+    });
+  }
+
+  // 7. Render Destinations Around (PDF Slide 4 Step 1 & Slide 5)
+  if (destinationsContainer) {
+    destinationsContainer.innerHTML = data.destinationsAround.map((dest, idx) => `
+      <div class="dest-card reveal reveal-delay-${(idx % 4) + 1}">
+        <div class="dest-card-image">
+          <img src="${dest.image}" alt="${dest.name}">
+          <span class="dest-tag">${dest.tag}</span>
+        </div>
+        <div class="dest-content">
+          <h4 class="dest-title">${dest.name}</h4>
+          <span class="dest-distance">📍 ${dest.distance}</span>
+          <p class="dest-desc">${dest.desc}</p>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  // 8. Render MSME Partners (PDF Slide 7)
+  if (msmeContainer) {
+    msmeContainer.innerHTML = data.localPartners.map((p, idx) => `
+      <div class="msme-card reveal reveal-delay-${(idx % 4) + 1}">
+        <span class="msme-cat">${p.category}</span>
+        <h4 class="msme-name">${p.name}</h4>
+        <p class="msme-desc">${p.desc}</p>
+        <div class="msme-benefit">
+          🎁 ${p.benefit}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  // 9. Subscribe to Calculator Changes (Reactive Live UI Update)
+  calc.subscribe((summary) => {
+    // Sync Input Controls
+    if (adultsVal) adultsVal.textContent = summary.state.adults;
+    if (childrenVal) childrenVal.textContent = summary.state.children;
+    if (parkingSelect) parkingSelect.value = summary.state.parkingType || "none";
+    if (guideSelect) guideSelect.value = summary.state.selectedGuideId || "none";
+
+    // Update chips & checkboxes without infinite triggers
+    updateTransportChipsUI(summary.state.selectedTransId);
+    updateActivitiesUI(summary.state.selectedActivities);
+    highlightSelectedGuideCard(summary.state.selectedGuideId);
+
+    // Update Applied Package Badge
+    if (appliedPackageBadge) {
+      if (summary.appliedPackage) {
+        appliedPackageBadge.textContent = summary.appliedPackage.title;
+        appliedPackageBadge.style.display = "inline-flex";
+      } else {
+        appliedPackageBadge.style.display = "none";
+      }
+    }
+
+    // Update Total Display
+    if (receiptTotalDisplay) {
+      receiptTotalDisplay.textContent = summary.totalFormatted;
+    }
+    if (mobileStickyPrice) {
+      mobileStickyPrice.textContent = summary.totalFormatted;
+    }
+    if (receiptItemCount) {
+      receiptItemCount.textContent = `${summary.itemCount} Komponen Terverifikasi`;
+    }
+
+    // Update Receipt Table
+    if (receiptItemsBody) {
+      if (summary.items.length === 0) {
+        receiptItemsBody.innerHTML = `
+          <tr>
+            <td colspan="2" style="text-align: center; color: var(--text-muted); padding: 1.5rem 0;">
+              Belum ada komponen dipilih. Silakan tentukan jumlah tiket atau paket.
+            </td>
+          </tr>
+        `;
+      } else {
+        receiptItemsBody.innerHTML = summary.items.map(item => `
+          <tr>
+            <td>
+              <span class="receipt-category-tag">${item.category}</span>
+              <div style="font-weight: 600; color: var(--text-main); font-size: 0.85rem;">${item.label}</div>
+              ${item.details ? `<div style="font-size: 0.725rem; color: var(--text-muted);">${item.details}</div>` : ''}
+            </td>
+            <td class="price-col">
+              ${calc.formatRupiah(item.subtotal)}
+            </td>
+          </tr>
+        `).join("");
+      }
+    }
+  });
+
+  // 10. Booking Modal Interaction (Step 5 from PDF)
+  if (btnOpenBooking) {
+    btnOpenBooking.addEventListener("click", () => {
+      const summary = calc.calculate();
+      if (summary.total === 0) {
+        alert("Pilih minimal 1 tiket masuk untuk melanjutkan pemesanan.");
+        return;
+      }
+
+      // Populate Modal Summary
+      if (modalSummaryList) {
+        modalSummaryList.innerHTML = summary.items.map(item => `
+          <div style="display: flex; justify-content: space-between; font-size: 0.825rem; margin-bottom: 0.4rem;">
+            <span style="color: var(--text-secondary);">${item.label}</span>
+            <strong style="color: var(--text-main);">${calc.formatRupiah(item.subtotal)}</strong>
+          </div>
+        `).join("");
+      }
+      if (modalTotalDisplay) {
+        modalTotalDisplay.textContent = summary.totalFormatted;
+      }
+
+      const modalDateInput = document.getElementById("modalDateInput");
+      if (modalDateInput) {
+        modalDateInput.value = calc.state.visitDate || formattedDate;
+      }
+
+      bookingModal.classList.add("active");
+    });
+  }
+
+  if (closeBookingModal) {
+    closeBookingModal.addEventListener("click", () => {
+      bookingModal.classList.remove("active");
+    });
+  }
+
+  // Handle Booking Form Submission -> Generate E-Ticket / Voucher
+  if (bookingForm) {
+    bookingForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const guestName = document.getElementById("guestName").value.trim();
+      const guestPhone = document.getElementById("guestPhone").value.trim();
+      const guestEmail = document.getElementById("guestEmail").value.trim();
+      const guestNotes = document.getElementById("guestNotes").value.trim();
+      const visitDate = document.getElementById("modalDateInput").value;
+
+      if (!guestName || !guestPhone) {
+        alert("Mohon lengkapi nama dan nomor WhatsApp Anda.");
+        return;
+      }
+
+      const summary = calc.calculate();
+      const bookingCode = "KRP-" + Math.floor(100000 + Math.random() * 900000);
+
+      // Render E-Voucher Modal
+      if (voucherContent) {
+        voucherContent.innerHTML = `
+          <div class="voucher-card">
+            <div class="voucher-top">
+              <div>
+                <span class="badge badge-primary">E-Tiket Terverifikasi</span>
+                <h3 style="font-size: 1.1rem; margin-top: 0.25rem;">Karapyak Travel Voucher</h3>
+              </div>
+              <div class="booking-code">${bookingCode}</div>
+            </div>
+
+            <div class="voucher-info-grid">
+              <div class="voucher-field">
+                <strong>Nama Pemesan:</strong>
+                <span>${guestName}</span>
+              </div>
+              <div class="voucher-field">
+                <strong>Tanggal Kunjungan:</strong>
+                <span>${formatDateIndo(visitDate)}</span>
+              </div>
+              <div class="voucher-field">
+                <strong>No. Kontak / WhatsApp:</strong>
+                <span>${guestPhone}</span>
+              </div>
+              <div class="voucher-field">
+                <strong>Status Pemesanan:</strong>
+                <span style="color: var(--success); font-weight: 700;">Terkonfirmasi (Bayar di Mitra)</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border-subtle);">
+              <strong style="font-size: 0.775rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Rincian Komponen Terpilih:</strong>
+              <div style="font-size: 0.825rem; display: flex; flex-direction: column; gap: 0.35rem;">
+                ${summary.items.map(it => `
+                  <div style="display: flex; justify-content: space-between;">
+                    <span>• ${it.label}</span>
+                    <strong>${calc.formatRupiah(it.subtotal)}</strong>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+
+            <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 2px solid var(--border-strong); display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.9rem; font-weight: 600;">Total Estimasi Biaya:</span>
+              <strong style="font-size: 1.35rem; color: var(--primary);">${summary.totalFormatted}</strong>
+            </div>
+
+            ${guestNotes ? `
+              <div style="margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-muted); background: var(--bg-surface); padding: 0.5rem; border-radius: var(--radius-sm);">
+                <em>Catatan Pemesan: "${guestNotes}"</em>
+              </div>
+            ` : ''}
+          </div>
+          
+          <div style="background-color: var(--bg-subtle); padding: 0.875rem; border-radius: var(--radius-md); font-size: 0.785rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            <strong>Mekanisme Pembayaran (Sesuai SOP Mitra Karapyak):</strong><br>
+            Tiket dan layanan pemandu dibayarkan langsung saat tiba di pos resmi Pantai Karapyak atau transfer rekening mitra yang dikonfirmasikan via WhatsApp pengelola.
+          </div>
+        `;
+      }
+
+      // Configure WhatsApp link button
+      if (btnWhatsAppConfirm) {
+        const waText = encodeURIComponent(
+          `Halo Mitra Karapyak Travel! Saya ingin mengonfirmasi pesanan tiket/layanan:\n` +
+          `- Kode Booking: ${bookingCode}\n` +
+          `- Nama: ${guestName}\n` +
+          `- Tanggal: ${formatDateIndo(visitDate)}\n` +
+          `- Total Estimasi: ${summary.totalFormatted}\n` +
+          `- Rincian: ${summary.items.map(i => i.label).join(", ")}\n` +
+          `Mohon informasi penjemputan dan panduan kedatangan. Terima kasih!`
+        );
+        btnWhatsAppConfirm.href = `https://wa.me/6281234567801?text=${waText}`;
+      }
+
+      bookingModal.classList.remove("active");
+      ticketModal.classList.add("active");
+    });
+  }
+
+  if (closeTicketModal) {
+    closeTicketModal.addEventListener("click", () => {
+      ticketModal.classList.remove("active");
+    });
+  }
+
+  if (btnPrintTicket) {
+    btnPrintTicket.addEventListener("click", () => {
+      window.print();
+    });
+  }
+
+  // Close modals when clicking overlay outside card
+  [bookingModal, ticketModal].forEach(modal => {
+    if (!modal) return;
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+        if (typeof updateFlowStepOnScroll === "function") {
+          updateFlowStepOnScroll();
+        }
+      }
+    });
+  });
+
+  if (closeBookingModal) {
+    closeBookingModal.addEventListener("click", () => {
+      bookingModal.classList.remove("active");
+      if (typeof updateFlowStepOnScroll === "function") {
+        updateFlowStepOnScroll();
+      }
+    });
+  }
+
+  // Helper Toast function
+  function showToast(message) {
+    let container = document.getElementById("toastContainer");
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "toastContainer";
+      container.className = "toast-container";
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="#10B981">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+      </svg>
+      <span>${message}</span>
+    `;
+
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transition = "opacity 300ms ease";
+      setTimeout(() => toast.remove(), 300);
+    }, 3200);
+  }
+
+  function scrollToElement(selector) {
+    const el = document.querySelector(selector);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function formatDateIndo(dateStr) {
+    if (!dateStr) return "-";
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("id-ID", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+  }
+
+  // ==========================================================================
+  // 11. Scroll Reveal Animations (Anti-Slop, High Performance IntersectionObserver)
+  // ==========================================================================
+  function initScrollReveal() {
+    const revealElements = document.querySelectorAll(".reveal, .reveal-scale");
+    if (!revealElements.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      revealElements.forEach(el => el.classList.add("is-visible"));
+      return;
+    }
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.08,
+      rootMargin: "0px 0px -30px 0px"
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  }
+
+  // ==========================================================================
+  // 12. Tourist 5-Step Flow Scroll Spy & Ribbon Controller
+  // ==========================================================================
+  let updateFlowStepOnScroll = null;
+
+  function initFlowScrollSpy() {
+    const stepItems = document.querySelectorAll(".flow-step-item");
+    const flowStep5 = document.getElementById("flowStep5");
+    if (!stepItems.length) return;
+
+    let isProgrammatic = false;
+    let timer = null;
+
+    function setActiveStep(stepNum) {
+      stepItems.forEach(item => {
+        const s = parseInt(item.getAttribute("data-step"), 10);
+        if (s === stepNum) {
+          if (!item.classList.contains("active")) {
+            item.classList.add("active");
+            // Auto scroll ribbon horizontally on mobile so active step is centered
+            item.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+          }
+        } else {
+          item.classList.remove("active");
+        }
+      });
+    }
+
+    // Direct click on Step 5: trigger booking modal
+    if (flowStep5) {
+      flowStep5.addEventListener("click", (e) => {
+        e.preventDefault();
+        isProgrammatic = true;
+        clearTimeout(timer);
+        setActiveStep(5);
+        scrollToElement("#receiptCard");
+        setTimeout(() => {
+          if (btnOpenBooking) {
+            btnOpenBooking.click();
+          }
+          isProgrammatic = false;
+        }, 500);
+      });
+    }
+
+    // Click on Steps 1 to 4: smooth scroll with temporary spy lock
+    stepItems.forEach(item => {
+      const stepNum = parseInt(item.getAttribute("data-step"), 10);
+      if (stepNum === 5) return;
+
+      item.addEventListener("click", (e) => {
+        const targetHref = item.getAttribute("href");
+        if (targetHref && targetHref.startsWith("#")) {
+          e.preventDefault();
+          isProgrammatic = true;
+          clearTimeout(timer);
+          setActiveStep(stepNum);
+          scrollToElement(targetHref);
+          timer = setTimeout(() => {
+            isProgrammatic = false;
+          }, 800);
+        }
+      });
+    });
+
+    // Scroll listener calculates active section
+    updateFlowStepOnScroll = function() {
+      if (isProgrammatic) return;
+
+      if (bookingModal && bookingModal.classList.contains("active")) {
+        setActiveStep(5);
+        return;
+      }
+
+      const scrollY = window.scrollY || window.pageYOffset;
+      const navOffset = 140;
+
+      const secInfo = document.getElementById("informasi");
+      const secCalc = document.getElementById("kalkulator");
+      const secPemandu = document.getElementById("pemandu");
+      const receiptCard = document.getElementById("receiptCard");
+
+      const infoTop = secInfo ? secInfo.offsetTop - navOffset : 0;
+      const calcTop = secCalc ? secCalc.offsetTop - navOffset : 600;
+      const pemanduTop = secPemandu ? secPemandu.offsetTop - navOffset : 1400;
+      const receiptTop = receiptCard ? receiptCard.offsetTop - navOffset : calcTop + 250;
+
+      if (scrollY < calcTop - 60) {
+        setActiveStep(1); // 1. Eksplorasi Informasi
+      } else if (scrollY >= calcTop - 60 && scrollY < pemanduTop - 80) {
+        // Di area kalkulator
+        if (scrollY >= receiptTop - 120) {
+          setActiveStep(4); // 4. Kalkulator Estimasi (Receipt Panel)
+        } else {
+          setActiveStep(2); // 2. Tiket & Tanggal (Form Kunjungan)
+        }
+      } else if (scrollY >= pemanduTop - 80 && scrollY < pemanduTop + (secPemandu ? secPemandu.offsetHeight : 600) - 80) {
+        setActiveStep(3); // 3. Pemandu Wisata
+      } else {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (scrollY >= totalHeight - 220) {
+          setActiveStep(5); // 5. Pemesanan & Konfirmasi
+        } else {
+          setActiveStep(4); // Estimasi Biaya
+        }
+      }
+    };
+
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateFlowStepOnScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Initial check
+    updateFlowStepOnScroll();
+  }
+
+  // Initialize Scroll Systems
+  initScrollReveal();
+  initFlowScrollSpy();
+});
