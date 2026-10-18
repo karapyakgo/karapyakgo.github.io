@@ -6,15 +6,16 @@ Dokumen ini merupakan catatan memori utama (*single source of truth*) untuk kont
 
 ## 1. Project Overview & Environment
 
-- **Project Name:** Karapyak Travel (`karapyakgo.github.io` / `web-karapyak`)
+- **Project Name:** Karapyak Travel (`karapyakgo.github.io`)
 - **Location:** `C:\Users\Lenovo\Herd\web-karapyak` (Laravel Herd Workspace)
-- **GitHub Repository:** `https://github.com/rizkym1/web-karapyak`
-- **GitHub Pages URL:** `https://rizkym1.github.io/web-karapyak/`
+- **GitHub Organization:** `https://github.com/karapyakgo`
+- **GitHub Repository:** `https://github.com/karapyakgo/karapyakgo.github.io`
+- **Production Live URL:** `https://karapyakgo.github.io/`
 - **Konsep:** Platform digital pemesanan tiket resmi, jasa pemandu wisata lokal, dan paket wisata Pantai Karapyak (Bagolo, Kalipucang, Kab. Pangandaran) secara terpadu.
 - **Teknologi:** Pure HTML5, CSS3, & Vanilla JavaScript (sesuai instruksi ketat pengguna tanpa framework berat).
 - **Environment & Runtimes:**
   - **Local Dev Server:** PHP 8.4.8 Built-in Server (`http://127.0.0.1:8000`)
-  - **Git Remote:** `origin` -> `https://github.com/rizkym1/web-karapyak.git` (branch `main`)
+  - **Git Remote:** `origin` -> `https://github.com/karapyakgo/karapyakgo.github.io.git` (branch `main`)
   - **Node.js:** v24.2.0 (`npm.cmd` v11.3.0)
   - **Composer:** 2.10.3
   - **OS:** Windows
