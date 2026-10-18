@@ -1571,6 +1571,7 @@ p {
 
   /* Reset body and html completely */
   html, body {
+    display: block !important;
     background: #FFFFFF !important;
     color: #0F172A !important;
     margin: 0 !important;

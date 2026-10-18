@@ -468,6 +468,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  let currentVoucherData = null;
+
   // Handle Booking Form Submission -> Generate E-Ticket / Voucher
   if (bookingForm) {
     bookingForm.addEventListener("submit", (e) => {
@@ -486,6 +488,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const summary = calc.calculate();
       const bookingCode = "KRP-" + Math.floor(100000 + Math.random() * 900000);
+
+      // Save for dedicated single-page print
+      currentVoucherData = {
+        bookingCode,
+        guestName,
+        guestPhone,
+        guestEmail,
+        guestNotes,
+        visitDate: formatDateIndo(visitDate),
+        items: summary.items,
+        totalFormatted: summary.totalFormatted
+      };
 
       // Render E-Voucher Modal
       if (voucherContent) {
@@ -574,9 +588,306 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Guaranteed 1-Page Clean Print via isolated iframe
+  function printCleanTicket(voucher) {
+    if (!voucher) {
+      window.print();
+      return;
+    }
+
+    let printFrame = document.getElementById("cleanTicketPrintFrame");
+    if (!printFrame) {
+      printFrame = document.createElement("iframe");
+      printFrame.id = "cleanTicketPrintFrame";
+      printFrame.style.position = "fixed";
+      printFrame.style.right = "0";
+      printFrame.style.bottom = "0";
+      printFrame.style.width = "0";
+      printFrame.style.height = "0";
+      printFrame.style.border = "none";
+      printFrame.style.visibility = "hidden";
+      document.body.appendChild(printFrame);
+    }
+
+    const frameDoc = printFrame.contentWindow.document;
+    frameDoc.open();
+    frameDoc.write(`
+      <!DOCTYPE html>
+      <html lang="id">
+      <head>
+        <meta charset="UTF-8">
+        <title>E-Tiket Resmi - ${voucher.bookingCode} - Karapyak Travel</title>
+        <style>
+          @page {
+            size: A4 portrait;
+            margin: 1.2cm 1.5cm;
+          }
+          *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+          }
+          html, body {
+            background: #FFFFFF !important;
+            color: #0F172A !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 10.5pt;
+            line-height: 1.45;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          .ticket-card {
+            max-width: 660px;
+            margin: 0 auto;
+            border: 2px solid #0C647C;
+            border-radius: 12px;
+            overflow: hidden;
+            page-break-inside: avoid;
+            break-inside: avoid;
+          }
+          .ticket-head {
+            background-color: #0C647C !important;
+            color: #FFFFFF !important;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .ticket-head h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 0 0.2rem 0;
+            color: #FFFFFF !important;
+          }
+          .ticket-head p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin: 0;
+            color: #E2E8F0 !important;
+          }
+          .status-badge {
+            background-color: #059669 !important;
+            color: #FFFFFF !important;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+          }
+          .ticket-content {
+            padding: 1.5rem;
+          }
+          .code-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #F0F9FF !important;
+            border: 1.5px dashed #0C647C;
+            padding: 0.875rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+          }
+          .code-label {
+            font-size: 0.75rem;
+            color: #0C647C;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+          .code-number {
+            font-family: monospace;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0C647C;
+            letter-spacing: 0.08em;
+          }
+          .meta-table {
+            width: 100%;
+            margin-bottom: 1.25rem;
+            border-collapse: collapse;
+          }
+          .meta-table td {
+            padding: 0.4rem 0.5rem;
+            vertical-align: top;
+            font-size: 0.9rem;
+          }
+          .meta-table td.col-title {
+            width: 38%;
+            color: #64748B;
+            font-weight: 500;
+          }
+          .meta-table td.col-val {
+            width: 62%;
+            color: #0F172A;
+            font-weight: 700;
+          }
+          .breakdown-box {
+            background: #F8FAFC !important;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+          }
+          .breakdown-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #475569;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #E2E8F0;
+          }
+          .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            padding: 0.35rem 0;
+            border-bottom: 1px solid #F1F5F9;
+          }
+          .breakdown-row:last-child {
+            border-bottom: none;
+          }
+          .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0 0 0;
+            border-top: 2px solid #0C647C;
+            margin-top: 0.6rem;
+          }
+          .total-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #0F172A;
+          }
+          .total-amount {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0C647C;
+          }
+          .notes-alert {
+            background: #FEF3C7 !important;
+            border: 1px solid #FCD34D;
+            padding: 0.6rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #92400E;
+            margin-bottom: 1.25rem;
+          }
+          .sop-alert {
+            background: #F8FAFC !important;
+            border-left: 3.5px solid #0C647C;
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            color: #475569;
+            margin-bottom: 0.5rem;
+            border-radius: 0 6px 6px 0;
+          }
+          .ticket-foot {
+            background: #F1F5F9 !important;
+            border-top: 1px solid #E2E8F0;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #64748B;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="ticket-card">
+          <div class="ticket-head">
+            <div>
+              <h1>Pantai Karapyak Travel</h1>
+              <p>Platform Digital Resmi Wisata Bahari Bagolo, Pangandaran</p>
+            </div>
+            <span class="status-badge">Terkonfirmasi</span>
+          </div>
+
+          <div class="ticket-content">
+            <div class="code-banner">
+              <span class="code-label">Kode Booking Resmi:</span>
+              <span class="code-number">${voucher.bookingCode}</span>
+            </div>
+
+            <table class="meta-table">
+              <tr>
+                <td class="col-title">Nama Pemesan:</td>
+                <td class="col-val">${voucher.guestName}</td>
+              </tr>
+              <tr>
+                <td class="col-title">No. Kontak / WhatsApp:</td>
+                <td class="col-val">${voucher.guestPhone}</td>
+              </tr>
+              ${voucher.guestEmail ? `
+              <tr>
+                <td class="col-title">Alamat Email:</td>
+                <td class="col-val">${voucher.guestEmail}</td>
+              </tr>` : ''}
+              <tr>
+                <td class="col-title">Tanggal Kunjungan:</td>
+                <td class="col-val">${voucher.visitDate}</td>
+              </tr>
+              <tr>
+                <td class="col-title">Lokasi Destinasi:</td>
+                <td class="col-val">Pantai Karapyak, Desa Bagolo, Kec. Kalipucang, Kab. Pangandaran</td>
+              </tr>
+            </table>
+
+            <div class="breakdown-box">
+              <div class="breakdown-title">Rincian Komponen & Layanan Terverifikasi:</div>
+              ${voucher.items.map(item => `
+                <div class="breakdown-row">
+                  <span>• ${item.label}</span>
+                  <strong>${calc.formatRupiah(item.subtotal)}</strong>
+                </div>
+              `).join("")}
+              <div class="total-row">
+                <span class="total-title">Total Estimasi Biaya:</span>
+                <span class="total-amount">${voucher.totalFormatted}</span>
+              </div>
+            </div>
+
+            ${voucher.guestNotes ? `
+              <div class="notes-alert">
+                <strong>Catatan Pemesan:</strong> "${voucher.guestNotes}"
+              </div>
+            ` : ''}
+
+            <div class="sop-alert">
+              <strong>Panduan Kedatangan (SOP Resmi Pengelola):</strong><br>
+              Tunjukkan lembar E-Voucher ini kepada petugas di Pos Gerbang Tiket Masuk Karapyak atau kepada pemandu lokal Anda saat tiba. Pembayaran diselesaikan langsung saat tiba di pos resmi Pantai Karapyak atau transfer rekening mitra yang dikonfirmasi via WhatsApp pengelola.
+            </div>
+          </div>
+
+          <div class="ticket-foot">
+            <span>Diterbitkan resmi oleh Pengelola Wisata Pantai Karapyak</span>
+            <span>karapyakgo.github.io</span>
+          </div>
+        </div>
+      </body>
+      </html>
+    `);
+    frameDoc.close();
+
+    // Trigger printing once content is ready
+    setTimeout(() => {
+      try {
+        printFrame.contentWindow.focus();
+        printFrame.contentWindow.print();
+      } catch (err) {
+        console.error("Iframe print error, falling back to window.print", err);
+        window.print();
+      }
+    }, 280);
+  }
+
   if (btnPrintTicket) {
     btnPrintTicket.addEventListener("click", () => {
-      window.print();
+      printCleanTicket(currentVoucherData);
     });
   }
 
