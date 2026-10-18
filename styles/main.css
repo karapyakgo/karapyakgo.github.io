@@ -1552,25 +1552,130 @@ p {
   }
 }
 
-/* Print Styles for E-Ticket */
+/* Print Styles for E-Ticket (Strict 1-Page Layout, Zero Spillover) */
 @media print {
-  body * {
-    visibility: hidden;
-  }
-  .modal-overlay.active, .modal-card, .voucher-card, .voucher-card * {
-    visibility: visible;
-  }
-  .modal-overlay {
-    position: static;
-    background: none;
-    padding: 0;
-  }
-  .modal-card {
-    box-shadow: none;
-    border: none;
-  }
-  .modal-close-btn, .modal-footer-actions, .site-header, .site-footer {
+  /* Hide all top-level page containers completely so they consume 0px space */
+  .site-header,
+  .flow-ribbon,
+  main,
+  .site-footer,
+  .mobile-sticky-bar,
+  .mobile-drawer-overlay,
+  .toast-container,
+  #bookingModal,
+  .modal-close-btn,
+  .modal-footer-actions,
+  #mobileDrawerOverlay {
     display: none !important;
+  }
+
+  /* Reset body and html completely */
+  html, body {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    font-size: 11pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force ticket modal into normal block flow at top of page */
+  #ticketModal {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+  }
+
+  #ticketModal .modal-card {
+    position: static !important;
+    display: block !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #FFFFFF !important;
+    transform: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  #ticketModal .modal-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-bottom: 2px solid #0C647C !important;
+    padding: 0 0 0.5rem 0 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  #ticketModal .modal-body {
+    padding: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .voucher-card {
+    background: #F8FAFC !important;
+    border: 1.5px solid #0C647C !important;
+    padding: 1rem 1.25rem !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    margin-bottom: 0.75rem !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .booking-code {
+    background: #0C647C !important;
+    color: #FFFFFF !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 6px !important;
+    letter-spacing: 0.05em !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .badge {
+    border: 1px solid #CBD5E1 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Clean up payment note box */
+  .voucher-card + div {
+    font-size: 8.5pt !important;
+    padding: 0.5rem 0.75rem !important;
+    margin-bottom: 0 !important;
+    border: 1px solid #E2E8F0 !important;
+    background: #F8FAFC !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 1cm 1.2cm;
   }
 }
 

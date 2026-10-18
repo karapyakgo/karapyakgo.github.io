@@ -87,7 +87,8 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
 - [x] **Langkah 5: Pemesanan Online & Konfirmasi Instan:**
   - Modal formulir pemesanan dengan gaya *bottom sheet* di layar smartphone agar tidak menutupi keyboard.
   - Generator **E-Voucher Digital** dengan kode booking unik (format `KRP-XXXXXX`).
-  - Fitur cetak/simpan tiket digital (`window.print`) dan integrasi pesan WhatsApp otomatis terformat langsung ke mitra pengelola.
+  - Fitur cetak/simpan tiket digital (`window.print`) dengan stylesheet `@media print` presisi 1 halaman A4 bersih (menghilangkan elemen halaman utama agar tidak tumpah ke 14 halaman).
+  - Integrasi pesan WhatsApp otomatis terformat langsung ke mitra pengelola.
 - [x] **Sticky Tourist Flow Ribbon & Dynamic Scroll Spy:**
   - Ribbon 5 alur dibuat sticky tepat di bawah header dengan glassmorphism (`backdrop-filter: blur(12px)`), bayangan lembut, dan status langkah aktif yang menyala (glowing aura).
   - Dilengkapi engine **Scroll Spy (`requestAnimationFrame` & `IntersectionObserver`)** di [scripts/app.js](file:///c:/Users/Lenovo/Herd/web-karapyak/scripts/app.js) yang otomatis mendeteksi posisi baca pengunjung dan memindahkan nomor aktif secara real-time.
