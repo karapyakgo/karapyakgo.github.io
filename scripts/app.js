@@ -1,26 +1,41 @@
 /**
- * Application Controller for Karapyak Travel
- * Manages UI interactions, real-time reactive calculator bindings,
- * modal dialogs, package pre-filling, and e-voucher generation (PDF Slide 4 & 5).
+ * ============================================================================
+ * CONTROLLER APLIKASI UTAMA — KARAPYAK TRAVEL (karapyakgo.github.io)
+ * ============================================================================
+ * File ini merupakan pengendali utama (Controller) dari antarmuka web Karapyak Travel.
+ * Mengintegrasikan:
+ * 1. Inisialisasi data & engine kalkulator dinamis (Slide 4 Langkah 4 & Slide 6).
+ * 2. Manipulasi DOM, rendering komponen kartu (Paket, Pemandu, Destinasi, UMKM).
+ * 3. Mekanisme langganan reaktif (Reactive Two-Way Sync) antara kalkulator dan struk biaya.
+ * 4. Navigasi drawer mobile & sticky floating action bar di smartphone.
+ * 5. Alur pemesanan interaktif (Langkah 5) & generator E-Voucher digital kode booking resmi.
+ * 6. Isolated Iframe Printer Engine untuk cetak tiket 1 halaman A4 bersih & rapi.
+ * 7. Integrasi pengiriman konfirmasi instan via pesan WhatsApp otomatis terformat.
+ * 8. Animasi performa tinggi: IntersectionObserver Scroll Reveal & Dynamic Scroll Spy 5 Alur.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  // --------------------------------------------------------------------------
+  // 1. INISIALISASI DATA & ENGINE KALKULATOR
+  // --------------------------------------------------------------------------
   const data = window.KARAPYAK_DATA;
   if (!data) {
-    console.error("KARAPYAK_DATA not loaded");
+    console.error("KARAPYAK_DATA belum dimuat. Pastikan scripts/data.js dipanggil sebelum app.js.");
     return;
   }
 
-  // Initialize Calculator with default values (matching Slide 6 Family simulation)
+  // Inisialisasi instance kalkulator dengan nilai awal (sesuai simulasi Slide 6: Paket Keluarga Rp 350.000)
   const calc = new window.KarapyakCalculator(data);
 
-  // Set default visit date to tomorrow
+  // Atur tanggal kunjungan bawaan ke hari esok (H+1)
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const formattedDate = tomorrow.toISOString().split("T")[0];
   calc.setState({ visitDate: formattedDate });
 
-  // DOM Elements - Calculator Controls
+  // --------------------------------------------------------------------------
+  // 2. REFERENSI ELEMEN DOM (KONTROL INPUT KALKULATOR)
+  // --------------------------------------------------------------------------
   const visitDateInput = document.getElementById("visitDateInput");
   const adultsVal = document.getElementById("adultsVal");
   const adultsInc = document.getElementById("adultsInc");
@@ -35,20 +50,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const transportContainer = document.getElementById("transportContainer");
   const activitiesContainer = document.getElementById("activitiesContainer");
 
-  // DOM Elements - Receipt & Output
+  // --------------------------------------------------------------------------
+  // 3. REFERENSI ELEMEN DOM (PANEL STRUK BIAYA & OUTPUT)
+  // --------------------------------------------------------------------------
   const receiptItemsBody = document.getElementById("receiptItemsBody");
   const receiptTotalDisplay = document.getElementById("receiptTotalDisplay");
   const receiptItemCount = document.getElementById("receiptItemCount");
   const appliedPackageBadge = document.getElementById("appliedPackageBadge");
   const btnOpenBooking = document.getElementById("btnOpenBooking");
 
-  // DOM Elements - Containers
+  // --------------------------------------------------------------------------
+  // 4. REFERENSI ELEMEN DOM (CONTAINER DINAMIS)
+  // --------------------------------------------------------------------------
   const packagesContainer = document.getElementById("packagesContainer");
   const guidesContainer = document.getElementById("guidesContainer");
   const destinationsContainer = document.getElementById("destinationsContainer");
   const msmeContainer = document.getElementById("msmeContainer");
 
-  // DOM Elements - Modals
+  // --------------------------------------------------------------------------
+  // 5. REFERENSI ELEMEN DOM (MODAL PEMESANAN & E-TIKET)
+  // --------------------------------------------------------------------------
   const bookingModal = document.getElementById("bookingModal");
   const closeBookingModal = document.getElementById("closeBookingModal");
   const bookingForm = document.getElementById("bookingForm");
@@ -61,14 +82,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnPrintTicket = document.getElementById("btnPrintTicket");
   const btnWhatsAppConfirm = document.getElementById("btnWhatsAppConfirm");
 
-  // DOM Elements - Mobile Navigation & Floating Bar
+  // --------------------------------------------------------------------------
+  // 6. REFERENSI ELEMEN DOM (NAVIGASI MOBILE DRAWER & FLOATING BAR)
+  // --------------------------------------------------------------------------
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileDrawerOverlay = document.getElementById("mobileDrawerOverlay");
   const closeMobileDrawer = document.getElementById("closeMobileDrawer");
   const mobileStickyPrice = document.getElementById("mobileStickyPrice");
   const btnMobileStickyBooking = document.getElementById("btnMobileStickyBooking");
 
-  // Mobile Drawer Open / Close Functions
+  // --------------------------------------------------------------------------
+  // PENGENDALI DRAWER NAVIGASI KHUSUS PERAMBAN MOBILE / PONSEL
+  // --------------------------------------------------------------------------
+  // Membuka menu slide-out drawer dan mengunci scroll body agar tidak bergeser
   function openMobileDrawer() {
     if (mobileDrawerOverlay) {
       mobileDrawerOverlay.classList.add("active");
@@ -76,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Menutup menu slide-out drawer dan mengembalikan scroll normal
   function closeMobileDrawerFn() {
     if (mobileDrawerOverlay) {
       mobileDrawerOverlay.classList.remove("active");
@@ -83,12 +110,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Event listener tombol hamburger menu di header mobile
   if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener("click", openMobileDrawer);
   }
+  // Tombol close (silang) di dalam drawer
   if (closeMobileDrawer) {
     closeMobileDrawer.addEventListener("click", closeMobileDrawerFn);
   }
+  // Menutup drawer saat pengguna mengklik area backdrop gelap di luar panel menu
   if (mobileDrawerOverlay) {
     mobileDrawerOverlay.addEventListener("click", (e) => {
       if (e.target === mobileDrawerOverlay) {
@@ -97,17 +127,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  document.querySelectorAll(".mobile-nav-link, #btnDrawerCta").forEach(link => {
+  // Menutup drawer secara otomatis ketika salah satu tautan menu di dalamnya diklik
+  document.querySelectorAll(".mobile-nav-link, #btnDrawerCta").forEach((link) => {
     link.addEventListener("click", closeMobileDrawerFn);
   });
 
+  // Tombol CTA pemesanan di sticky bottom bar mobile langsung memicu modal booking
   if (btnMobileStickyBooking && btnOpenBooking) {
     btnMobileStickyBooking.addEventListener("click", () => {
       btnOpenBooking.click();
     });
   }
 
-  // Set initial Date
+  // --------------------------------------------------------------------------
+  // INISIALISASI INPUT TANGGAL KUNJUNGAN
+  // --------------------------------------------------------------------------
+  // Membatasi tanggal minimal adalah hari ini agar pengguna tidak memilih tanggal masa lalu
   if (visitDateInput) {
     visitDateInput.min = new Date().toISOString().split("T")[0];
     visitDateInput.value = formattedDate;
@@ -116,41 +151,57 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 1. Populate Guides Dropdown in Calculator
+  // --------------------------------------------------------------------------
+  // 1. POPULASI OPSI PEMANDU PADA DROPDOWN FORM KALKULATOR
+  // --------------------------------------------------------------------------
+  // Menghasilkan daftar opsi tour guide secara dinamis berdasarkan data master
   if (guideSelect) {
     guideSelect.innerHTML = `
       <option value="none">-- Tanpa Pemandu Wisata (Mandiri) --</option>
-      ${data.tourGuides.map(g => `
+      ${data.tourGuides
+        .map(
+          (g) => `
         <option value="${g.id}">
           ${g.name} (${g.role}) - ${calc.formatRupiah(g.price)} / ${g.duration}
         </option>
-      `).join("")}
+      `
+        )
+        .join("")}
     `;
     guideSelect.value = calc.state.selectedGuideId;
+    // Mengubah pemandu di kalkulator sekaligus menyorot kartu pemandu yang sesuai
     guideSelect.addEventListener("change", (e) => {
       calc.setState({ selectedGuideId: e.target.value, appliedPackageId: null });
       highlightSelectedGuideCard(e.target.value);
     });
   }
 
-  // 2. Render Transport Radio Options
+  // --------------------------------------------------------------------------
+  // 2. RENDERING PILIHAN TRANSPORTASI LOKAL (RADIO CHOICE CHIPS)
+  // --------------------------------------------------------------------------
+  // Menampilkan kartu pilihan transportasi (tanpa transport, shuttle PP, ATV, e-bike)
   if (transportContainer) {
-    transportContainer.innerHTML = data.transportOptions.map(t => `
-      <label class="choice-chip ${calc.state.selectedTransId === t.id ? 'selected' : ''}" data-trans-id="${t.id}">
+    transportContainer.innerHTML = data.transportOptions
+      .map(
+        (t) => `
+      <label class="choice-chip ${calc.state.selectedTransId === t.id ? "selected" : ""}" data-trans-id="${t.id}">
         <div class="choice-chip-left">
-          <input type="radio" name="transChoice" class="choice-radio" value="${t.id}" ${calc.state.selectedTransId === t.id ? 'checked' : ''}>
+          <input type="radio" name="transChoice" class="choice-radio" value="${t.id}" ${calc.state.selectedTransId === t.id ? "checked" : ""}>
           <div class="choice-info">
             <strong>${t.name}</strong>
             <small>${t.description}</small>
           </div>
         </div>
         <div class="choice-price">
-          ${t.price === 0 ? 'Gratis' : calc.formatRupiah(t.price)}
+          ${t.price === 0 ? "Gratis" : calc.formatRupiah(t.price)}
         </div>
       </label>
-    `).join("");
+    `
+      )
+      .join("");
 
-    transportContainer.querySelectorAll(".choice-chip").forEach(chip => {
+    // Event listener saat pengguna memilih moda transportasi
+    transportContainer.querySelectorAll(".choice-chip").forEach((chip) => {
       chip.addEventListener("click", () => {
         const transId = chip.getAttribute("data-trans-id");
         calc.setState({ selectedTransId: transId, appliedPackageId: null });
@@ -159,9 +210,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Sinkronisasi status visual (class 'selected' & atribut checked) pada chip transportasi
   function updateTransportChipsUI(transId) {
     if (!transportContainer) return;
-    transportContainer.querySelectorAll(".choice-chip").forEach(chip => {
+    transportContainer.querySelectorAll(".choice-chip").forEach((chip) => {
       const isMatch = chip.getAttribute("data-trans-id") === transId;
       chip.classList.toggle("selected", isMatch);
       const radio = chip.querySelector("input[type='radio']");
@@ -169,13 +221,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 3. Render Custom Activities Checkboxes
+  // --------------------------------------------------------------------------
+  // 3. RENDERING PILIHAN AKTIVITAS TAMBAHAN & KULINER (CHECKBOX CARDS)
+  // --------------------------------------------------------------------------
+  // Menampilkan add-on aktivitas (snorkeling karang, kelapa muda, ikan bakar, gazebo, camping)
   if (activitiesContainer) {
-    activitiesContainer.innerHTML = data.customActivities.map(act => {
-      const isChecked = calc.state.selectedActivities.includes(act.id);
-      return `
-        <label class="checkbox-card ${isChecked ? 'selected' : ''}" data-act-id="${act.id}">
-          <input type="checkbox" value="${act.id}" ${isChecked ? 'checked' : ''}>
+    activitiesContainer.innerHTML = data.customActivities
+      .map((act) => {
+        const isChecked = calc.state.selectedActivities.includes(act.id);
+        return `
+        <label class="checkbox-card ${isChecked ? "selected" : ""}" data-act-id="${act.id}">
+          <input type="checkbox" value="${act.id}" ${isChecked ? "checked" : ""}>
           <div class="checkbox-card-body">
             <div class="checkbox-title-row">
               <strong>${act.name}</strong>
@@ -185,9 +241,11 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </label>
       `;
-    }).join("");
+      })
+      .join("");
 
-    activitiesContainer.querySelectorAll(".checkbox-card").forEach(card => {
+    // Event listener checkbox saat add-on dicentang atau dilepas
+    activitiesContainer.querySelectorAll(".checkbox-card").forEach((card) => {
       const checkbox = card.querySelector("input[type='checkbox']");
       checkbox.addEventListener("change", (e) => {
         const actId = e.target.value;
@@ -197,9 +255,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Sinkronisasi status visual kartu checkbox aktivitas dengan state kalkulator
   function updateActivitiesUI(selectedActIds) {
     if (!activitiesContainer) return;
-    activitiesContainer.querySelectorAll(".checkbox-card").forEach(card => {
+    activitiesContainer.querySelectorAll(".checkbox-card").forEach((card) => {
       const actId = card.getAttribute("data-act-id");
       const isSelected = selectedActIds.includes(actId);
       card.classList.toggle("selected", isSelected);
@@ -208,13 +267,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 4. Adults & Children Steppers
+  // --------------------------------------------------------------------------
+  // 4. KONTROL STEPPER JUMLAH PENGUNJUNG (DEWASA & ANAK-ANAK)
+  // --------------------------------------------------------------------------
+  // Menambah jumlah tiket dewasa (+1)
   if (adultsInc) {
     adultsInc.addEventListener("click", () => {
       const current = parseInt(calc.state.adults, 10) || 0;
       calc.setState({ adults: current + 1, appliedPackageId: null });
     });
   }
+  // Mengurangi jumlah tiket dewasa (-1), batas minimum 1 orang
   if (adultsDec) {
     adultsDec.addEventListener("click", () => {
       const current = parseInt(calc.state.adults, 10) || 0;
@@ -223,12 +286,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+  // Menambah jumlah tiket anak-anak (+1)
   if (childrenInc) {
     childrenInc.addEventListener("click", () => {
       const current = parseInt(calc.state.children, 10) || 0;
       calc.setState({ children: current + 1, appliedPackageId: null });
     });
   }
+  // Mengurangi jumlah tiket anak-anak (-1), batas minimum 0 orang
   if (childrenDec) {
     childrenDec.addEventListener("click", () => {
       const current = parseInt(calc.state.children, 10) || 0;
@@ -238,19 +303,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Parking Select
+  // Event listener pilihan retribusi parkir kendaraan
   if (parkingSelect) {
     parkingSelect.addEventListener("change", (e) => {
       calc.setState({ parkingType: e.target.value });
     });
   }
 
-  // 5. Render Tour Packages (PDF Slide 5)
+  // --------------------------------------------------------------------------
+  // 5. RENDERING KATALOG PAKET WISATA SIAP PAKAI (Slide 5 & Simulasi Slide 6)
+  // --------------------------------------------------------------------------
+  // Menampilkan kartu paket wisata (Keluarga, Solo, Rombongan, Edukasi)
   if (packagesContainer) {
-    packagesContainer.innerHTML = data.tourPackages.map((pkg, idx) => `
-      <div class="package-card ${pkg.featured ? 'featured-package' : ''} reveal reveal-delay-${(idx % 4) + 1}" data-pkg-id="${pkg.id}">
+    packagesContainer.innerHTML = data.tourPackages
+      .map(
+        (pkg, idx) => `
+      <div class="package-card ${pkg.featured ? "featured-package" : ""} reveal reveal-delay-${(idx % 4) + 1}" data-pkg-id="${pkg.id}">
         <div class="package-card-header">
-          <span class="badge ${pkg.featured ? 'badge-warm' : 'badge-primary'}">${pkg.badge}</span>
+          <span class="badge ${pkg.featured ? "badge-warm" : "badge-primary"}">${pkg.badge}</span>
           <h3>${pkg.title}</h3>
           <p style="font-size: 0.8rem; color: var(--text-muted);">${pkg.category}</p>
         </div>
@@ -260,34 +330,48 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="package-price">${calc.formatRupiah(pkg.price)}</div>
         </div>
         <ul class="package-includes-list">
-          ${pkg.includes.map(inc => `
+          ${pkg.includes
+            .map(
+              (inc) => `
             <li>
               <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
               </svg>
               <span>${inc}</span>
             </li>
-          `).join("")}
+          `
+            )
+            .join("")}
         </ul>
-        <button class="btn ${pkg.featured ? 'btn-primary' : 'btn-secondary'} btn-block btn-apply-package" data-id="${pkg.id}">
+        <button class="btn ${pkg.featured ? "btn-primary" : "btn-secondary"} btn-block btn-apply-package" data-id="${pkg.id}">
           Pilih & Terapkan ke Estimasi
         </button>
       </div>
-    `).join("");
+    `
+      )
+      .join("");
 
-    packagesContainer.querySelectorAll(".btn-apply-package").forEach(btn => {
+    // Tombol "Pilih & Terapkan ke Estimasi" langsung mengisi seluruh form kalkulator otomatis
+    packagesContainer.querySelectorAll(".btn-apply-package").forEach((btn) => {
       btn.addEventListener("click", () => {
         const pkgId = btn.getAttribute("data-id");
         calc.applyPackage(pkgId);
-        showToast(`Paket "${data.tourPackages.find(p => p.id === pkgId).title}" berhasil diterapkan ke kalkulator!`);
+        showToast(
+          `Paket "${data.tourPackages.find((p) => p.id === pkgId).title}" berhasil diterapkan ke kalkulator!`
+        );
         scrollToElement("#kalkulator");
       });
     });
   }
 
-  // 6. Render Tour Guides (PDF Slide 4 Step 3 & Slide 5)
+  // --------------------------------------------------------------------------
+  // 6. RENDERING DIREKTORI TOUR GUIDE LOKAL (Slide 4 Langkah 3 & Slide 5)
+  // --------------------------------------------------------------------------
+  // Menampilkan profil lengkap 4 pemandu lokal dengan avatar, sertifikasi, rating, dan keahlian
   if (guidesContainer) {
-    guidesContainer.innerHTML = data.tourGuides.map((g, idx) => `
+    guidesContainer.innerHTML = data.tourGuides
+      .map(
+        (g, idx) => `
       <div class="guide-card reveal reveal-delay-${(idx % 4) + 1}" id="card-${g.id}" data-guide-id="${g.id}">
         <div class="guide-avatar-wrap">
           <img src="${g.avatar}" alt="${g.name}">
@@ -313,35 +397,46 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       </div>
-    `).join("");
+    `
+      )
+      .join("");
 
-    guidesContainer.querySelectorAll(".btn-select-guide").forEach(btn => {
+    // Tombol "Pilih Guide" pada kartu pemandu memilih guide dan mengarahkan ke kalkulator
+    guidesContainer.querySelectorAll(".btn-select-guide").forEach((btn) => {
       btn.addEventListener("click", () => {
         const gId = btn.getAttribute("data-id");
         calc.setState({ selectedGuideId: gId, appliedPackageId: null });
         highlightSelectedGuideCard(gId);
-        showToast(`Pemandu "${data.tourGuides.find(g => g.id === gId).name}" dipilih!`);
+        showToast(`Pemandu "${data.tourGuides.find((g) => g.id === gId).name}" dipilih!`);
         scrollToElement("#kalkulator");
       });
     });
   }
 
+  // Memberikan penanda visual (highlight border dan tombol "Dipilih ✓") pada pemandu yang sedang aktif
   function highlightSelectedGuideCard(guideId) {
     if (!guidesContainer) return;
-    guidesContainer.querySelectorAll(".guide-card").forEach(c => {
+    guidesContainer.querySelectorAll(".guide-card").forEach((c) => {
       const isMatch = c.getAttribute("data-guide-id") === guideId;
       c.classList.toggle("selected-guide", isMatch);
       const btn = c.querySelector(".btn-select-guide");
       if (btn) {
         btn.textContent = isMatch ? "Dipilih ✓" : "Pilih Guide";
-        btn.className = isMatch ? "btn btn-sm btn-primary btn-select-guide" : "btn btn-sm btn-secondary btn-select-guide";
+        btn.className = isMatch
+          ? "btn btn-sm btn-primary btn-select-guide"
+          : "btn btn-sm btn-secondary btn-select-guide";
       }
     });
   }
 
-  // 7. Render Destinations Around (PDF Slide 4 Step 1 & Slide 5)
+  // --------------------------------------------------------------------------
+  // 7. RENDERING DESTINASI SEKITAR PANTAI KARAPYAK (Slide 4 Langkah 1 & Slide 5)
+  // --------------------------------------------------------------------------
+  // Menampilkan kartu spot wisata sekitar (Tebing Karang, Sunset Deck, Mangrove, Lembah Putri)
   if (destinationsContainer) {
-    destinationsContainer.innerHTML = data.destinationsAround.map((dest, idx) => `
+    destinationsContainer.innerHTML = data.destinationsAround
+      .map(
+        (dest, idx) => `
       <div class="dest-card reveal reveal-delay-${(idx % 4) + 1}">
         <div class="dest-card-image">
           <img src="${dest.image}" alt="${dest.name}">
@@ -353,12 +448,19 @@ document.addEventListener("DOMContentLoaded", () => {
           <p class="dest-desc">${dest.desc}</p>
         </div>
       </div>
-    `).join("");
+    `
+      )
+      .join("");
   }
 
-  // 8. Render MSME Partners (PDF Slide 7)
+  // --------------------------------------------------------------------------
+  // 8. RENDERING MITRA UMKM LOKAL PESISIR BAGOLO (Slide 7)
+  // --------------------------------------------------------------------------
+  // Menampilkan kartu mitra UMKM warga pesisir beserta keuntungan bagi pemegang voucher
   if (msmeContainer) {
-    msmeContainer.innerHTML = data.localPartners.map((p, idx) => `
+    msmeContainer.innerHTML = data.localPartners
+      .map(
+        (p, idx) => `
       <div class="msme-card reveal reveal-delay-${(idx % 4) + 1}">
         <span class="msme-cat">${p.category}</span>
         <h4 class="msme-name">${p.name}</h4>
@@ -367,23 +469,29 @@ document.addEventListener("DOMContentLoaded", () => {
           🎁 ${p.benefit}
         </div>
       </div>
-    `).join("");
+    `
+      )
+      .join("");
   }
 
-  // 9. Subscribe to Calculator Changes (Reactive Live UI Update)
+  // --------------------------------------------------------------------------
+  // 9. LANGGANAN REAKTIF KALKULATOR (REACTIVE TWO-WAY UI SYNC)
+  // --------------------------------------------------------------------------
+  // Callback ini dijalankan otomatis SETIAP KALI ada perubahan pada state kalkulator,
+  // memastikan form, rincian tabel struk, total harga, dan mobile bar selalu selaras.
   calc.subscribe((summary) => {
-    // Sync Input Controls
+    // Sinkronisasi teks angka pada stepper dan nilai dropdown
     if (adultsVal) adultsVal.textContent = summary.state.adults;
     if (childrenVal) childrenVal.textContent = summary.state.children;
     if (parkingSelect) parkingSelect.value = summary.state.parkingType || "none";
     if (guideSelect) guideSelect.value = summary.state.selectedGuideId || "none";
 
-    // Update chips & checkboxes without infinite triggers
+    // Sinkronisasi chip radio transportasi, kartu aktivitas, dan kartu guide
     updateTransportChipsUI(summary.state.selectedTransId);
     updateActivitiesUI(summary.state.selectedActivities);
     highlightSelectedGuideCard(summary.state.selectedGuideId);
 
-    // Update Applied Package Badge
+    // Tampilkan / sembunyikan badge nama paket aktif di atas panel kalkulator
     if (appliedPackageBadge) {
       if (summary.appliedPackage) {
         appliedPackageBadge.textContent = summary.appliedPackage.title;
@@ -393,7 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Update Total Display
+    // Pembaruan total nominal harga di struk desktop dan sticky action bar ponsel
     if (receiptTotalDisplay) {
       receiptTotalDisplay.textContent = summary.totalFormatted;
     }
@@ -404,7 +512,7 @@ document.addEventListener("DOMContentLoaded", () => {
       receiptItemCount.textContent = `${summary.itemCount} Komponen Terverifikasi`;
     }
 
-    // Update Receipt Table
+    // Pembaruan baris rincian pada tabel struk (Receipt Table)
     if (receiptItemsBody) {
       if (summary.items.length === 0) {
         receiptItemsBody.innerHTML = `
@@ -415,23 +523,30 @@ document.addEventListener("DOMContentLoaded", () => {
           </tr>
         `;
       } else {
-        receiptItemsBody.innerHTML = summary.items.map(item => `
+        receiptItemsBody.innerHTML = summary.items
+          .map(
+            (item) => `
           <tr>
             <td>
               <span class="receipt-category-tag">${item.category}</span>
               <div style="font-weight: 600; color: var(--text-main); font-size: 0.85rem;">${item.label}</div>
-              ${item.details ? `<div style="font-size: 0.725rem; color: var(--text-muted);">${item.details}</div>` : ''}
+              ${item.details ? `<div style="font-size: 0.725rem; color: var(--text-muted);">${item.details}</div>` : ""}
             </td>
             <td class="price-col">
               ${calc.formatRupiah(item.subtotal)}
             </td>
           </tr>
-        `).join("");
+        `
+          )
+          .join("");
       }
     }
   });
 
-  // 10. Booking Modal Interaction (Step 5 from PDF)
+  // --------------------------------------------------------------------------
+  // 10. INTERAKSI MODAL PEMESANAN ONLINE (Langkah 5 Alur Wisatawan)
+  // --------------------------------------------------------------------------
+  // Membuka modal formulir pemesanan ketika tombol "Lanjut ke Pemesanan Online" diklik
   if (btnOpenBooking) {
     btnOpenBooking.addEventListener("click", () => {
       const summary = calc.calculate();
@@ -440,19 +555,24 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Populate Modal Summary
+      // Mengisi ringkasan komponen biaya di bagian atas formulir modal
       if (modalSummaryList) {
-        modalSummaryList.innerHTML = summary.items.map(item => `
+        modalSummaryList.innerHTML = summary.items
+          .map(
+            (item) => `
           <div style="display: flex; justify-content: space-between; font-size: 0.825rem; margin-bottom: 0.4rem;">
             <span style="color: var(--text-secondary);">${item.label}</span>
             <strong style="color: var(--text-main);">${calc.formatRupiah(item.subtotal)}</strong>
           </div>
-        `).join("");
+        `
+          )
+          .join("");
       }
       if (modalTotalDisplay) {
         modalTotalDisplay.textContent = summary.totalFormatted;
       }
 
+      // Sinkronisasi tanggal kunjungan yang dipilih ke input tanggal modal
       const modalDateInput = document.getElementById("modalDateInput");
       if (modalDateInput) {
         modalDateInput.value = calc.state.visitDate || formattedDate;
@@ -462,19 +582,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Menutup modal pemesanan via tombol silang
   if (closeBookingModal) {
     closeBookingModal.addEventListener("click", () => {
       bookingModal.classList.remove("active");
     });
   }
 
+  // Variabel penampung data voucher aktif untuk keperluan pencetakan isolated iframe
   let currentVoucherData = null;
 
-  // Handle Booking Form Submission -> Generate E-Ticket / Voucher
+  // --------------------------------------------------------------------------
+  // PENANGANAN PENGIRIMAN FORMULIR BOOKING -> PENERBITAN E-VOUCHER TIKET
+  // --------------------------------------------------------------------------
   if (bookingForm) {
     bookingForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
+      // Mengambil dan membersihkan input pengguna
       const guestName = document.getElementById("guestName").value.trim();
       const guestPhone = document.getElementById("guestPhone").value.trim();
       const guestEmail = document.getElementById("guestEmail").value.trim();
@@ -487,9 +612,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const summary = calc.calculate();
+      // Pembuatan kode booking resmi acak dengan format KRP-XXXXXX
       const bookingCode = "KRP-" + Math.floor(100000 + Math.random() * 900000);
 
-      // Save for dedicated single-page print
+      // Simpan data voucher untuk dicetak mandiri
       currentVoucherData = {
         bookingCode,
         guestName,
@@ -498,10 +624,10 @@ document.addEventListener("DOMContentLoaded", () => {
         guestNotes,
         visitDate: formatDateIndo(visitDate),
         items: summary.items,
-        totalFormatted: summary.totalFormatted
+        totalFormatted: summary.totalFormatted,
       };
 
-      // Render E-Voucher Modal
+      // Render tampilan visual E-Voucher di dalam dialog modal
       if (voucherContent) {
         voucherContent.innerHTML = `
           <div class="voucher-card">
@@ -535,12 +661,16 @@ document.addEventListener("DOMContentLoaded", () => {
             <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border-subtle);">
               <strong style="font-size: 0.775rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Rincian Komponen Terpilih:</strong>
               <div style="font-size: 0.825rem; display: flex; flex-direction: column; gap: 0.35rem;">
-                ${summary.items.map(it => `
+                ${summary.items
+                  .map(
+                    (it) => `
                   <div style="display: flex; justify-content: space-between;">
                     <span>• ${it.label}</span>
                     <strong>${calc.formatRupiah(it.subtotal)}</strong>
                   </div>
-                `).join("")}
+                `
+                  )
+                  .join("")}
               </div>
             </div>
 
@@ -549,11 +679,15 @@ document.addEventListener("DOMContentLoaded", () => {
               <strong style="font-size: 1.35rem; color: var(--primary);">${summary.totalFormatted}</strong>
             </div>
 
-            ${guestNotes ? `
+            ${
+              guestNotes
+                ? `
               <div style="margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-muted); background: var(--bg-surface); padding: 0.5rem; border-radius: var(--radius-sm);">
                 <em>Catatan Pemesan: "${guestNotes}"</em>
               </div>
-            ` : ''}
+            `
+                : ""
+            }
           </div>
           
           <div style="background-color: var(--bg-subtle); padding: 0.875rem; border-radius: var(--radius-md); font-size: 0.785rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
@@ -563,32 +697,38 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       }
 
-      // Configure WhatsApp link button
+      // Konfigurasi tautan otomatis ke WhatsApp resmi pengelola wisata
       if (btnWhatsAppConfirm) {
         const waText = encodeURIComponent(
           `Halo Mitra Karapyak Travel! Saya ingin mengonfirmasi pesanan tiket/layanan:\n` +
-          `- Kode Booking: ${bookingCode}\n` +
-          `- Nama: ${guestName}\n` +
-          `- Tanggal: ${formatDateIndo(visitDate)}\n` +
-          `- Total Estimasi: ${summary.totalFormatted}\n` +
-          `- Rincian: ${summary.items.map(i => i.label).join(", ")}\n` +
-          `Mohon informasi penjemputan dan panduan kedatangan. Terima kasih!`
+            `- Kode Booking: ${bookingCode}\n` +
+            `- Nama: ${guestName}\n` +
+            `- Tanggal: ${formatDateIndo(visitDate)}\n` +
+            `- Total Estimasi: ${summary.totalFormatted}\n` +
+            `- Rincian: ${summary.items.map((i) => i.label).join(", ")}\n` +
+            `Mohon informasi penjemputan dan panduan kedatangan. Terima kasih!`
         );
         btnWhatsAppConfirm.href = `https://wa.me/6281234567801?text=${waText}`;
       }
 
+      // Beralih dari modal formulir ke modal tampilan tiket berhasil
       bookingModal.classList.remove("active");
       ticketModal.classList.add("active");
     });
   }
 
+  // Menutup modal voucher digital
   if (closeTicketModal) {
     closeTicketModal.addEventListener("click", () => {
       ticketModal.classList.remove("active");
     });
   }
 
-  // Guaranteed 1-Page Clean Print via isolated iframe
+  // --------------------------------------------------------------------------
+  // ISOLATED IFRAME PRINTER ENGINE (CETAK TIKET BERSIH 1 HALAMAN A4)
+  // --------------------------------------------------------------------------
+  // Mencetak voucher melalui iframe terisolasi agar styling web luar tidak merusak
+  // proporsi cetak, menjamin hasil print/PDF persis 1 lembar A4 portrait resmi.
   function printCleanTicket(voucher) {
     if (!voucher) {
       window.print();
@@ -822,11 +962,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td class="col-title">No. Kontak / WhatsApp:</td>
                 <td class="col-val">${voucher.guestPhone}</td>
               </tr>
-              ${voucher.guestEmail ? `
+              ${
+                voucher.guestEmail
+                  ? `
               <tr>
                 <td class="col-title">Alamat Email:</td>
                 <td class="col-val">${voucher.guestEmail}</td>
-              </tr>` : ''}
+              </tr>`
+                  : ""
+              }
               <tr>
                 <td class="col-title">Tanggal Kunjungan:</td>
                 <td class="col-val">${voucher.visitDate}</td>
@@ -839,23 +983,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div class="breakdown-box">
               <div class="breakdown-title">Rincian Komponen & Layanan Terverifikasi:</div>
-              ${voucher.items.map(item => `
+              ${voucher.items
+                .map(
+                  (item) => `
                 <div class="breakdown-row">
                   <span>• ${item.label}</span>
                   <strong>${calc.formatRupiah(item.subtotal)}</strong>
                 </div>
-              `).join("")}
+              `
+                )
+                .join("")}
               <div class="total-row">
                 <span class="total-title">Total Estimasi Biaya:</span>
                 <span class="total-amount">${voucher.totalFormatted}</span>
               </div>
             </div>
 
-            ${voucher.guestNotes ? `
+            ${
+              voucher.guestNotes
+                ? `
               <div class="notes-alert">
                 <strong>Catatan Pemesan:</strong> "${voucher.guestNotes}"
               </div>
-            ` : ''}
+            `
+                : ""
+            }
 
             <div class="sop-alert">
               <strong>Panduan Kedatangan (SOP Resmi Pengelola):</strong><br>
@@ -873,26 +1025,27 @@ document.addEventListener("DOMContentLoaded", () => {
     `);
     frameDoc.close();
 
-    // Trigger printing once content is ready
+    // Picu dialog print browser setelah iframe selesai merender konten
     setTimeout(() => {
       try {
         printFrame.contentWindow.focus();
         printFrame.contentWindow.print();
       } catch (err) {
-        console.error("Iframe print error, falling back to window.print", err);
+        console.error("Gagal mencetak lewat iframe, beralih ke window.print:", err);
         window.print();
       }
     }, 280);
   }
 
+  // Tombol "Cetak / Simpan E-Tiket" memanggil engine print iframe
   if (btnPrintTicket) {
     btnPrintTicket.addEventListener("click", () => {
       printCleanTicket(currentVoucherData);
     });
   }
 
-  // Close modals when clicking overlay outside card
-  [bookingModal, ticketModal].forEach(modal => {
+  // Menutup dialog modal ketika pengguna mengklik area backdrop di luar kartu modal
+  [bookingModal, ticketModal].forEach((modal) => {
     if (!modal) return;
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {
@@ -913,7 +1066,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Helper Toast function
+  // --------------------------------------------------------------------------
+  // FUNGSI HELPER: NOTIFIKASI TOAST MELAYANG
+  // --------------------------------------------------------------------------
+  // Menampilkan pesan pop-up ringan di pojok kanan bawah selama 3 detik
   function showToast(message) {
     let container = document.getElementById("toastContainer");
     if (!container) {
@@ -940,6 +1096,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3200);
   }
 
+  // Menggulir tampilan layar ke elemen target secara halus (smooth scroll)
   function scrollToElement(selector) {
     const el = document.querySelector(selector);
     if (el) {
@@ -947,6 +1104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Mengubah format tanggal ISO (YYYY-MM-DD) ke bahasa Indonesia formal (Contoh: "Selasa, 21 Oktober 2026")
   function formatDateIndo(dateStr) {
     if (!dateStr) return "-";
     const date = new Date(dateStr);
@@ -954,41 +1112,48 @@ document.addEventListener("DOMContentLoaded", () => {
       weekday: "long",
       year: "numeric",
       month: "long",
-      day: "numeric"
+      day: "numeric",
     });
   }
 
   // ==========================================================================
-  // 11. Scroll Reveal Animations (Anti-Slop, High Performance IntersectionObserver)
+  // 11. ANIMASI SCROLL REVEAL (INTERSECTION OBSERVER BERPERFORMA TINGGI)
   // ==========================================================================
+  // Memunculkan kartu secara bertahap saat digulir ke dalam viewport pengguna.
   function initScrollReveal() {
     const revealElements = document.querySelectorAll(".reveal, .reveal-scale");
     if (!revealElements.length) return;
 
+    // Fallback jika peramban lawas tidak mendukung IntersectionObserver
     if (!("IntersectionObserver" in window)) {
-      revealElements.forEach(el => el.classList.add("is-visible"));
+      revealElements.forEach((el) => el.classList.add("is-visible"));
       return;
     }
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      root: null,
-      threshold: 0.08,
-      rootMargin: "0px 0px -30px 0px"
-    });
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target); // Lepas observer agar hemat memori
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.08,
+        rootMargin: "0px 0px -30px 0px",
+      }
+    );
 
-    revealElements.forEach(el => revealObserver.observe(el));
+    revealElements.forEach((el) => revealObserver.observe(el));
   }
 
   // ==========================================================================
-  // 12. Tourist 5-Step Flow Scroll Spy & Ribbon Controller
+  // 12. PENGENDALI SCROLL SPY & STICKY 5-STEP TOURIST FLOW RIBBON
   // ==========================================================================
+  // Memantau posisi gulir dan memperbarui status aktif langkah 1 s/d 5 di pita alur,
+  // serta menggeser posisi aktif ke tengah layar secara otomatis pada ponsel.
   let updateFlowStepOnScroll = null;
 
   function initFlowScrollSpy() {
@@ -996,16 +1161,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const flowStep5 = document.getElementById("flowStep5");
     if (!stepItems.length) return;
 
-    let isProgrammatic = false;
+    let isProgrammatic = false; // Flag untuk mencegah konflik saat scroll otomatis dipicu tombol
     let timer = null;
 
+    // Menandai langkah aktif pada pita navigasi alur
     function setActiveStep(stepNum) {
-      stepItems.forEach(item => {
+      stepItems.forEach((item) => {
         const s = parseInt(item.getAttribute("data-step"), 10);
         if (s === stepNum) {
           if (!item.classList.contains("active")) {
             item.classList.add("active");
-            // Auto scroll ribbon horizontally on mobile so active step is centered
+            // Auto-center posisi tab di layar HP agar langkah aktif selalu terlihat
             item.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
           }
         } else {
@@ -1014,7 +1180,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Direct click on Step 5: trigger booking modal
+    // Klik langsung pada Langkah 5 ("Pemesanan & Konfirmasi") otomatis membuka modal booking
     if (flowStep5) {
       flowStep5.addEventListener("click", (e) => {
         e.preventDefault();
@@ -1031,8 +1197,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Click on Steps 1 to 4: smooth scroll with temporary spy lock
-    stepItems.forEach(item => {
+    // Klik pada langkah 1 s/d 4: Menggulir mulus ke section yang dituju
+    stepItems.forEach((item) => {
       const stepNum = parseInt(item.getAttribute("data-step"), 10);
       if (stepNum === 5) return;
 
@@ -1051,17 +1217,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Scroll listener calculates active section
-    updateFlowStepOnScroll = function() {
+    // Kalkulasi posisi gulir untuk menentukan section mana yang sedang dibaca pengunjung
+    updateFlowStepOnScroll = function () {
       if (isProgrammatic) return;
 
+      // Jika modal booking sedang aktif terbuka, kunci langkah ke nomor 5
       if (bookingModal && bookingModal.classList.contains("active")) {
         setActiveStep(5);
         return;
       }
 
       const scrollY = window.scrollY || window.pageYOffset;
-      const navOffset = 140;
+      const navOffset = 140; // Offset kompensasi tinggi sticky header + ribbon
 
       const secInfo = document.getElementById("informasi");
       const secCalc = document.getElementById("kalkulator");
@@ -1074,16 +1241,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const receiptTop = receiptCard ? receiptCard.offsetTop - navOffset : calcTop + 250;
 
       if (scrollY < calcTop - 60) {
-        setActiveStep(1); // 1. Eksplorasi Informasi
+        setActiveStep(1); // 1. Eksplorasi Informasi Pantai
       } else if (scrollY >= calcTop - 60 && scrollY < pemanduTop - 80) {
-        // Di area kalkulator
         if (scrollY >= receiptTop - 120) {
-          setActiveStep(4); // 4. Kalkulator Estimasi (Receipt Panel)
+          setActiveStep(4); // 4. Kalkulator Estimasi (Panel Struk Biaya)
         } else {
           setActiveStep(2); // 2. Tiket & Tanggal (Form Kunjungan)
         }
-      } else if (scrollY >= pemanduTop - 80 && scrollY < pemanduTop + (secPemandu ? secPemandu.offsetHeight : 600) - 80) {
-        setActiveStep(3); // 3. Pemandu Wisata
+      } else if (
+        scrollY >= pemanduTop - 80 &&
+        scrollY < pemanduTop + (secPemandu ? secPemandu.offsetHeight : 600) - 80
+      ) {
+        setActiveStep(3); // 3. Pemandu Wisata Lokal
       } else {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
         if (scrollY >= totalHeight - 220) {
@@ -1094,22 +1263,27 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
+    // Pemanfaatan requestAnimationFrame untuk optimasi event scroll 60 FPS
     let ticking = false;
-    window.addEventListener("scroll", () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateFlowStepOnScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            updateFlowStepOnScroll();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
 
-    // Initial check
+    // Jalankan pemeriksaan awal saat halaman pertama kali dimuat
     updateFlowStepOnScroll();
   }
 
-  // Initialize Scroll Systems
+  // Menjalankan sistem animasi dan scroll spy
   initScrollReveal();
   initFlowScrollSpy();
 });

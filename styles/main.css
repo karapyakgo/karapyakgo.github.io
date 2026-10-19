@@ -1,13 +1,19 @@
 /**
- * Karapyak Travel - Core Design System & Stylesheet
- * Handcrafted, Senior Product Design Quality (Apple / Linear / Stripe aesthetic)
- * Fully responsive (375px+), subtle borders, refined coastal typography.
+ * ============================================================================
+ * SISTEM DESAIN & STYLESHEET UTAMA — KARAPYAK TRAVEL (karapyakgo.github.io)
+ * ============================================================================
+ * Desain bergaya Senior Product Designer (estetika Apple / Linear / Stripe),
+ * palet Grounded Coastal Slate & Aegean Teal, subtle borders tanpa AI slop.
+ * Responsif penuh pada resolusi smartphone (375px+) hingga monitor layar lebar.
  */
 
 :root {
+  /* ------------------------------------------------------------------------ */
+  /* VARIABEL TOKEN DESAIN (DESIGN TOKENS)                                    */
+  /* ------------------------------------------------------------------------ */
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   
-  /* Color Palette - Grounded Coastal & Carbon */
+  /* Palet Warna Alami Pesisir & Carbon Neutral */
   --bg-body: #F8FAFC;
   --bg-surface: #FFFFFF;
   --bg-surface-elevated: #FFFFFF;
@@ -57,7 +63,9 @@
   --transition-normal: 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Base Reset & Box Sizing */
+/* -------------------------------------------------------------------------- */
+/* RESET DASAR & BOX SIZING GLOBAL                                            */
+/* -------------------------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -158,7 +166,9 @@ p {
   border-color: var(--success-border);
 }
 
-/* Header & Top Navigation */
+/* -------------------------------------------------------------------------- */
+/* HEADER STICKY & NAVIGASI ATAS (DESKTOP)                                    */
+/* -------------------------------------------------------------------------- */
 .site-header {
   position: sticky;
   top: 0;
@@ -245,7 +255,9 @@ p {
   }
 }
 
-/* Mobile Menu Button */
+/* -------------------------------------------------------------------------- */
+/* MENU DRAWER SLIDE-OUT & HAMBURGER BUTTON (MOBILE)                         */
+/* -------------------------------------------------------------------------- */
 .mobile-menu-btn {
   display: flex;
   align-items: center;
@@ -271,7 +283,7 @@ p {
   }
 }
 
-/* Mobile Navigation Drawer */
+/* Overlay & Panel Menu Drawer Mobile */
 .mobile-drawer-overlay {
   position: fixed;
   inset: 0;
@@ -376,7 +388,9 @@ p {
   background-color: var(--bg-body);
 }
 
-/* Buttons */
+/* -------------------------------------------------------------------------- */
+/* KOMPONEN TOMBOL (BUTTONS) & EFEK INTERAKTIF                                */
+/* -------------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -431,7 +445,9 @@ p {
   width: 100%;
 }
 
-/* 5-Step Journey Flow Ribbon (Direct from PDF Slide 4) */
+/* -------------------------------------------------------------------------- */
+/* PITA 5 ALUR WISATAWAN (STICKY FLOW RIBBON — PDF SLIDE 4)                   */
+/* -------------------------------------------------------------------------- */
 .flow-ribbon {
   position: sticky;
   top: 4.25rem;
@@ -512,7 +528,9 @@ p {
   font-size: 0.75rem;
 }
 
-/* Hero Section */
+/* -------------------------------------------------------------------------- */
+/* SECTION HERO: HEADLINE, CTA ESTIMASI & VISUAL TEBING KARANG               */
+/* -------------------------------------------------------------------------- */
 .hero-section {
   padding: 3.5rem 0 4rem;
   background: radial-gradient(100% 70% at 50% 0%, #EDF7FA 0%, var(--bg-body) 100%);
@@ -627,7 +645,9 @@ p {
   margin-bottom: 0.75rem;
 }
 
-/* Interactive Calculator & Booking Station (Core Feature - PDF Step 4 & Slide 6) */
+/* -------------------------------------------------------------------------- */
+/* MESIN KALKULATOR BIAYA REAL-TIME & STRUK (PDF SLIDE 4 LANGKAH 4 & SLIDE 6) */
+/* -------------------------------------------------------------------------- */
 .calc-section {
   padding: 4.5rem 0;
 }
@@ -698,7 +718,7 @@ p {
   box-shadow: 0 0 0 3px var(--primary-ring);
 }
 
-/* Counter Inputs (Adults, Children) */
+/* Kontrol Stepper Penambah/Pengurang Pengunjung (Dewasa & Anak) */
 .stepper-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -770,7 +790,7 @@ p {
   text-align: center;
 }
 
-/* Radio Choice Chips (Parking & Transport) */
+/* Pilihan Chip Radio Interaktif (Retribusi Parkir & Transportasi Shuttle) */
 .radio-chips-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -832,7 +852,7 @@ p {
   color: var(--primary);
 }
 
-/* Activities Checkboxes Grid */
+/* Kartu Checkbox Pilihan Aktivitas Tambahan & Kuliner UMKM */
 .checkbox-card {
   display: flex;
   align-items: flex-start;
@@ -884,7 +904,9 @@ p {
   line-height: 1.4;
 }
 
-/* Live Receipt Card (Right Column) */
+/* -------------------------------------------------------------------------- */
+/* PANEL STRUK BIAYA REAL-TIME & TRANSPARAN (KOLOM KANAN)                     */
+/* -------------------------------------------------------------------------- */
 .receipt-card {
   background-color: var(--bg-surface);
   border-radius: var(--radius-lg);
@@ -988,7 +1010,9 @@ p {
   border-radius: var(--radius-md);
 }
 
-/* Tour Packages Section (PDF Slide 5) */
+/* -------------------------------------------------------------------------- */
+/* KATALOG PAKET WISATA SIAP PAKAI / BUNDLING HEMAT (PDF SLIDE 5)             */
+/* -------------------------------------------------------------------------- */
 .packages-section {
   padding: 4.5rem 0;
   background-color: var(--bg-subtle);
@@ -1078,7 +1102,9 @@ p {
   margin-top: 0.15rem;
 }
 
-/* Tour Guide Directory (PDF Slide 4 Step 3 & Slide 5) */
+/* -------------------------------------------------------------------------- */
+/* DIREKTORI TOUR GUIDE LOKAL TERVERIFIKASI (PDF SLIDE 4 LANGKAH 3 & SLIDE 5) */
+/* -------------------------------------------------------------------------- */
 .guides-section {
   padding: 4.5rem 0;
 }
@@ -1407,7 +1433,9 @@ p {
   padding: 1.5rem;
 }
 
-/* Digital Ticket / Voucher Aesthetics */
+/* -------------------------------------------------------------------------- */
+/* TAMPILAN E-VOUCHER / TIKET DIGITAL KUNJUNGAN WISATA                        */
+/* -------------------------------------------------------------------------- */
 .voucher-card {
   background: linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 100%);
   border: 2px dashed var(--primary-border);
@@ -1479,7 +1507,9 @@ p {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Footer */
+/* -------------------------------------------------------------------------- */
+/* FOOTER SITUS: IDENTITAS PLATFORM, NAVIGASI & DATA TIM PENYUSUN            */
+/* -------------------------------------------------------------------------- */
 .site-footer {
   margin-top: auto;
   background-color: #0B232E;
@@ -1552,7 +1582,9 @@ p {
   }
 }
 
-/* Print Styles for E-Ticket (Strict 1-Page Layout, Zero Spillover) */
+/* -------------------------------------------------------------------------- */
+/* FORMAT PENCETAKAN E-TIKET RESMI (ISOLATED PRINT STYLESHEET 1 HALAMAN A4)   */
+/* -------------------------------------------------------------------------- */
 @media print {
   /* Hide all top-level page containers completely so they consume 0px space */
   .site-header,
@@ -1681,10 +1713,10 @@ p {
 }
 
 /* ==========================================================================
-   Mobile Responsive Enhancements (Phones, Tablets & Touch Interfaces)
+   PENINGKATAN RESPONSIF MOBILE (LAYOUT SMARTPHONE, TABLET & TOUCH TARGET)
    ========================================================================== */
 
-/* Mobile Sticky Floating Action Bar */
+/* Floating Bottom Action Bar Khusus Layar Ponsel (Harga Live & Pesan Cepat) */
 .mobile-sticky-bar {
   position: fixed;
   bottom: 0;
@@ -1883,7 +1915,7 @@ section[id],
 }
 
 /* ==========================================================================
-   Fluid Scroll Reveal Animations (Anti-Slop, 60fps, GPU Accelerated)
+   ANIMASI SCROLL REVEAL (INTERSECTION OBSERVER BERPERFORMA TINGGI / 60 FPS)
    ========================================================================== */
 .reveal {
   opacity: 0;

@@ -1,91 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Platform digital terintegrasi untuk pemesanan tiket, pemandu wisata lokal, dan paket perjalanan Pantai Karapyak secara transparan dan mudah.">
-  <meta name="keywords" content="Pantai Karapyak, Karapyak Travel, Wisata Pangandaran, Pemandu Wisata Lokal, Tiket Karapyak, Bagolo Kalipucang">
-  <title>Karapyak Travel — Platform Digital Resmi Wisata Pantai Karapyak</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Platform digital terintegrasi untuk pemesanan tiket, pemandu wisata lokal, dan paket perjalanan Pantai Karapyak secara transparan dan mudah."
+    />
+    <meta
+      name="keywords"
+      content="Pantai Karapyak, Karapyak Travel, Wisata Pangandaran, Pemandu Wisata Lokal, Tiket Karapyak, Bagolo Kalipucang"
+    />
+    <title>
+      Karapyak Travel — Platform Digital Resmi Wisata Pantai Karapyak
+    </title>
 
-  <!-- Google Fonts: Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Core CSS -->
-  <link rel="stylesheet" href="styles/main.css?v=3.0">
-</head>
-<body>
-
-  <!-- Top Sticky Navigation -->
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <div class="logo-group">
-        <div class="logo-mark">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 12h20"/>
-            <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/>
-            <path d="M12 2v10"/>
-            <path d="m4.93 4.93 4.24 4.24"/>
-            <path d="m14.83 9.17 4.24-4.24"/>
-          </svg>
-        </div>
-        <div class="logo-text">
-          <h3>Karapyak Travel</h3>
-          <span>karapyakgo.github.io</span>
-        </div>
-      </div>
-
-      <nav class="nav-links">
-        <a href="#informasi" class="nav-link">Informasi Pantai</a>
-        <a href="#kalkulator" class="nav-link">Kalkulator Biaya</a>
-        <a href="#paket" class="nav-link">Paket Wisata</a>
-        <a href="#pemandu" class="nav-link">Pemandu Lokal</a>
-        <a href="#destinasi" class="nav-link">Destinasi Sekitar</a>
-        <a href="#umkm" class="nav-link">Mitra UMKM</a>
-      </nav>
-
-      <div class="nav-actions">
-        <a href="#kalkulator" class="btn btn-primary btn-sm desktop-only-btn">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2"/>
-            <line x1="8" y1="6" x2="16" y2="6"/>
-            <line x1="16" y1="14" x2="16" y2="18"/>
-            <path d="M16 10h.01"/>
-            <path d="M12 10h.01"/>
-            <path d="M8 10h.01"/>
-            <path d="M12 14h.01"/>
-            <path d="M8 14h.01"/>
-            <path d="M12 18h.01"/>
-            <path d="M8 18h.01"/>
-          </svg>
-          <span>Hitung Estimasi</span>
-        </a>
-
-        <!-- Mobile Menu Hamburger Button -->
-        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka Menu Navigasi">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile Navigation Drawer -->
-  <div id="mobileDrawerOverlay" class="mobile-drawer-overlay">
-    <div class="mobile-drawer">
-      <div class="mobile-drawer-header">
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="styles/main.css?v=2.2" />
+  </head>
+  <body>
+    <!-- =================================================================== -->
+    <!-- 1. HEADER & BAR NAVIGASI UTAMA (DESKTOP)                            -->
+    <!-- Menampilkan identitas Karapyak Travel, menu alur wisata, dan tombol -->
+    <!-- cepat menuju kalkulator biaya serta hamburger menu untuk smartphone.-->
+    <!-- =================================================================== -->
+    <header class="site-header">
+      <div class="container nav-wrap">
         <div class="logo-group">
           <div class="logo-mark">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 12h20"/>
-              <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/>
-              <path d="M12 2v10"/>
-              <path d="m4.93 4.93 4.24 4.24"/>
-              <path d="m14.83 9.17 4.24-4.24"/>
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M2 12h20" />
+              <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6" />
+              <path d="M12 2v10" />
+              <path d="m4.93 4.93 4.24 4.24" />
+              <path d="m14.83 9.17 4.24-4.24" />
             </svg>
           </div>
           <div class="logo-text">
@@ -93,622 +58,1219 @@
             <span>karapyakgo.github.io</span>
           </div>
         </div>
-        <button type="button" class="mobile-drawer-close" id="closeMobileDrawer" aria-label="Tutup Menu">&times;</button>
-      </div>
 
-      <nav class="mobile-drawer-nav">
-        <a href="#informasi" class="mobile-nav-link">
-          <span class="mobile-nav-num">1</span>
-          <span>Informasi Pantai & Fasilitas</span>
-        </a>
-        <a href="#kalkulator" class="mobile-nav-link">
-          <span class="mobile-nav-num">2</span>
-          <span>Tarif Tiket & Tanggal</span>
-        </a>
-        <a href="#pemandu" class="mobile-nav-link">
-          <span class="mobile-nav-num">3</span>
-          <span>Direktori Pemandu Lokal</span>
-        </a>
-        <a href="#kalkulator" class="mobile-nav-link">
-          <span class="mobile-nav-num">4</span>
-          <span>Kalkulator Biaya Real-time</span>
-        </a>
-        <a href="#paket" class="mobile-nav-link">
-          <span class="mobile-nav-num">5</span>
-          <span>Katalog Paket Wisata</span>
-        </a>
-        <a href="#destinasi" class="mobile-nav-link">
-          <span class="mobile-nav-bullet">📍</span>
-          <span>Destinasi Sekitar Karapyak</span>
-        </a>
-        <a href="#umkm" class="mobile-nav-link">
-          <span class="mobile-nav-bullet">🏪</span>
-          <span>Mitra UMKM Lokal Bagolo</span>
-        </a>
-      </nav>
+        <nav class="nav-links">
+          <a href="#informasi" class="nav-link">Informasi Pantai</a>
+          <a href="#kalkulator" class="nav-link">Kalkulator Biaya</a>
+          <a href="#paket" class="nav-link">Paket Wisata</a>
+          <a href="#pemandu" class="nav-link">Pemandu Lokal</a>
+          <a href="#destinasi" class="nav-link">Destinasi Sekitar</a>
+          <a href="#umkm" class="nav-link">Mitra UMKM</a>
+        </nav>
 
-      <div class="mobile-drawer-footer">
-        <a href="#kalkulator" class="btn btn-primary btn-block" id="btnDrawerCta">
-          Mulai Hitung Estimasi
-        </a>
-        <div style="font-size: 0.725rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem;">
-          Platform Digital Wisata Pantai Karapyak
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5-Step Flow Ribbon (Direct from PDF Slide 4) -->
-  <div class="flow-ribbon" id="flowRibbon">
-    <div class="container flow-steps" id="flowStepsContainer">
-      <a href="#informasi" class="flow-step-item active" data-step="1">
-        <span class="flow-step-num">1</span>
-        <span>Eksplorasi Informasi</span>
-      </a>
-      <span class="flow-separator">›</span>
-      <a href="#kalkulator" class="flow-step-item" data-step="2">
-        <span class="flow-step-num">2</span>
-        <span>Tiket & Tanggal</span>
-      </a>
-      <span class="flow-separator">›</span>
-      <a href="#pemandu" class="flow-step-item" data-step="3">
-        <span class="flow-step-num">3</span>
-        <span>Pemandu Wisata</span>
-      </a>
-      <span class="flow-separator">›</span>
-      <a href="#receiptCard" class="flow-step-item" data-step="4">
-        <span class="flow-step-num">4</span>
-        <span>Kalkulator Estimasi</span>
-      </a>
-      <span class="flow-separator">›</span>
-      <a href="#receiptCard" class="flow-step-item" data-step="5" id="flowStep5">
-        <span class="flow-step-num">5</span>
-        <span>Pemesanan & Konfirmasi</span>
-      </a>
-    </div>
-  </div>
-
-  <main>
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="container hero-grid">
-        <div class="hero-content reveal">
-          <div>
-            <span class="badge badge-primary">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="12" r="10"/>
-              </svg>
-              Platform Digital Pariwisata Kewirausahaan
-            </span>
-          </div>
-          <h1 class="hero-title">
-            Eksplorasi Keindahan <span class="hero-highlight">Pantai Karapyak</span> dengan Transparansi Penuh.
-          </h1>
-          <p class="hero-lead">
-            Rencanakan kunjungan Anda ke pesisir tebing karang putih Bagolo, Pangandaran. Pesan tiket resmi terverifikasi, pilih pemandu lokal berlisensi, dan hitung estimasi total biaya sebelum berangkat.
-          </p>
-
-          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
-            <a href="#kalkulator" class="btn btn-primary">
-              Mulai Simulasi Biaya
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </a>
-            <a href="#paket" class="btn btn-secondary">
-              Lihat Paket Wisata
-            </a>
-          </div>
-
-          <div class="hero-stats-row reveal reveal-delay-2">
-            <div class="stat-item">
-              <h4>Rp 15.000</h4>
-              <p>Tarif Tiket Resmi Masuk</p>
-            </div>
-            <div class="stat-item">
-              <h4>4 Pemandu</h4>
-              <p>Lokal Terverifikasi & Ramah</p>
-            </div>
-            <div class="stat-item">
-              <h4>100%</h4>
-              <p>Transparansi Estimasi Biaya</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-visual reveal reveal-delay-1">
-          <div class="hero-card-frame">
-            <div class="hero-card-media">
-              <img src="assets/images/hero-karapyak.jpg" alt="Pemandangan Tebing Karang Putih Pantai Karapyak" style="object-fit: cover; width: 100%; height: 100%; border-radius: inherit;">
-            </div>
-            <div class="hero-card-caption">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <strong style="font-size: 0.95rem; color: var(--text-main);">Tebing Karang Putih & Biota Laut</strong>
-                <span class="badge badge-success">Buka Hari Ini</span>
-              </div>
-              <div class="hero-caption-meta">
-                <span>📍 Bagolo, Kalipucang, Pangandaran</span>
-                <span>🕒 06.00 - 18.00 WIB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 1: Informasi Pantai & Fasilitas (PDF Slide 4 Step 1 & Slide 5) -->
-    <section id="informasi" class="calc-section" style="background-color: var(--bg-surface); border-bottom: 1px solid var(--border-subtle);">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="badge badge-primary">Langkah 1: Informasi Wisata</span>
-          <h2>Mengenal Pantai Karapyak</h2>
-          <p>
-            Destinasi eksotis di pesisir timur Pangandaran dengan hamparan tebing karang putih unik, kolam alami pasang-surut, dan deburan ombak Samudera Hindia yang menenangkan.
-          </p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-            <!-- Info Box 1 -->
-            <div class="card-panel reveal reveal-delay-1" style="padding: 1.25rem;">
-              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                <div style="width: 2.25rem; height: 2.25rem; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center;">
-                  📍
-                </div>
-                <h4 style="font-size: 1rem;">Lokasi & Aksesibilitas</h4>
-              </div>
-              <p style="font-size: 0.825rem; color: var(--text-secondary);">
-                Berada di Desa Bagolo, Kec. Kalipucang, Kab. Pangandaran. Sekitar 20 km (30 menit berkendara) sebelum gerbang utama Pantai Pangandaran dengan akses jalan aspal mulus.
-              </p>
-            </div>
-
-            <!-- Info Box 2 -->
-            <div class="card-panel reveal reveal-delay-2" style="padding: 1.25rem;">
-              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                <div style="width: 2.25rem; height: 2.25rem; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center;">
-                  🕒
-                </div>
-                <h4 style="font-size: 1rem;">Jam Operasional & Tiket</h4>
-              </div>
-              <p style="font-size: 0.825rem; color: var(--text-secondary);">
-                Buka setiap hari pukul 06.00 - 18.00 WIB. Tiket masuk resmi Rp 15.000 / orang dewasa dan Rp 10.000 / anak, sudah termasuk asuransi keselamatan pengunjung.
-              </p>
-            </div>
-
-            <!-- Info Box 3 -->
-            <div class="card-panel reveal reveal-delay-3" style="padding: 1.25rem;">
-              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                <div style="width: 2.25rem; height: 2.25rem; border-radius: var(--radius-md); background: var(--accent-warm-light); color: var(--accent-warm); display: flex; align-items: center; justify-content: center;">
-                  ⚠️
-                </div>
-                <h4 style="font-size: 1rem;">Aturan Keselamatan Pantai</h4>
-              </div>
-              <p style="font-size: 0.825rem; color: var(--text-secondary);">
-                Wajib mematuhi rambu batas surut karang, dilarang merusak biota karang laut hidup, dan gunakan alas kaki yang tidak licin saat melintasi bebatuan karang.
-              </p>
-            </div>
-          </div>
-
-          <!-- Fasilitas Grid -->
-          <div class="reveal reveal-delay-2" style="background-color: var(--bg-subtle); border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--border-subtle);">
-            <h4 style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--text-main);">Fasilitas Lengkap yang Tersedia di Area Pantai:</h4>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; font-size: 0.85rem;">
-              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
-                <span style="color: var(--primary);">✓</span> Mushola & Toilet Bersih
-              </div>
-              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
-                <span style="color: var(--primary);">✓</span> Area Parkir Luas & Terjaga
-              </div>
-              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
-                <span style="color: var(--primary);">✓</span> Gazebo & Rest Area Tepi Tebing
-              </div>
-              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
-                <span style="color: var(--primary);">✓</span> Sentra Kuliner Ikan Bakar Bagolo
-              </div>
-              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
-                <span style="color: var(--primary);">✓</span> Spot Foto Instagramable Karang
-              </div>
-              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
-                <span style="color: var(--primary);">✓</span> Pos Lifeguard & P3K Pantai
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 2, 3, 4: Kalkulator Biaya & Alur Pemesanan (PDF Slide 4 Step 2-4 & Slide 6) -->
-    <section id="kalkulator" class="calc-section">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="badge badge-warm">Langkah 2, 3 & 4: Kalkulator Interaktif</span>
-          <h2>Simulasi & Estimasi Biaya Wisata</h2>
-          <p>
-            Sesuaikan rencana perjalanan Anda. Sistem akan menghitung estimasi tiket, pemandu, transportasi, dan aktivitas secara real-time dan 100% transparan sebelum Anda melakukan pemesanan.
-          </p>
-        </div>
-
-        <div class="calc-layout">
-          <!-- Left Column: Interactive Inputs -->
-          <div class="card-panel reveal" id="calculatorInputsPanel">
-            <div class="panel-header">
-              <div>
-                <h3 style="font-size: 1.15rem;">Kustomisasi Rencana Kunjungan</h3>
-                <p style="font-size: 0.8rem; margin-top: 0.15rem;">Pilih komponen sesuai kebutuhan dan anggaran Anda.</p>
-              </div>
-              <span id="appliedPackageBadge" class="badge badge-warm" style="display: none;">
-                Paket Aktif
-              </span>
-            </div>
-
-            <!-- 1. Tanggal Kunjungan & Tiket -->
-            <div class="form-group">
-              <label class="form-label" for="visitDateInput">1. Tentukan Tanggal Kunjungan</label>
-              <input type="date" id="visitDateInput" class="form-input">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">2. Jumlah Pengunjung (Tarif Resmi Pengelola)</label>
-              <div class="stepper-row">
-                <!-- Dewasa -->
-                <div class="stepper-box">
-                  <div class="stepper-label">
-                    <strong>Dewasa</strong>
-                    <small>Rp 15.000 / orang</small>
-                  </div>
-                  <div class="stepper-controls">
-                    <button type="button" class="stepper-btn" id="adultsDec">-</button>
-                    <span class="stepper-value" id="adultsVal">4</span>
-                    <button type="button" class="stepper-btn" id="adultsInc">+</button>
-                  </div>
-                </div>
-
-                <!-- Anak-anak -->
-                <div class="stepper-box">
-                  <div class="stepper-label">
-                    <strong>Anak-anak</strong>
-                    <small>Rp 10.000 / orang</small>
-                  </div>
-                  <div class="stepper-controls">
-                    <button type="button" class="stepper-btn" id="childrenDec">-</button>
-                    <span class="stepper-value" id="childrenVal">0</span>
-                    <button type="button" class="stepper-btn" id="childrenInc">+</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 2. Retribusi Parkir -->
-            <div class="form-group">
-              <label class="form-label" for="parkingSelect">3. Retribusi Parkir Kendaraan <span class="optional">(Opsional)</span></label>
-              <select id="parkingSelect" class="form-select">
-                <option value="none" selected>Tanpa Parkir (Jalan Kaki / Diantar Shuttle)</option>
-                <option value="motor">Sepeda Motor — Rp 5.000</option>
-                <option value="mobil">Mobil Pribadi — Rp 10.000</option>
-                <option value="bus">Bus Pariwisata / Minibus — Rp 25.000</option>
-              </select>
-            </div>
-
-            <!-- 3. Pemandu Wisata Lokal (Step 3) -->
-            <div class="form-group">
-              <label class="form-label" for="guideSelect">4. Pemandu Wisata Lokal Karapyak <span class="optional">(Opsional)</span></label>
-              <select id="guideSelect" class="form-select">
-                <!-- Injected via JavaScript -->
-              </select>
-              <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.35rem;">
-                💡 Layanan pemandu bersifat opsional. Cocok untuk eksplorasi biota karang tersembunyi dan panduan keamanan keluarga.
-              </p>
-            </div>
-
-            <!-- 4. Transportasi Lokal -->
-            <div class="form-group">
-              <label class="form-label">5. Pilihan Transportasi Lokal & Mobilitas</label>
-              <div id="transportContainer" class="radio-chips-grid">
-                <!-- Injected via JavaScript -->
-              </div>
-            </div>
-
-            <!-- 5. Aktivitas Tambahan & Kuliner UMKM -->
-            <div class="form-group" style="margin-bottom: 0;">
-              <label class="form-label">6. Aktivitas Tambahan & Kuliner UMKM Pesisir</label>
-              <div id="activitiesContainer">
-                <!-- Injected via JavaScript -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Column: Live Transparent Receipt (PDF Slide 4 Step 4 & Slide 6) -->
-          <div class="receipt-card reveal reveal-delay-2" id="receiptCard">
-            <div class="receipt-header">
-              <div>
-                <span style="font-size: 0.725rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94A3B8;">Rincian Transparan</span>
-                <h3 style="font-size: 1.15rem; color: #FFFFFF;">Kalkulator Biaya</h3>
-              </div>
-              <span id="receiptItemCount" class="badge" style="background: rgba(255,255,255,0.15); color: #FFFFFF; border: none;">
-                4 Komponen
-              </span>
-            </div>
-
-            <div class="receipt-body">
-              <table class="receipt-table">
-                <thead>
-                  <tr>
-                    <th>Komponen Layanan</th>
-                    <th style="text-align: right;">Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody id="receiptItemsBody">
-                  <!-- Injected via JavaScript -->
-                </tbody>
-              </table>
-
-              <div class="receipt-total-block">
-                <div class="receipt-total-row">
-                  <span>Total Estimasi Biaya:</span>
-                  <h3 id="receiptTotalDisplay">Rp 350.000</h3>
-                </div>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem;">
-                  *Angka estimasi riil terintegrasi mencakup tiket resmi, pemandu, dan aktivitas yang Anda tentukan.
-                </p>
-
-                <div class="receipt-guarantee">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    <path d="m9 12 2 2 4-4"/>
-                  </svg>
-                  <span>Harga terverifikasi resmi bersama mitra pengelola Pantai Karapyak.</span>
-                </div>
-
-                <!-- Step 5 Trigger Button -->
-                <button type="button" id="btnOpenBooking" class="btn btn-primary btn-block" style="padding: 0.875rem 1.25rem; font-size: 0.95rem;">
-                  Lanjut ke Pemesanan Online (Langkah 5)
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12 5 19 12 12 19"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section: Paket Wisata Siap Pakai (PDF Slide 5) -->
-    <section id="paket" class="packages-section">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="badge badge-primary">Katalog Paket Wisata</span>
-          <h2>Pilihan Paket Wisata Praktis</h2>
-          <p>
-            Tersedia paket perjalanan yang dirancang khusus bersama komunitas pemandu lokal untuk kenyamanan individu, keluarga, rombongan, hingga edukasi pelajar.
-          </p>
-        </div>
-
-        <div id="packagesContainer" class="packages-grid">
-          <!-- Injected via JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Section: Direktori Tour Guide Lokal (PDF Slide 4 Step 3 & Slide 5) -->
-    <section id="pemandu" class="guides-section">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="badge badge-primary">Langkah 3: Pemandu Lokal</span>
-          <h2>Direktori Pemandu Wisata Terverifikasi</h2>
-          <p>
-            Kenali pemandu lokal asli Karapyak yang siap memandu perjalanan Anda dengan aman, ramah, dan kaya cerita sejarah serta keanekaragaman biota laut.
-          </p>
-        </div>
-
-        <div id="guidesContainer" class="guides-grid">
-          <!-- Injected via JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Section: Destinasi Sekitar Pantai Karapyak (PDF Slide 4 Step 1 & Slide 5) -->
-    <section id="destinasi" class="destinations-section">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="badge badge-primary">Eksplorasi Lanjutan</span>
-          <h2>Rekomendasi Destinasi Sekitar</h2>
-          <p>
-            Maksimalkan perjalanan wisata Anda dengan mengunjungi spot-spot menarik di kawasan Pantai Karapyak dan pesisir Bagolo.
-          </p>
-        </div>
-
-        <div id="destinationsContainer" class="destinations-grid">
-          <!-- Injected via JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Section: Kemitraan & UMKM Lokal (PDF Slide 7 & 8) -->
-    <section id="umkm" class="msme-section">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="badge badge-warm">Pemberdayaan Masyarakat</span>
-          <h2>Mitra Usaha & UMKM Lokal Bagolo</h2>
-          <p>
-            Karapyak Travel berkolaborasi langsung dengan pelaku UMKM pesisir untuk menggerakkan ekonomi warga sekitar melalui promosi dan layanan terpadu.
-          </p>
-        </div>
-
-        <div id="msmeContainer" class="msme-grid">
-          <!-- Injected via JavaScript -->
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Step 5: Modal Pemesanan Online (PDF Slide 4 Step 5) -->
-  <div id="bookingModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div>
-          <span class="badge badge-primary">Langkah 5: Konfirmasi</span>
-          <h3 style="margin-top: 0.25rem;">Formulir Pemesanan Wisata</h3>
-        </div>
-        <button type="button" class="modal-close-btn" id="closeBookingModal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <form id="bookingForm">
-          <div style="background-color: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.25rem;">
-            <strong style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Ringkasan Komponen yang Akan Dipesan:</strong>
-            <div id="modalSummaryList">
-              <!-- Injected via JavaScript -->
-            </div>
-            <div style="display: flex; justify-content: space-between; border-top: 1px dashed var(--border-subtle); padding-top: 0.5rem; margin-top: 0.5rem;">
-              <span style="font-weight: 600;">Total Biaya:</span>
-              <strong id="modalTotalDisplay" style="color: var(--primary); font-size: 1.1rem;">Rp 350.000</strong>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="modalDateInput">Tanggal Kedatangan Kunjungan</label>
-            <input type="date" id="modalDateInput" class="form-input" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="guestName">Nama Lengkap Pemesan / Perwakilan</label>
-            <input type="text" id="guestName" class="form-input" placeholder="Contoh: Budi Santoso" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="guestPhone">Nomor WhatsApp Aktif</label>
-            <input type="tel" id="guestPhone" class="form-input" placeholder="Contoh: 081234567890" required>
-            <small style="color: var(--text-muted); font-size: 0.725rem;">Bukti e-voucher dan petunjuk kedatangan akan dikirimkan ke nomor ini.</small>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="guestEmail">Alamat Email <span class="optional">(Opsional)</span></label>
-            <input type="email" id="guestEmail" class="form-input" placeholder="nama@domain.com">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="guestNotes">Catatan Tambahan untuk Mitra / Guide <span class="optional">(Opsional)</span></label>
-            <textarea id="guestNotes" class="form-input" rows="2" placeholder="Contoh: Membawa balita 3 tahun, butuh jemput di gerbang masuk"></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-block" style="padding: 0.85rem; font-size: 0.95rem;">
-            Konfirmasi & Terbitkan E-Tiket
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal E-Tiket / Voucher Digital (Step 5 Output) -->
-  <div id="ticketModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div>
-          <span class="badge badge-success">Pemesanan Berhasil</span>
-          <h3 style="margin-top: 0.25rem;">E-Voucher Kunjungan Wisata</h3>
-        </div>
-        <button type="button" class="modal-close-btn" id="closeTicketModal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <div id="voucherContent">
-          <!-- Injected via JavaScript -->
-        </div>
-
-        <div class="modal-footer-actions" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <a id="btnWhatsAppConfirm" href="#" target="_blank" class="btn btn-primary" style="flex: 1; background-color: #059669; border-color: #059669;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        <div class="nav-actions">
+          <a href="#kalkulator" class="btn btn-primary btn-sm desktop-only-btn">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="4" y="2" width="16" height="20" rx="2" />
+              <line x1="8" y1="6" x2="16" y2="6" />
+              <line x1="16" y1="14" x2="16" y2="18" />
+              <path d="M16 10h.01" />
+              <path d="M12 10h.01" />
+              <path d="M8 10h.01" />
+              <path d="M12 14h.01" />
+              <path d="M8 14h.01" />
+              <path d="M12 18h.01" />
+              <path d="M8 18h.01" />
             </svg>
-            Konfirmasi via WhatsApp Mitra
+            <span>Hitung Estimasi</span>
           </a>
-          <button type="button" id="btnPrintTicket" class="btn btn-secondary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 6 2 18 2 18 9"/>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-              <rect x="6" y="14" width="12" height="8"/>
+
+          <!-- Mobile Menu Hamburger Button -->
+          <button
+            type="button"
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="Buka Menu Navigasi"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
-            Cetak / Simpan E-Tiket
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- =================================================================== -->
+    <!-- 2. MENU SLIDE-OUT DRAWER NAVIGASI (KHUSUS SMARTPHONE / MOBILE)      -->
+    <!-- Menyediakan menu vertikal bernomor sesuai Alur Wisatawan agar mudah -->
+    <!-- dijelajahi dengan ibu jari pada layar ponsel (375px+).              -->
+    <!-- =================================================================== -->
+    <div id="mobileDrawerOverlay" class="mobile-drawer-overlay">
+      <div class="mobile-drawer">
+        <div class="mobile-drawer-header">
+          <div class="logo-group">
+            <div class="logo-mark">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M2 12h20" />
+                <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6" />
+                <path d="M12 2v10" />
+                <path d="m4.93 4.93 4.24 4.24" />
+                <path d="m14.83 9.17 4.24-4.24" />
+              </svg>
+            </div>
+            <div class="logo-text">
+              <h3>Karapyak Travel</h3>
+              <span>karapyakgo.github.io</span>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="mobile-drawer-close"
+            id="closeMobileDrawer"
+            aria-label="Tutup Menu"
+          >
+            &times;
+          </button>
+        </div>
+
+        <nav class="mobile-drawer-nav">
+          <a href="#informasi" class="mobile-nav-link">
+            <span class="mobile-nav-num">1</span>
+            <span>Informasi Pantai & Fasilitas</span>
+          </a>
+          <a href="#kalkulator" class="mobile-nav-link">
+            <span class="mobile-nav-num">2</span>
+            <span>Tarif Tiket & Tanggal</span>
+          </a>
+          <a href="#pemandu" class="mobile-nav-link">
+            <span class="mobile-nav-num">3</span>
+            <span>Direktori Pemandu Lokal</span>
+          </a>
+          <a href="#kalkulator" class="mobile-nav-link">
+            <span class="mobile-nav-num">4</span>
+            <span>Kalkulator Biaya Real-time</span>
+          </a>
+          <a href="#paket" class="mobile-nav-link">
+            <span class="mobile-nav-num">5</span>
+            <span>Katalog Paket Wisata</span>
+          </a>
+          <a href="#destinasi" class="mobile-nav-link">
+            <span class="mobile-nav-bullet">📍</span>
+            <span>Destinasi Sekitar Karapyak</span>
+          </a>
+          <a href="#umkm" class="mobile-nav-link">
+            <span class="mobile-nav-bullet">🏪</span>
+            <span>Mitra UMKM Lokal Bagolo</span>
+          </a>
+        </nav>
+
+        <div class="mobile-drawer-footer">
+          <a
+            href="#kalkulator"
+            class="btn btn-primary btn-block"
+            id="btnDrawerCta"
+          >
+            Mulai Hitung Estimasi
+          </a>
+          <div
+            style="
+              font-size: 0.725rem;
+              color: var(--text-muted);
+              text-align: center;
+              margin-top: 0.75rem;
+            "
+          >
+            Platform Digital Wisata Pantai Karapyak
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- 3. PITA 5 ALUR WISATAWAN (STICKY FLOW RIBBON DENGAN SCROLL SPY)     -->
+    <!-- Merefleksikan 5 langkah resmi dari PDF Slide 4:                     -->
+    <!-- 1. Informasi -> 2. Tiket -> 3. Pemandu -> 4. Estimasi -> 5. Pesan   -->
+    <!-- Otomatis menyala dan bergeser ke tengah saat halaman digulir.       -->
+    <!-- =================================================================== -->
+    <div class="flow-ribbon" id="flowRibbon">
+      <div class="container flow-steps" id="flowStepsContainer">
+        <a href="#informasi" class="flow-step-item active" data-step="1">
+          <span class="flow-step-num">1</span>
+          <span>Eksplorasi Informasi</span>
+        </a>
+        <span class="flow-separator">›</span>
+        <a href="#kalkulator" class="flow-step-item" data-step="2">
+          <span class="flow-step-num">2</span>
+          <span>Tiket & Tanggal</span>
+        </a>
+        <span class="flow-separator">›</span>
+        <a href="#pemandu" class="flow-step-item" data-step="3">
+          <span class="flow-step-num">3</span>
+          <span>Pemandu Wisata</span>
+        </a>
+        <span class="flow-separator">›</span>
+        <a href="#receiptCard" class="flow-step-item" data-step="4">
+          <span class="flow-step-num">4</span>
+          <span>Kalkulator Estimasi</span>
+        </a>
+        <span class="flow-separator">›</span>
+        <a
+          href="#receiptCard"
+          class="flow-step-item"
+          data-step="5"
+          id="flowStep5"
+        >
+          <span class="flow-step-num">5</span>
+          <span>Pemesanan & Konfirmasi</span>
+        </a>
+      </div>
+    </div>
+
+    <main>
+      <!-- ================================================================= -->
+      <!-- 4. SECTION HERO: HEADLINE, CTA SIMULASI & STATISTIK DESTINASI     -->
+      <!-- Mengenalkan keunggulan Pantai Karapyak dengan transparansi biaya  -->
+      <!-- 100%, visual tebing karang putih, dan status buka hari ini.       -->
+      <!-- ================================================================= -->
+      <section class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-content reveal">
+            <div>
+              <span class="badge badge-primary">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+                Platform Digital Pariwisata Kewirausahaan
+              </span>
+            </div>
+            <h1 class="hero-title">
+              Eksplorasi Keindahan
+              <span class="hero-highlight">Pantai Karapyak</span> dengan
+              Transparansi Penuh.
+            </h1>
+            <p class="hero-lead">
+              Rencanakan kunjungan Anda ke pesisir tebing karang putih Bagolo,
+              Pangandaran. Pesan tiket resmi terverifikasi, pilih pemandu lokal
+              berlisensi, dan hitung estimasi total biaya sebelum berangkat.
+            </p>
+
+            <div
+              style="
+                display: flex;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+                margin-top: 0.5rem;
+              "
+            >
+              <a href="#kalkulator" class="btn btn-primary">
+                Mulai Simulasi Biaya
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
+              <a href="#paket" class="btn btn-secondary">
+                Lihat Paket Wisata
+              </a>
+            </div>
+
+            <div class="hero-stats-row reveal reveal-delay-2">
+              <div class="stat-item">
+                <h4>Rp 15.000</h4>
+                <p>Tarif Tiket Resmi Masuk</p>
+              </div>
+              <div class="stat-item">
+                <h4>4 Pemandu</h4>
+                <p>Lokal Terverifikasi & Ramah</p>
+              </div>
+              <div class="stat-item">
+                <h4>100%</h4>
+                <p>Transparansi Estimasi Biaya</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal reveal-delay-1">
+            <div class="hero-card-frame">
+              <div class="hero-card-media">
+                <img
+                  src="assets/images/hero-karapyak.jpg"
+                  alt="Pemandangan Tebing Karang Putih Pantai Karapyak"
+                  style="
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: inherit;
+                  "
+                />
+              </div>
+              <div class="hero-card-caption">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <strong style="font-size: 0.95rem; color: var(--text-main)"
+                    >Tebing Karang Putih & Biota Laut</strong
+                  >
+                  <span class="badge badge-success">Buka Hari Ini</span>
+                </div>
+                <div class="hero-caption-meta">
+                  <span>📍 Bagolo, Kalipucang, Pangandaran</span>
+                  <span>🕒 06.00 - 18.00 WIB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- LANGKAH 1: EKSPLORASI INFORMASI PANTAI, AKSESIBILITAS & FASILITAS -->
+      <!-- Lokasi Bagolo Kalipucang, jam buka 06.00-18.00 WIB, tarif tiket,  -->
+      <!-- aturan keselamatan bibir karang, serta 6 sarana penunjang pantai. -->
+      <!-- ================================================================= -->
+      <section
+        id="informasi"
+        class="calc-section"
+        style="
+          background-color: var(--bg-surface);
+          border-bottom: 1px solid var(--border-subtle);
+        "
+      >
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge badge-primary">Langkah 1: Informasi Wisata</span>
+            <h2>Mengenal Pantai Karapyak</h2>
+            <p>
+              Destinasi eksotis di pesisir timur Pangandaran dengan hamparan
+              tebing karang putih unik, kolam alami pasang-surut, dan deburan
+              ombak Samudera Hindia yang menenangkan.
+            </p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr; gap: 2rem">
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.25rem;
+              "
+            >
+              <!-- Info Box 1 -->
+              <div
+                class="card-panel reveal reveal-delay-1"
+                style="padding: 1.25rem"
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    margin-bottom: 0.75rem;
+                  "
+                >
+                  <div
+                    style="
+                      width: 2.25rem;
+                      height: 2.25rem;
+                      border-radius: var(--radius-md);
+                      background: var(--primary-light);
+                      color: var(--primary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    📍
+                  </div>
+                  <h4 style="font-size: 1rem">Lokasi & Aksesibilitas</h4>
+                </div>
+                <p style="font-size: 0.825rem; color: var(--text-secondary)">
+                  Berada di Desa Bagolo, Kec. Kalipucang, Kab. Pangandaran.
+                  Sekitar 20 km (30 menit berkendara) sebelum gerbang utama
+                  Pantai Pangandaran dengan akses jalan aspal mulus.
+                </p>
+              </div>
+
+              <!-- Info Box 2 -->
+              <div
+                class="card-panel reveal reveal-delay-2"
+                style="padding: 1.25rem"
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    margin-bottom: 0.75rem;
+                  "
+                >
+                  <div
+                    style="
+                      width: 2.25rem;
+                      height: 2.25rem;
+                      border-radius: var(--radius-md);
+                      background: var(--primary-light);
+                      color: var(--primary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    🕒
+                  </div>
+                  <h4 style="font-size: 1rem">Jam Operasional & Tiket</h4>
+                </div>
+                <p style="font-size: 0.825rem; color: var(--text-secondary)">
+                  Buka setiap hari pukul 06.00 - 18.00 WIB. Tiket masuk resmi Rp
+                  15.000 / orang dewasa dan Rp 10.000 / anak, sudah termasuk
+                  asuransi keselamatan pengunjung.
+                </p>
+              </div>
+
+              <!-- Info Box 3 -->
+              <div
+                class="card-panel reveal reveal-delay-3"
+                style="padding: 1.25rem"
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    margin-bottom: 0.75rem;
+                  "
+                >
+                  <div
+                    style="
+                      width: 2.25rem;
+                      height: 2.25rem;
+                      border-radius: var(--radius-md);
+                      background: var(--accent-warm-light);
+                      color: var(--accent-warm);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    ⚠️
+                  </div>
+                  <h4 style="font-size: 1rem">Aturan Keselamatan Pantai</h4>
+                </div>
+                <p style="font-size: 0.825rem; color: var(--text-secondary)">
+                  Wajib mematuhi rambu batas surut karang, dilarang merusak
+                  biota karang laut hidup, dan gunakan alas kaki yang tidak
+                  licin saat melintasi bebatuan karang.
+                </p>
+              </div>
+            </div>
+
+            <!-- Fasilitas Grid -->
+            <div
+              class="reveal reveal-delay-2"
+              style="
+                background-color: var(--bg-subtle);
+                border-radius: var(--radius-lg);
+                padding: 1.5rem;
+                border: 1px solid var(--border-subtle);
+              "
+            >
+              <h4
+                style="
+                  margin-bottom: 1rem;
+                  font-size: 0.95rem;
+                  color: var(--text-main);
+                "
+              >
+                Fasilitas Lengkap yang Tersedia di Area Pantai:
+              </h4>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                  gap: 1rem;
+                  font-size: 0.85rem;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-secondary);
+                  "
+                >
+                  <span style="color: var(--primary)">✓</span> Mushola & Toilet
+                  Bersih
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-secondary);
+                  "
+                >
+                  <span style="color: var(--primary)">✓</span> Area Parkir Luas
+                  & Terjaga
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-secondary);
+                  "
+                >
+                  <span style="color: var(--primary)">✓</span> Gazebo & Rest
+                  Area Tepi Tebing
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-secondary);
+                  "
+                >
+                  <span style="color: var(--primary)">✓</span> Sentra Kuliner
+                  Ikan Bakar Bagolo
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-secondary);
+                  "
+                >
+                  <span style="color: var(--primary)">✓</span> Spot Foto
+                  Instagramable Karang
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-secondary);
+                  "
+                >
+                  <span style="color: var(--primary)">✓</span> Pos Lifeguard &
+                  P3K Pantai
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- LANGKAH 2 & 4: KALKULATOR BIAYA REAL-TIME & STRUK TRANSPARAN      -->
+      <!-- Mengintegrasikan pemilihan tiket, guide, transport & aktivitas    -->
+      <!-- dengan simulasi resmi Slide 6 (Paket Keluarga: Rp 350.000).       -->
+      <!-- ================================================================= -->
+      <section id="kalkulator" class="calc-section">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge badge-warm"
+              >Langkah 2, 3 & 4: Kalkulator Interaktif</span
+            >
+            <h2>Simulasi & Estimasi Biaya Wisata</h2>
+            <p>
+              Sesuaikan rencana perjalanan Anda. Sistem akan menghitung estimasi
+              tiket, pemandu, transportasi, dan aktivitas secara real-time dan
+              100% transparan sebelum Anda melakukan pemesanan.
+            </p>
+          </div>
+
+          <div class="calc-layout">
+            <!-- KOLOM KIRI: FORMULIR KUSTOMISASI RENCANA KUNJUNGAN (INPUT) -->
+            <div class="card-panel reveal" id="calculatorInputsPanel">
+              <div class="panel-header">
+                <div>
+                  <h3 style="font-size: 1.15rem">
+                    Kustomisasi Rencana Kunjungan
+                  </h3>
+                  <p style="font-size: 0.8rem; margin-top: 0.15rem">
+                    Pilih komponen sesuai kebutuhan dan anggaran Anda.
+                  </p>
+                </div>
+                <span
+                  id="appliedPackageBadge"
+                  class="badge badge-warm"
+                  style="display: none"
+                >
+                  Paket Aktif
+                </span>
+              </div>
+
+              <!-- 1. Tanggal Kunjungan & Tiket -->
+              <div class="form-group">
+                <label class="form-label" for="visitDateInput"
+                  >1. Tentukan Tanggal Kunjungan</label
+                >
+                <input type="date" id="visitDateInput" class="form-input" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label"
+                  >2. Jumlah Pengunjung (Tarif Resmi Pengelola)</label
+                >
+                <div class="stepper-row">
+                  <!-- Dewasa -->
+                  <div class="stepper-box">
+                    <div class="stepper-label">
+                      <strong>Dewasa</strong>
+                      <small>Rp 15.000 / orang</small>
+                    </div>
+                    <div class="stepper-controls">
+                      <button type="button" class="stepper-btn" id="adultsDec">
+                        -
+                      </button>
+                      <span class="stepper-value" id="adultsVal">4</span>
+                      <button type="button" class="stepper-btn" id="adultsInc">
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Anak-anak -->
+                  <div class="stepper-box">
+                    <div class="stepper-label">
+                      <strong>Anak-anak</strong>
+                      <small>Rp 10.000 / orang</small>
+                    </div>
+                    <div class="stepper-controls">
+                      <button
+                        type="button"
+                        class="stepper-btn"
+                        id="childrenDec"
+                      >
+                        -
+                      </button>
+                      <span class="stepper-value" id="childrenVal">0</span>
+                      <button
+                        type="button"
+                        class="stepper-btn"
+                        id="childrenInc"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Retribusi Parkir -->
+              <div class="form-group">
+                <label class="form-label" for="parkingSelect"
+                  >3. Retribusi Parkir Kendaraan
+                  <span class="optional">(Opsional)</span></label
+                >
+                <select id="parkingSelect" class="form-select">
+                  <option value="none" selected>
+                    Tanpa Parkir (Jalan Kaki / Diantar Shuttle)
+                  </option>
+                  <option value="motor">Sepeda Motor — Rp 5.000</option>
+                  <option value="mobil">Mobil Pribadi — Rp 10.000</option>
+                  <option value="bus">
+                    Bus Pariwisata / Minibus — Rp 25.000
+                  </option>
+                </select>
+              </div>
+
+              <!-- 3. Pemandu Wisata Lokal (Step 3) -->
+              <div class="form-group">
+                <label class="form-label" for="guideSelect"
+                  >4. Pemandu Wisata Lokal Karapyak
+                  <span class="optional">(Opsional)</span></label
+                >
+                <select id="guideSelect" class="form-select">
+                  <!-- Injected via JavaScript -->
+                </select>
+                <p
+                  style="
+                    font-size: 0.75rem;
+                    color: var(--text-muted);
+                    margin-top: 0.35rem;
+                  "
+                >
+                  💡 Layanan pemandu bersifat opsional. Cocok untuk eksplorasi
+                  biota karang tersembunyi dan panduan keamanan keluarga.
+                </p>
+              </div>
+
+              <!-- 4. Transportasi Lokal -->
+              <div class="form-group">
+                <label class="form-label"
+                  >5. Pilihan Transportasi Lokal & Mobilitas</label
+                >
+                <div id="transportContainer" class="radio-chips-grid">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
+              <!-- 5. Aktivitas Tambahan & Kuliner UMKM -->
+              <div class="form-group" style="margin-bottom: 0">
+                <label class="form-label"
+                  >6. Aktivitas Tambahan & Kuliner UMKM Pesisir</label
+                >
+                <div id="activitiesContainer">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <!-- KOLOM KANAN: PANEL STRUK TRANSPARAN & TOMBOL PEMESANAN LANGKAH 5 -->
+            <div class="receipt-card reveal reveal-delay-2" id="receiptCard">
+              <div class="receipt-header">
+                <div>
+                  <span
+                    style="
+                      font-size: 0.725rem;
+                      text-transform: uppercase;
+                      letter-spacing: 0.05em;
+                      color: #94a3b8;
+                    "
+                    >Rincian Transparan</span
+                  >
+                  <h3 style="font-size: 1.15rem; color: #ffffff">
+                    Kalkulator Biaya
+                  </h3>
+                </div>
+                <span
+                  id="receiptItemCount"
+                  class="badge"
+                  style="
+                    background: rgba(255, 255, 255, 0.15);
+                    color: #ffffff;
+                    border: none;
+                  "
+                >
+                  4 Komponen
+                </span>
+              </div>
+
+              <div class="receipt-body">
+                <table class="receipt-table">
+                  <thead>
+                    <tr>
+                      <th>Komponen Layanan</th>
+                      <th style="text-align: right">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody id="receiptItemsBody">
+                    <!-- Injected via JavaScript -->
+                  </tbody>
+                </table>
+
+                <div class="receipt-total-block">
+                  <div class="receipt-total-row">
+                    <span>Total Estimasi Biaya:</span>
+                    <h3 id="receiptTotalDisplay">Rp 350.000</h3>
+                  </div>
+                  <p
+                    style="
+                      font-size: 0.75rem;
+                      color: var(--text-muted);
+                      margin-bottom: 1rem;
+                    "
+                  >
+                    *Angka estimasi riil terintegrasi mencakup tiket resmi,
+                    pemandu, dan aktivitas yang Anda tentukan.
+                  </p>
+
+                  <div class="receipt-guarantee">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#059669"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="m9 12 2 2 4-4" />
+                    </svg>
+                    <span
+                      >Harga terverifikasi resmi bersama mitra pengelola Pantai
+                      Karapyak.</span
+                    >
+                  </div>
+
+                  <!-- Step 5 Trigger Button -->
+                  <button
+                    type="button"
+                    id="btnOpenBooking"
+                    class="btn btn-primary btn-block"
+                    style="padding: 0.875rem 1.25rem; font-size: 0.95rem"
+                  >
+                    Lanjut ke Pemesanan Online (Langkah 5)
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- KATALOG PAKET WISATA SIAP PAKAI / BUNDLING HEMAT (SLIDE 5)        -->
+      <!-- Termasuk Paket Keluarga Rp 350.000 (prefill otomatis kalkulator). -->
+      <!-- ================================================================= -->
+      <section id="paket" class="packages-section">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge badge-primary">Katalog Paket Wisata</span>
+            <h2>Pilihan Paket Wisata Praktis</h2>
+            <p>
+              Tersedia paket perjalanan yang dirancang khusus bersama komunitas
+              pemandu lokal untuk kenyamanan individu, keluarga, rombongan,
+              hingga edukasi pelajar.
+            </p>
+          </div>
+
+          <div id="packagesContainer" class="packages-grid">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- LANGKAH 3: DIREKTORI PEMANDU WISATA LOKAL TERVERIFIKASI           -->
+      <!-- Profil 4 pemandu lokal (Kang Asep, Teh Rina, Kang Dedi, Kang Yana)-->
+      <!-- berlisensi resmi dengan tarif dan durasi pendampingan 3 jam.      -->
+      <!-- ================================================================= -->
+      <section id="pemandu" class="guides-section">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge badge-primary">Langkah 3: Pemandu Lokal</span>
+            <h2>Direktori Pemandu Wisata Terverifikasi</h2>
+            <p>
+              Kenali pemandu lokal asli Karapyak yang siap memandu perjalanan
+              Anda dengan aman, ramah, dan kaya cerita sejarah serta
+              keanekaragaman biota laut.
+            </p>
+          </div>
+
+          <div id="guidesContainer" class="guides-grid">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- SPOT DESTINASI SEKITAR KAWASAN PESISIR PANTAI KARAPYAK BAGOLO     -->
+      <!-- Tebing Karang Putih, Sunset Deck Glamping, Mangrove, Lembah Putri.-->
+      <!-- ================================================================= -->
+      <section id="destinasi" class="destinations-section">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge badge-primary">Eksplorasi Lanjutan</span>
+            <h2>Rekomendasi Destinasi Sekitar</h2>
+            <p>
+              Maksimalkan perjalanan wisata Anda dengan mengunjungi spot-spot
+              menarik di kawasan Pantai Karapyak dan pesisir Bagolo.
+            </p>
+          </div>
+
+          <div id="destinationsContainer" class="destinations-grid">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- KEMITRAAN UMKM & PEMBERDAYAAN EKONOMI WARGA LOKAL (SLIDE 7 & 8)   -->
+      <!-- Sentra kuliner, kelapa muda, asosiasi pemandu & armada ojek lokal.-->
+      <!-- ================================================================= -->
+      <section id="umkm" class="msme-section">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="badge badge-warm">Pemberdayaan Masyarakat</span>
+            <h2>Mitra Usaha & UMKM Lokal Bagolo</h2>
+            <p>
+              Karapyak Travel berkolaborasi langsung dengan pelaku UMKM pesisir
+              untuk menggerakkan ekonomi warga sekitar melalui promosi dan
+              layanan terpadu.
+            </p>
+          </div>
+
+          <div id="msmeContainer" class="msme-grid">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =================================================================== -->
+    <!-- LANGKAH 5: MODAL FORMULIR PEMESANAN ONLINE (KONFIRMASI WISATAWAN)   -->
+    <!-- Formulir data diri pemesan (Nama, No WhatsApp, Email, dan Catatan). -->
+    <!-- =================================================================== -->
+    <div id="bookingModal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <span class="badge badge-primary">Langkah 5: Konfirmasi</span>
+            <h3 style="margin-top: 0.25rem">Formulir Pemesanan Wisata</h3>
+          </div>
+          <button type="button" class="modal-close-btn" id="closeBookingModal">
+            &times;
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form id="bookingForm">
+            <div
+              style="
+                background-color: var(--bg-subtle);
+                padding: 1rem;
+                border-radius: var(--radius-md);
+                margin-bottom: 1.25rem;
+              "
+            >
+              <strong
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-muted);
+                  display: block;
+                  margin-bottom: 0.5rem;
+                "
+                >Ringkasan Komponen yang Akan Dipesan:</strong
+              >
+              <div id="modalSummaryList">
+                <!-- Injected via JavaScript -->
+              </div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  border-top: 1px dashed var(--border-subtle);
+                  padding-top: 0.5rem;
+                  margin-top: 0.5rem;
+                "
+              >
+                <span style="font-weight: 600">Total Biaya:</span>
+                <strong
+                  id="modalTotalDisplay"
+                  style="color: var(--primary); font-size: 1.1rem"
+                  >Rp 350.000</strong
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="modalDateInput"
+                >Tanggal Kedatangan Kunjungan</label
+              >
+              <input
+                type="date"
+                id="modalDateInput"
+                class="form-input"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="guestName"
+                >Nama Lengkap Pemesan / Perwakilan</label
+              >
+              <input
+                type="text"
+                id="guestName"
+                class="form-input"
+                placeholder="Contoh: Budi Santoso"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="guestPhone"
+                >Nomor WhatsApp Aktif</label
+              >
+              <input
+                type="tel"
+                id="guestPhone"
+                class="form-input"
+                placeholder="Contoh: 081234567890"
+                required
+              />
+              <small style="color: var(--text-muted); font-size: 0.725rem"
+                >Bukti e-voucher dan petunjuk kedatangan akan dikirimkan ke
+                nomor ini.</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="guestEmail"
+                >Alamat Email <span class="optional">(Opsional)</span></label
+              >
+              <input
+                type="email"
+                id="guestEmail"
+                class="form-input"
+                placeholder="nama@domain.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="guestNotes"
+                >Catatan Tambahan untuk Mitra / Guide
+                <span class="optional">(Opsional)</span></label
+              >
+              <textarea
+                id="guestNotes"
+                class="form-input"
+                rows="2"
+                placeholder="Contoh: Membawa balita 3 tahun, butuh jemput di gerbang masuk"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary btn-block"
+              style="padding: 0.85rem; font-size: 0.95rem"
+            >
+              Konfirmasi & Terbitkan E-Tiket
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MODAL PENERBITAN E-VOUCHER TIKET RESMI DIGITAL (OUTPUT LANGKAH 5)   -->
+    <!-- Menampilkan kode booking unik KRP-XXXXXX, tombol Cetak 1 Halaman A4 -->
+    <!-- via isolated iframe printer, dan tombol konfirmasi otomatis ke WA.  -->
+    <!-- =================================================================== -->
+    <div id="ticketModal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <span class="badge badge-success">Pemesanan Berhasil</span>
+            <h3 style="margin-top: 0.25rem">E-Voucher Kunjungan Wisata</h3>
+          </div>
+          <button type="button" class="modal-close-btn" id="closeTicketModal">
+            &times;
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div id="voucherContent">
+            <!-- Injected via JavaScript -->
+          </div>
+
+          <div
+            class="modal-footer-actions"
+            style="display: flex; gap: 0.75rem; flex-wrap: wrap"
+          >
+            <a
+              id="btnWhatsAppConfirm"
+              href="#"
+              target="_blank"
+              class="btn btn-primary"
+              style="flex: 1; background-color: #059669; border-color: #059669"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              Konfirmasi via WhatsApp Mitra
+            </a>
+            <button type="button" id="btnPrintTicket" class="btn btn-secondary">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 6 2 18 2 18 9" />
+                <path
+                  d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+                />
+                <rect x="6" y="14" width="12" height="8" />
+              </svg>
+              Cetak / Simpan E-Tiket
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- FOOTER SITUS: IDENTITAS PLATFORM, NAVIGASI & DATA TIM MAHASISWA     -->
+    <!-- Mencantumkan identitas tim penyusun kewirausahaan pariwisata PDF.   -->
+    <!-- =================================================================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h3>Karapyak Travel</h3>
+            <p>
+              Inovasi digitalisasi pariwisata bahari terintegrasi untuk
+              pemesanan tiket resmi, jasa pemandu lokal, dan pemberdayaan pelaku
+              UMKM di Pantai Karapyak.
+            </p>
+            <div style="margin-top: 1rem; font-size: 0.8rem; color: #64748b">
+              Domain:
+              <span style="color: #94a3b8; font-family: monospace"
+                >karapyakgo.github.io</span
+              >
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Navigasi Alur</h4>
+            <ul class="footer-list">
+              <li><a href="#informasi">1. Informasi & Fasilitas</a></li>
+              <li><a href="#kalkulator">2. Tiket Masuk & Tanggal</a></li>
+              <li><a href="#pemandu">3. Direktori Pemandu</a></li>
+              <li><a href="#kalkulator">4. Kalkulator Biaya Real-time</a></li>
+              <li><a href="#paket">5. Katalog Paket Wisata</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Penyusun & Tim Pengembang</h4>
+            <p
+              style="font-size: 0.8rem; margin-bottom: 0.75rem; color: #94a3b8"
+            >
+              Kelompok Kewirausahaan Industri Pariwisata:
+            </p>
+            <ul
+              class="footer-list"
+              style="font-family: monospace; font-size: 0.775rem"
+            >
+              <li>Salsabila (2107240020)</li>
+              <li>Eva Nikmatul H (2107240004)</li>
+              <li>Mona Santika (2107240011)</li>
+              <li>Intan Ratna N (2107240007)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>
+            &copy; 2026 Karapyak Travel. Hak Cipta Dilindungi. Platform
+            Digitalisasi Pariwisata Pantai Karapyak.
+          </div>
+          <div>Desa Bagolo, Kec. Kalipucang, Kab. Pangandaran, Jawa Barat.</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =================================================================== -->
+    <!-- FLOATING ACTION BAR BAWAH KHUSUS SMARTPHONE (MOBILE-FIRST)          -->
+    <!-- Selalu melayang di layar ponsel, menampilkan harga total real-time  -->
+    <!-- dan tombol cepat pemesanan tanpa harus scroll ke panel struk.       -->
+    <!-- =================================================================== -->
+    <div id="mobileStickyBar" class="mobile-sticky-bar">
+      <div class="mobile-sticky-inner">
+        <div class="mobile-sticky-info">
+          <span class="mobile-sticky-label">Estimasi Total</span>
+          <strong class="mobile-sticky-price" id="mobileStickyPrice"
+            >Rp 350.000</strong
+          >
+        </div>
+        <div class="mobile-sticky-actions">
+          <a
+            href="#kalkulator"
+            class="btn btn-secondary btn-sm"
+            id="btnMobileScrollCalc"
+            aria-label="Lihat Rincian"
+          >
+            Rincian
+          </a>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            id="btnMobileStickyBooking"
+          >
+            Pesan Tiket (Step 5)
           </button>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer (Includes team metadata from PDF page 1) -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3>Karapyak Travel</h3>
-          <p>
-            Inovasi digitalisasi pariwisata bahari terintegrasi untuk pemesanan tiket resmi, jasa pemandu lokal, dan pemberdayaan pelaku UMKM di Pantai Karapyak.
-          </p>
-          <div style="margin-top: 1rem; font-size: 0.8rem; color: #64748B;">
-            Domain: <span style="color: #94A3B8; font-family: monospace;">karapyakgo.github.io</span>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4>Navigasi Alur</h4>
-          <ul class="footer-list">
-            <li><a href="#informasi">1. Informasi & Fasilitas</a></li>
-            <li><a href="#kalkulator">2. Tiket Masuk & Tanggal</a></li>
-            <li><a href="#pemandu">3. Direktori Pemandu</a></li>
-            <li><a href="#kalkulator">4. Kalkulator Biaya Real-time</a></li>
-            <li><a href="#paket">5. Katalog Paket Wisata</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Penyusun & Tim Pengembang</h4>
-          <p style="font-size: 0.8rem; margin-bottom: 0.75rem; color: #94A3B8;">
-            Kelompok Kewirausahaan Industri Pariwisata:
-          </p>
-          <ul class="footer-list" style="font-family: monospace; font-size: 0.775rem;">
-            <li>Salsabila (2107240020)</li>
-            <li>Eva Nikmatul H (2107240004)</li>
-            <li>Mona Santika (2107240011)</li>
-            <li>Intan Ratna N (2107240007)</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>
-          &copy; 2026 Karapyak Travel. Hak Cipta Dilindungi. Platform Digitalisasi Pariwisata Pantai Karapyak.
-        </div>
-        <div>
-          Desa Bagolo, Kec. Kalipucang, Kab. Pangandaran, Jawa Barat.
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Mobile Sticky Bottom Floating Action Bar -->
-  <div id="mobileStickyBar" class="mobile-sticky-bar">
-    <div class="mobile-sticky-inner">
-      <div class="mobile-sticky-info">
-        <span class="mobile-sticky-label">Estimasi Total</span>
-        <strong class="mobile-sticky-price" id="mobileStickyPrice">Rp 350.000</strong>
-      </div>
-      <div class="mobile-sticky-actions">
-        <a href="#kalkulator" class="btn btn-secondary btn-sm" id="btnMobileScrollCalc" aria-label="Lihat Rincian">
-          Rincian
-        </a>
-        <button type="button" class="btn btn-primary btn-sm" id="btnMobileStickyBooking">
-          Pesan Tiket (Step 5)
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script src="scripts/data.js?v=3.0"></script>
-  <script src="scripts/calculator.js?v=3.0"></script>
-  <script src="scripts/app.js?v=3.0"></script>
-</body>
+    <!-- =================================================================== -->
+    <!-- PEMUATAN SKRIP JAVASCRIPT MODULAR (URUTAN WAJIB)                     -->
+    <!-- 1. data.js       : Master dataset statis & tarif resmi                  -->
+    <!-- 2. calculator.js : Engine perhitungan dinamis reaktif                   -->
+    <!-- 3. app.js        : Controller antarmuka UI, printer & event listeners   -->
+    <!-- =================================================================== -->
+    <script src="scripts/data.js"></script>
+    <script src="scripts/calculator.js"></script>
+    <script src="scripts/app.js?v=2.2"></script>
+  </body>
 </html>
