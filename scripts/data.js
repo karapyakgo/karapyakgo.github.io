@@ -302,14 +302,14 @@ const KARAPYAK_DATA = {
       tag: "Wisata Hijau",
       distance: "1.2 km",
       desc: "Jalur jembatan kayu melintasi rimbunnya hutan bakau pencegah abrasi dengan udara pesisir yang sangat sejuk.",
-      image: "assets/images/dest-mangrove.svg"
+      image: "assets/images/dest-mangrove.jpg"
     },
     {
       name: "Spot Pasir Putih & Pantai Lembah Putri",
       tag: "Relaksasi & Foto",
       distance: "3.5 km",
       desc: "Pantai tetangga dengan pasir putih lembut dan miniatur miniatur tebing yang menawan untuk liburan tenang.",
-      image: "assets/images/dest-lembah.svg"
+      image: "assets/images/dest-lembah.jpg"
     }
   ],
 
