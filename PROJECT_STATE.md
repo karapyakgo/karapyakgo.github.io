@@ -100,23 +100,24 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
   - Staggered timing delay (`.reveal-delay-1` s/d `4`) untuk kartu info, paket wisata, pemandu lokal, destinasi, dan mitra UMKM.
   - Efek hover interaktif yang elegan: kartu sedikit terangkat (*lift*) dan foto pemandangan membesar secara halus (*subtle zoom*).
   - Dukungan aksesibilitas penuh untuk pengguna dengan preferensi `prefers-reduced-motion`.
-- [x] **Foto Lanskap Realistis:**
+- [x] **Foto Lanskap Realistis Lengkap:**
   - `assets/images/hero-karapyak.jpg` untuk tebing karang putih dan biota laut saat surut.
-  - `assets/images/dest-tebing.jpg` dan `assets/images/dest-sunset.jpg` terpasang rapi dengan `object-fit: cover`.
-- [x] **Mobile Responsiveness & Ergonomics:**
-  - Layout diuji bebas overflow horizontal pada lebar layar 375px hingga 1200px.
-  - Ukuran font input 16px untuk mencegah masalah auto-zoom pada peramban iOS Safari.
-  - Hamburger menu drawer lengkap dengan animasi transisi halus.
+  - `assets/images/dest-tebing.jpg` (Tebing Karang Putih) dan `assets/images/dest-sunset.jpg` (Sunset Deck).
+  - `assets/images/dest-mangrove.jpg` (Konservasi Hutan Mangrove Bagolo) & `assets/images/dest-lembah.jpg` (Spot Pasir Putih & Pantai Lembah Putri) menggantikan seluruh placeholder/vektor ilustrasi lama.
+- [x] **GitHub Pages Deployment & Cache Busting:**
+  - Menambahkan `.nojekyll` di root repo untuk membypass engine Jekyll bawaan agar seluruh aset statis dideploy secara instan tanpa kegagalan parsing markdown.
+  - Menambahkan GitHub Actions workflow `.github/workflows/deploy.yml` untuk deployment otomatis.
+  - Menambahkan query parameter cache-buster `v=2.5` pada `styles/main.css`, `scripts/data.js`, `scripts/calculator.js`, dan `scripts/app.js` di `index.html`.
 
 ---
 
 ## 5. Pending Tasks, Known Issues & Next Steps
 
 ### Pending Tasks:
-- [ ] Generate sisa foto destinasi JPG (`dest-mangrove.jpg` dan `dest-lembah.jpg`) jika diperlukan foto riil tambahan.
 - [ ] Opsi integrasi payment gateway otomatis (Midtrans/Xendit) jika model bisnis tahap 4 (Slide 9) ingin dikembangkan lebih lanjut.
 - [ ] Opsi penambahan fitur *Dark Mode* jika dibutuhkan.
 
 ### Environment Notes:
-- Web berjalan aktif pada local dev server di port 8000 (`http://127.0.0.1:8000`) atau dapat langsung diakses dengan membuka [index.html](file:///c:/Users/Lenovo/Herd/web-karapyak/index.html).
+- Web berjalan aktif pada local dev server di port 8000 (`http://127.0.0.1:8000`) atau production di `https://karapyakgo.github.io/`.
+
 
