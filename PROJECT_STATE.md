@@ -101,13 +101,16 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
   - Efek hover interaktif yang elegan: kartu sedikit terangkat (*lift*) dan foto pemandangan membesar secara halus (*subtle zoom*).
   - Dukungan aksesibilitas penuh untuk pengguna dengan preferensi `prefers-reduced-motion`.
 - [x] **Foto Lanskap Realistis Lengkap:**
-  - `assets/images/hero-karapyak.jpg` untuk tebing karang putih dan biota laut saat surut.
-  - `assets/images/dest-tebing.jpg` (Tebing Karang Putih) dan `assets/images/dest-sunset.jpg` (Sunset Deck).
-  - `assets/images/dest-mangrove.jpg` (Konservasi Hutan Mangrove Bagolo) & `assets/images/dest-lembah.jpg` (Spot Pasir Putih & Pantai Lembah Putri) menggantikan seluruh placeholder/vektor ilustrasi lama.
-- [x] **GitHub Pages Deployment & Cache Busting:**
-  - Menambahkan `.nojekyll` di root repo untuk membypass engine Jekyll bawaan agar seluruh aset statis dideploy secara instan tanpa kegagalan parsing markdown.
-  - Menambahkan GitHub Actions workflow `.github/workflows/deploy.yml` untuk deployment otomatis.
-  - Menambahkan query parameter cache-buster `v=2.5` pada `styles/main.css`, `scripts/data.js`, `scripts/calculator.js`, dan `scripts/app.js` di `index.html`.
+  - `assets/images/hero-karapyak.jpg`: Lanskap tebing karang putih dan biota laut saat surut.
+  - `assets/images/dest-tebing.jpg`: Tebing Karang Putih ikonik dengan air laut toska.
+  - `assets/images/dest-sunset.jpg`: Sunset Deck Karapyak Glamping saat senja keemasan.
+  - `assets/images/dest-mangrove.jpg`: Jembatan kayu rimbun Konservasi Hutan Mangrove Bagolo.
+  - `assets/images/dest-lembah.jpg`: Pantai pasir putih dan teluk tropis Pantai Lembah Putri.
+  - Seluruh kartu destinasi kini 100% menggunakan foto asli beresolusi tinggi dengan `object-fit: cover` menggantikan vektor ilustrasi lama.
+- [x] **Mobile Responsiveness & Ergonomics:**
+  - Layout diuji bebas overflow horizontal pada lebar layar 375px hingga 1200px.
+  - Ukuran font input 16px untuk mencegah masalah auto-zoom pada peramban iOS Safari.
+  - Hamburger menu drawer lengkap dengan animasi transisi halus.
 
 ---
 
@@ -118,6 +121,5 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
 - [ ] Opsi penambahan fitur *Dark Mode* jika dibutuhkan.
 
 ### Environment Notes:
-- Web berjalan aktif pada local dev server di port 8000 (`http://127.0.0.1:8000`) atau production di `https://karapyakgo.github.io/`.
-
+- Web berjalan aktif pada local dev server di port 8000 (`http://127.0.0.1:8000`) atau dapat langsung diakses dengan membuka [index.html](file:///c:/Users/Lenovo/Herd/web-karapyak/index.html).
 

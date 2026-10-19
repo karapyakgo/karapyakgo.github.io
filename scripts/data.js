@@ -288,28 +288,28 @@ const KARAPYAK_DATA = {
       tag: "Spot Ikonik",
       distance: "0 km (Area Utama)",
       desc: "Hamparan tebing karang putih dengan kolam-kolam alami kecil yang menampung ikan hias saat air laut surut.",
-      image: "assets/images/dest-tebing.jpg"
+      image: "assets/images/dest-tebing.jpg?v=3.0"
     },
     {
       name: "Sunset Deck Karapyak Glamping",
       tag: "Panorama Senja",
       distance: "300 meter",
       desc: "Dek kayu estetik di atas tebing untuk menikmati matahari tenggelam dengan secangkir kopi khas Jawa Barat.",
-      image: "assets/images/dest-sunset.jpg"
+      image: "assets/images/dest-sunset.jpg?v=3.0"
     },
     {
       name: "Konservasi Hutan Mangrove Bagolo",
       tag: "Wisata Hijau",
       distance: "1.2 km",
       desc: "Jalur jembatan kayu melintasi rimbunnya hutan bakau pencegah abrasi dengan udara pesisir yang sangat sejuk.",
-      image: "assets/images/dest-mangrove.jpg"
+      image: "assets/images/dest-mangrove.jpg?v=3.0"
     },
     {
       name: "Spot Pasir Putih & Pantai Lembah Putri",
       tag: "Relaksasi & Foto",
       distance: "3.5 km",
       desc: "Pantai tetangga dengan pasir putih lembut dan miniatur miniatur tebing yang menawan untuk liburan tenang.",
-      image: "assets/images/dest-lembah.jpg"
+      image: "assets/images/dest-lembah.jpg?v=3.0"
     }
   ],
 
