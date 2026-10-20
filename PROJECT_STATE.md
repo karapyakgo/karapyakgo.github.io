@@ -123,7 +123,7 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
 - [x] **Ikon Tab Website (Favicon & Touch Icons):**
   - Implementasi ikon tab browser modern: format vektor tajam `favicon.svg` serta raster beresolusi tinggi `favicon-32x32.png`, `favicon.png`, dan `apple-touch-icon.png` (180x180) dengan desain matahari emas pantai, tebing karang putih, dan deburan ombak berlatar Aegean Teal khas Karapyak Travel.
 - [x] **Optimasi Workflow GitHub Actions Pages:**
-  - Menetapkan `concurrency.cancel-in-progress: true` pada [.github/workflows/deploy.yml](file:///c:/Users/Lenovo/Herd/web-karapyak/.github/workflows/deploy.yml) untuk mencegah error tabrakan deployment (*HttpError: Deployment request failed due to in progress deployment*) saat ada push berturut-turut.
+  - Menetapkan `concurrency.cancel-in-progress: false` pada [.github/workflows/deploy.yml](file:///c:/Users/Lenovo/Herd/web-karapyak/.github/workflows/deploy.yml) agar workflow deployment mengantri (tidak saling membatalkan), sehingga mencegah lock *in progress deployment* pada GitHub Pages.
 
 ---
 
