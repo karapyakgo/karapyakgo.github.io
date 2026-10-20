@@ -18,6 +18,8 @@ const KARAPYAK_DATA = {
     name: "Karapyak Travel",
     tagline: "Platform Terintegrasi Wisata Pantai Karapyak",
     domain: "karapyakgo.github.io",
+    contactWhatsApp: "628158899181",
+    phoneDisplay: "0815-8899-181",
     location: "Desa Bagolo, Kec. Kalipucang, Kab. Pangandaran, Jawa Barat",
     operatingHours: "Buka Setiap Hari: 06.00 - 18.00 WIB",
     description:
@@ -75,7 +77,7 @@ const KARAPYAK_DATA = {
       specialty:
         "Ahli eksplorasi karang surut, spot foto tebing, dan edukasi biota laut aman.",
       avatar: "assets/images/user-icon.svg?v=3.1",
-      phone: "+6281234567801",
+      phone: "+628158899181",
       badge: "Pemandu Tersertifikasi",
     },
     {
@@ -91,7 +93,7 @@ const KARAPYAK_DATA = {
       specialty:
         "Ramah anak & keluarga, fokus jalur mangrove dan kisah sejarah pesisir Bagolo.",
       avatar: "assets/images/user-icon.svg?v=3.1",
-      phone: "+6281234567802",
+      phone: "+628158899181",
       badge: "Favorit Keluarga",
     },
     {
@@ -107,7 +109,7 @@ const KARAPYAK_DATA = {
       specialty:
         "Pencari spot angle foto tersembunyi, pendampingan snorkeling dan sunset point.",
       avatar: "assets/images/user-icon.svg?v=3.1",
-      phone: "+6281234567803",
+      phone: "+628158899181",
       badge: "Spesialis Foto",
     },
     {
@@ -123,7 +125,7 @@ const KARAPYAK_DATA = {
       specialty:
         "Menguasai titik memancing karang dan jalur tracking senja Pantai Karapyak.",
       avatar: "assets/images/user-icon.svg?v=3.1",
-      phone: "+6281234567804",
+      phone: "+628158899181",
       badge: "Ahli Lapangan",
     },
   ],

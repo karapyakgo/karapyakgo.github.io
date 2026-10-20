@@ -708,7 +708,8 @@ document.addEventListener("DOMContentLoaded", () => {
             `- Rincian: ${summary.items.map((i) => i.label).join(", ")}\n` +
             `Mohon informasi penjemputan dan panduan kedatangan. Terima kasih!`
         );
-        btnWhatsAppConfirm.href = `https://wa.me/6281234567801?text=${waText}`;
+        const waNumber = (data.info && data.info.contactWhatsApp) || "628158899181";
+        btnWhatsAppConfirm.href = `https://wa.me/${waNumber}?text=${waText}`;
       }
 
       // Beralih dari modal formulir ke modal tampilan tiket berhasil

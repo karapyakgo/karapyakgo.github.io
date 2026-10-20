@@ -118,6 +118,8 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
 - [x] **Pembaruan Avatar Pemandu & Foto Destinasi Riil:**
   - Avatar ke-4 pemandu lokal (Kang Asep, Teh Rina, Kang Dedi, Kang Yana) telah diperbarui menggunakan ikon siluet user minimalis (`assets/images/user-icon.svg` / `user-icon.png`) sesuai referensi pengguna.
   - Foto destinasi spot Mangrove (`dest-mangrove.jpg`) dan Lembah Putri (`dest-lembah.jpg`) telah aktif digunakan menggantikan placeholder SVG.
+- [x] **Pembaruan Kontak Resmi WhatsApp:**
+  - Nomor WhatsApp resmi mitra pengelola untuk konfirmasi booking otomatis dan kontak pemandu telah diperbarui menjadi **08158899181** (`628158899181`) di [scripts/data.js](file:///c:/Users/Lenovo/Herd/web-karapyak/scripts/data.js) dan [scripts/app.js](file:///c:/Users/Lenovo/Herd/web-karapyak/scripts/app.js).
 
 ---
 
