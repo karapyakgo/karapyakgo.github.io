@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E7490"/>
+      <stop offset="45%" stop-color="#0C647C"/>
+      <stop offset="100%" stop-color="#042F3A"/>
+    </linearGradient>
+    <linearGradient id="sunGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base with smooth rounded corners -->
+  <rect width="64" height="64" rx="15" fill="url(#favBg)"/>
+  <!-- Subtle border for crispness on dark/light tabs -->
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="14.25" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+
+  <!-- Golden Coastal Sun (Sunrise over Pantai Karapyak) -->
+  <circle cx="32" cy="22" r="9.5" fill="url(#sunGold)" filter="url(#glow)"/>
+  <!-- Sun halo ring -->
+  <circle cx="32" cy="22" r="14.5" fill="none" stroke="#FDE047" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.6"/>
+
+  <!-- Compass / Beacon Ray Lines (Pointing forward) -->
+  <line x1="32" y1="5" x2="32" y2="10" stroke="#FDE047" stroke-width="2" stroke-linecap="round"/>
+  <line x1="45" y1="12" x2="41" y2="15.5" stroke="#FDE047" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="19" y1="12" x2="23" y2="15.5" stroke="#FDE047" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Stylized White Rock Cliffs of Karapyak (Tebing Karang Putih) -->
+  <path d="M 12 45 L 23 29 L 34 45 Z" fill="#FFFFFF" opacity="0.95" filter="url(#glow)"/>
+  <path d="M 28 45 L 39 33 L 52 45 Z" fill="#E2E8F0" opacity="0.9" filter="url(#glow)"/>
+
+  <!-- Ocean Waves (Samudera Hindia Karapyak) -->
+  <!-- Wave 1: Cyan / Aqua -->
+  <path d="M 6 46 Q 19 41 32 46 T 58 46 L 58 52 Q 45 48 32 52 T 6 52 Z" fill="#38BDF8"/>
+  <!-- Wave 2: Sparkling Foam Wave -->
+  <path d="M 6 51 Q 19 46 32 51 T 58 51 L 58 57 Q 45 53 32 57 T 6 57 Z" fill="#FFFFFF" opacity="0.9"/>
+  <!-- Wave 3: Deep Marine Base -->
+  <path d="M 6 56 Q 19 52 32 56 T 58 56 L 58 60 Q 45 58 32 60 T 6 60 Z" fill="#0284C7" opacity="0.8"/>
+</svg>
