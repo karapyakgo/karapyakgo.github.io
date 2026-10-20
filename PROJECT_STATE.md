@@ -115,13 +115,16 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
   - [index.html](file:///c:/Users/Lenovo/Herd/web-karapyak/index.html): Penjelasan struktur markup semantik HTML5 yang memetakan Alur Wisatawan Langkah 1 s/d 5, formulir input, panel struk rincian, dialog modal pemesanan, kartu voucher, footer identitas tim mahasiswa, dan sticky bottom bar mobile.
   - [styles/main.css](file:///c:/Users/Lenovo/Herd/web-karapyak/styles/main.css): Penjelasan sistem token desain CSS variables, reset dasar, layout desktop & tablet, transformasi modal menjadi native-feeling bottom sheet di layar ponsel (< 640px), isolated print style untuk pencetakan dokumen A4, serta animasi scroll reveal berbasis akselerasi GPU.
 
+- [x] **Pembaruan Avatar Pemandu & Foto Destinasi Riil:**
+  - Avatar ke-4 pemandu lokal (Kang Asep, Teh Rina, Kang Dedi, Kang Yana) telah diperbarui menggunakan ikon siluet user minimalis (`assets/images/user-icon.svg` / `user-icon.png`) sesuai referensi pengguna.
+  - Foto destinasi spot Mangrove (`dest-mangrove.jpg`) dan Lembah Putri (`dest-lembah.jpg`) telah aktif digunakan menggantikan placeholder SVG.
+
 ---
 
 ## 5. Pending Tasks, Known Issues & Next Steps
 
 ### Pending Tasks:
 
-- [ ] Generate sisa foto destinasi JPG (`dest-mangrove.jpg` dan `dest-lembah.jpg`) jika diperlukan foto riil tambahan.
 - [ ] Opsi integrasi payment gateway otomatis (Midtrans/Xendit) jika model bisnis tahap 4 (Slide 9) ingin dikembangkan lebih lanjut.
 - [ ] Opsi penambahan fitur _Dark Mode_ jika dibutuhkan.
 

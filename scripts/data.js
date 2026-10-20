@@ -74,7 +74,7 @@ const KARAPYAK_DATA = {
       price: 150000, // Rp 150.000 (sesuai simulasi paket keluarga Slide 6)
       specialty:
         "Ahli eksplorasi karang surut, spot foto tebing, dan edukasi biota laut aman.",
-      avatar: "assets/images/guide-asep.svg",
+      avatar: "assets/images/user-icon.svg?v=3.1",
       phone: "+6281234567801",
       badge: "Pemandu Tersertifikasi",
     },
@@ -90,7 +90,7 @@ const KARAPYAK_DATA = {
       price: 150000,
       specialty:
         "Ramah anak & keluarga, fokus jalur mangrove dan kisah sejarah pesisir Bagolo.",
-      avatar: "assets/images/guide-rina.svg",
+      avatar: "assets/images/user-icon.svg?v=3.1",
       phone: "+6281234567802",
       badge: "Favorit Keluarga",
     },
@@ -106,7 +106,7 @@ const KARAPYAK_DATA = {
       price: 175000,
       specialty:
         "Pencari spot angle foto tersembunyi, pendampingan snorkeling dan sunset point.",
-      avatar: "assets/images/guide-dedi.svg",
+      avatar: "assets/images/user-icon.svg?v=3.1",
       phone: "+6281234567803",
       badge: "Spesialis Foto",
     },
@@ -122,7 +122,7 @@ const KARAPYAK_DATA = {
       price: 150000,
       specialty:
         "Menguasai titik memancing karang dan jalur tracking senja Pantai Karapyak.",
-      avatar: "assets/images/guide-yana.svg",
+      avatar: "assets/images/user-icon.svg?v=3.1",
       phone: "+6281234567804",
       badge: "Ahli Lapangan",
     },
@@ -363,14 +363,14 @@ const KARAPYAK_DATA = {
       tag: "Wisata Hijau",
       distance: "1.2 km",
       desc: "Jalur jembatan kayu melintasi rimbunnya hutan bakau pencegah abrasi dengan udara pesisir yang sangat sejuk.",
-      image: "assets/images/dest-mangrove.svg",
+      image: "assets/images/dest-mangrove.jpg",
     },
     {
       name: "Spot Pasir Putih & Pantai Lembah Putri",
       tag: "Relaksasi & Foto",
       distance: "3.5 km",
       desc: "Pantai tetangga dengan pasir putih lembut dan miniatur miniatur tebing yang menawan untuk liburan tenang.",
-      image: "assets/images/dest-lembah.svg",
+      image: "assets/images/dest-lembah.jpg",
     },
   ],
 

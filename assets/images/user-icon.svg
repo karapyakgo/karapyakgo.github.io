@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <!-- Circular gray background from user icon -->
+  <circle cx="100" cy="100" r="100" fill="#919191"/>
+  <!-- White circular head -->
+  <circle cx="100" cy="73" r="32" fill="#FFFFFF"/>
+  <!-- White torso / shoulders with flat base -->
+  <path d="M 48 162 C 48 128, 70 114, 100 114 C 130 114, 152 128, 152 162 C 152 165, 150 166, 147 166 L 53 166 C 50 166, 48 165, 48 162 Z" fill="#FFFFFF"/>
+</svg>
