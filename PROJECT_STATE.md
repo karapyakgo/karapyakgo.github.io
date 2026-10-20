@@ -126,7 +126,7 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
   - Menggantikan ikon kemudi kapal/garis umum pada navbar atas, drawer mobile, dan footer dengan ikon resmi terpadu (`favicon.svg`) yang selaras 100% dengan ikon tab website.
   - Menambahkan mikro-interaksi hover yang halus (`translateY(-1px)` dan shadow glow) serta penautan kembali ke halaman beranda (`#`).
 - [x] **Optimasi Workflow GitHub Actions Pages:**
-  - Menetapkan `concurrency.cancel-in-progress: true` pada [.github/workflows/deploy.yml](file:///c:/Users/Lenovo/Herd/web-karapyak/.github/workflows/deploy.yml) untuk mencegah error tabrakan deployment (*HttpError: Deployment request failed due to in progress deployment*) saat ada push berturut-turut.
+  - Menetapkan `concurrency.cancel-in-progress: false` pada [.github/workflows/deploy.yml](file:///c:/Users/Lenovo/Herd/web-karapyak/.github/workflows/deploy.yml) agar antrean build Pages menunggu proses deployment aktif selesai dengan aman alih-alih membatalkan paksa yang memicu error tabrakan lock Pages API (*HttpError: Deployment request failed due to in progress deployment*).
 
 ---
 
