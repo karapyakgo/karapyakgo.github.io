@@ -122,6 +122,8 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
   - Nomor WhatsApp resmi mitra pengelola untuk konfirmasi booking otomatis dan kontak pemandu telah diperbarui menjadi **08158899181** (`628158899181`) di [scripts/data.js](file:///c:/Users/Lenovo/Herd/web-karapyak/scripts/data.js) dan [scripts/app.js](file:///c:/Users/Lenovo/Herd/web-karapyak/scripts/app.js).
 - [x] **Ikon Tab Website (Favicon & Touch Icons):**
   - Implementasi ikon tab browser modern: format vektor tajam `favicon.svg` serta raster beresolusi tinggi `favicon-32x32.png`, `favicon.png`, dan `apple-touch-icon.png` (180x180) dengan desain matahari emas pantai, tebing karang putih, dan deburan ombak berlatar Aegean Teal khas Karapyak Travel.
+- [x] **Optimasi Workflow GitHub Actions Pages:**
+  - Menetapkan `concurrency.cancel-in-progress: true` pada [.github/workflows/deploy.yml](file:///c:/Users/Lenovo/Herd/web-karapyak/.github/workflows/deploy.yml) untuk mencegah error tabrakan deployment (*HttpError: Deployment request failed due to in progress deployment*) saat ada push berturut-turut.
 
 ---
 
