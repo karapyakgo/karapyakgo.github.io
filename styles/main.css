@@ -190,24 +190,37 @@ p {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity var(--transition-fast);
+}
+
+.logo-group:hover {
+  opacity: 0.95;
 }
 
 .logo-mark {
   width: 2.375rem;
   height: 2.375rem;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--primary) 0%, #034455 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-inverse);
   box-shadow: var(--shadow-sm);
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.logo-group:hover .logo-mark {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(12, 100, 124, 0.25);
 }
 
 .logo-text h3 {
   font-size: 1.1rem;
   letter-spacing: -0.02em;
   margin-bottom: 0.05rem;
+  color: var(--text-main);
+  transition: color var(--transition-fast);
 }
 
 .logo-text span {
@@ -1529,6 +1542,14 @@ p {
   .footer-grid {
     grid-template-columns: 1.5fr 1fr 1fr;
   }
+}
+
+.site-footer .logo-text h3 {
+  color: #FFFFFF;
+}
+
+.site-footer .logo-text span {
+  color: #94A3B8;
 }
 
 .footer-brand h3 {

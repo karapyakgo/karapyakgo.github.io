@@ -121,7 +121,10 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
 - [x] **Pembaruan Kontak Resmi WhatsApp:**
   - Nomor WhatsApp resmi mitra pengelola untuk konfirmasi booking otomatis dan kontak pemandu telah diperbarui menjadi **08158899181** (`628158899181`) di [scripts/data.js](file:///c:/Users/Lenovo/Herd/web-karapyak/scripts/data.js) dan [scripts/app.js](file:///c:/Users/Lenovo/Herd/web-karapyak/scripts/app.js).
 - [x] **Ikon Tab Website (Favicon & Touch Icons):**
-  - Implementasi ikon tab browser modern: format vektor tajam `favicon.svg` serta raster beresolusi tinggi `favicon-32x32.png`, `favicon.png`, dan `apple-touch-icon.png` (180x180) dengan desain matahari emas pantai, tebing karang putih, dan deburan ombak berlatar Aegean Teal khas Karapyak Travel.
+  - Implementasi ikon tab browser modern: format vektor tajam `favicon.svg`, binary ICO standar multi-resolusi 32x32 & 48x48 `favicon.ico`, serta raster beresolusi tinggi `favicon-32x32.png`, `favicon.png`, dan `apple-touch-icon.png` (180x180) dengan desain matahari emas pantai, tebing karang putih, dan deburan ombak berlatar Aegean Teal khas Karapyak Travel.
+- [x] **Penyelarasan Logo Identitas Brand (Navbar, Mobile Drawer & Footer):**
+  - Menggantikan ikon kemudi kapal/garis umum pada navbar atas, drawer mobile, dan footer dengan ikon resmi terpadu (`favicon.svg`) yang selaras 100% dengan ikon tab website.
+  - Menambahkan mikro-interaksi hover yang halus (`translateY(-1px)` dan shadow glow) serta penautan kembali ke halaman beranda (`#`).
 - [x] **Optimasi Workflow GitHub Actions Pages:**
   - Menetapkan `concurrency.cancel-in-progress: true` pada [.github/workflows/deploy.yml](file:///c:/Users/Lenovo/Herd/web-karapyak/.github/workflows/deploy.yml) untuk mencegah error tabrakan deployment (*HttpError: Deployment request failed due to in progress deployment*) saat ada push berturut-turut.
 
@@ -136,4 +139,5 @@ Sesuai 5 Alur Wisatawan pada dokumen PDF (`karapyakgo.github.io`):
 
 ### Environment Notes:
 
-- Web berjalan aktif pada local dev server di port 8000 (`http://127.0.0.1:8000`) atau dapat langsung diakses dengan membuka [index.html](file:///c:/Users/Lenovo/Herd/web-karapyak/index.html).
+- **Catatan Favicon Browser:** Peramban berbasis Chromium (Chrome, Edge, Brave) memiliki kebijakan keamanan sandbox bawaan yang secara sengaja tidak menampilkan custom favicon pada protokol file lokal (`file:///...`) dan menampilkan ikon globe abu-abu default. Favicon tab akan langsung tampil optimal saat dibuka via Web Server lokal (Laravel Herd `http://web-karapyak.test` / `http://localhost:8000`) atau via link live GitHub Pages (`https://karapyakgo.github.io/`) setelah refresh / clear cache.
+- Web berjalan aktif pada local dev server di port 8000 (`http://127.0.0.1:8000`), Herd, atau dapat langsung diakses dengan membuka [index.html](file:///c:/Users/Lenovo/Herd/web-karapyak/index.html).
